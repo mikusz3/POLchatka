@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}POLchatka{% endblock title %}</title>
+  <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <h1>POLchatka</h1>
+      <p>Czuj się jak u siebie.</p>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="/">Start</a></li>
+        <li><a href="/blog">Blogi</a></li>
+        <li><a href="/forum">Forum</a></li>
+        <li><a href="/profil">Profil</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      {% block content %}{% endblock content %}
+    </main>
+
+    <footer>
+      <p>&copy; POLchatka.pl | Projekt hobbystyczny | <a href="/kontakt">Kontakt</a></p>
+    </footer>
+  </div>
+</body>
+</html>

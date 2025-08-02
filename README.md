@@ -151,6 +151,11 @@ polchatka/
 └── themes/              # Motywy CSS
 ```
 
+## Wizualizacja demonstracyjna
+![polchatka_projekt_1](/polchatka_projekt_1.png)
+![polchatka_projekt_2](/polchatka_projekt_2.png)
+![polchatka_projekt_3](/polchatka_projekt_3.png)
+
 ## 🔗 Przydatne linki
 
 - 🎨 **Inspiracje**: [Poszkole.pl (ARCHIWUM Z WEB.ARCHIVE.ORG [DOKŁADNA DATA: 18 KWIETNIA 2010])](https://web.archive.org/web/20100418121938/http://poszkole.pl), [NaszaKlasa.pl (później NK.pl) (ARCHIWUM Z WEB.ARCHIVE.ORG [DOKŁADNA DATA: 1 MAJA 2008])](web.archive.org/web/20080430215623/http://www.naszaklasa.pl), [SpaceHey](https://spacehey.com)

@@ -1,6 +1,8 @@
 # POLchatka 🇵🇱
 
-![POLchatka Logo](static/img/logo.png)
+![POLchatka Logo](static/img/polchatkalogo.png)
+
+Czuj się jak u siebie.
 
 **Polski retro portal społecznościowy w stylu lat 2000**
 
@@ -151,8 +153,7 @@ polchatka/
 
 ## 🔗 Przydatne linki
 
-- 🌐 **Demo**: [polchatka.pl](https://polchatka.pl) *(w budowie)*
-- 🎨 **Inspiracje**: [Poszkole.pl](http://poszkole.pl), [SpaceHey](https://spacehey.com)
+- 🎨 **Inspiracje**: [Poszkole.pl (ARCHIWUM Z WEB.ARCHIVE.ORG [DOKŁADNA DATA: 18 KWIETNIA 2010])](https://web.archive.org/web/20100418121938/http://poszkole.pl), [NaszaKlasa.pl (później NK.pl) (ARCHIWUM Z WEB.ARCHIVE.ORG [DOKŁADNA DATA: 1 MAJA 2008])](web.archive.org/web/20080430215623/http://www.naszaklasa.pl), [SpaceHey](https://spacehey.com)
 - 🎮 **Retro gaming**: [Ruffle Flash Emulator](https://ruffle.rs)
 - 📚 **Zola docs**: [getzola.org](https://getzola.org)
 
@@ -175,4 +176,4 @@ Projekt POLchatka jest udostępniany na licencji MIT - patrz plik [LICENSE](LICE
 
 ---
 
-*Ostatnia aktualizacja: Sierpień 2025*
+*Ostatnia aktualizacja: 2 Sierpnia 2025*

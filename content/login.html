@@ -4,331 +4,727 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie - POLchatka</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
-        .login-container {
-            max-width: 400px;
-            margin: 50px auto;
-            background: #fff;
-            border: 2px solid #4caf50;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            overflow: hidden;
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .login-header {
-            background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .login-header h2 {
-            font-size: 20px;
-            margin-bottom: 5px;
-        }
-
-        .login-header p {
-            font-size: 12px;
-            opacity: 0.9;
-        }
-
-        .login-form {
-            padding: 25px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+        body {
+            font-family: 'Verdana', 'Tahoma', 'MS Sans Serif', sans-serif;
+            font-size: 11px;
+            background: #e4f1ce url('data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==') repeat;
             color: #333;
-            font-size: 12px;
+            line-height: 1.2;
+            min-height: 100vh;
         }
 
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 13px;
-            transition: border-color 0.3s;
+        /* Header w stylu Poszkole */
+        .header {
+            background: linear-gradient(to bottom, #ffffff 0%, #e8f4fd 50%, #b8d5f2 100%);
+            border-bottom: 3px solid #4682b4;
+            padding: 8px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .form-group input:focus {
-            outline: none;
-            border-color: #4caf50;
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        .header-content {
+            max-width: 760px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
         }
 
-        .remember-me {
+        .logo-section {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 20px;
+            gap: 12px;
         }
 
-        .remember-me input[type="checkbox"] {
-            width: auto;
-        }
-
-        .remember-me label {
-            font-size: 11px;
-            font-weight: normal;
-            margin-bottom: 0;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .login-btn:hover {
-            background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
-            transform: translateY(-1px);
-        }
-
-        .form-links {
-            text-align: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-
-        .form-links a {
-            color: #2196f3;
-            text-decoration: none;
-            font-size: 11px;
-            margin: 0 10px;
-        }
-
-        .form-links a:hover {
-            text-decoration: underline;
-        }
-
-        .back-home {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .back-home a {
-            color: #4caf50;
-            text-decoration: none;
-            font-size: 12px;
-        }
-
-        .back-home a:hover {
-            text-decoration: underline;
-        }
-
-        .social-login {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-
-        .social-login h4 {
-            text-align: center;
-            margin-bottom: 15px;
-            color: #666;
-            font-size: 12px;
-        }
-
-        .social-buttons {
+        .logo {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #4682b4 0%, #87ceeb 100%);
+            border: 2px outset #4682b4;
             display: flex;
-            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            font-weight: bold;
         }
 
-        .social-btn {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 11px;
+        .site-info h1 {
+            font-size: 20px;
+            color: #2c5aa0;
+            margin-bottom: 2px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        .site-info .tagline {
+            font-size: 10px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 5px;
+        }
+
+        .header-btn {
+            padding: 3px 8px;
+            font-size: 10px;
+            font-weight: bold;
+            border: 1px outset #d0d0d0;
+            background: #f0f0f0;
+            color: #333;
             text-decoration: none;
-            transition: all 0.3s;
+            cursor: pointer;
+            transition: none;
         }
 
-        .social-btn.facebook {
-            background: #3b5998;
-            color: #fff;
-            border-color: #3b5998;
+        .header-btn:hover {
+            border: 1px inset #d0d0d0;
+            background: #e0e0e0;
         }
 
-        .social-btn.google {
-            background: #dd4b39;
-            color: #fff;
-            border-color: #dd4b39;
+        .header-btn:active {
+            border: 1px inset #d0d0d0;
+            background: #d0d0d0;
         }
 
-        .social-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        /* Navigation w stylu lat 2000 */
+        .navigation {
+            background: linear-gradient(to bottom, #4682b4 0%, #2c5aa0 100%);
+            border-bottom: 1px solid #1e3a5f;
         }
 
-        .error-message {
-            background: #ffebee;
-            color: #c62828;
-            padding: 10px;
-            border-radius: 4px;
+        .nav-content {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu li {
+            border-right: 1px solid #1e3a5f;
+            border-left: 1px solid #87ceeb;
+        }
+
+        .nav-menu li:first-child {
+            border-left: none;
+        }
+
+        .nav-menu li:last-child {
+            border-right: none;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 5px 12px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 10px;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+            transition: none;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 760px;
+            margin: 20px auto;
+            padding: 0 10px;
+            background: white;
+            border: 2px outset #d0d0d0;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .content-header {
+            background: linear-gradient(to bottom, #e8f4fd 0%, #b8d5f2 100%);
+            border-bottom: 1px solid #4682b4;
+            padding: 8px 15px;
+        }
+
+        .content-header h2 {
+            color: #2c5aa0;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .breadcrumb {
+            background: #f8f8f8;
+            border-bottom: 1px solid #ddd;
+            padding: 4px 15px;
+            font-size: 9px;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Login Form */
+        .login-content {
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .login-form-container {
+            flex: 1;
+            max-width: 350px;
+        }
+
+        .form-box {
+            border: 2px inset #d0d0d0;
+            background: #f8f8f8;
+            padding: 15px;
             margin-bottom: 15px;
-            font-size: 11px;
-            border-left: 3px solid #f44336;
         }
 
-        .success-message {
-            background: #e8f5e8;
-            color: #2e7d32;
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 15px;
+        .form-box h3 {
+            color: #2c5aa0;
+            font-size: 12px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 3px;
+        }
+
+        .form-table {
+            width: 100%;
+        }
+
+        .form-table td {
+            padding: 3px;
+            vertical-align: middle;
+        }
+
+        .form-table label {
+            font-weight: bold;
+            font-size: 10px;
+            color: #333;
+        }
+
+        .form-table input[type="text"],
+        .form-table input[type="password"] {
+            width: 100%;
+            padding: 2px 4px;
+            border: 1px inset #d0d0d0;
+            background: white;
             font-size: 11px;
-            border-left: 3px solid #4caf50;
+            font-family: 'Verdana', sans-serif;
+        }
+
+        .form-table input[type="text"]:focus,
+        .form-table input[type="password"]:focus {
+            outline: none;
+            background: #fffffe;
+        }
+
+        .checkbox-row {
+            margin: 8px 0;
+        }
+
+        .checkbox-row input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .checkbox-row label {
+            font-size: 10px;
+            color: #666;
+        }
+
+        .button-row {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .retro-button {
+            padding: 4px 12px;
+            font-size: 10px;
+            font-weight: bold;
+            border: 2px outset #d0d0d0;
+            background: #f0f0f0;
+            color: #333;
+            cursor: pointer;
+            margin: 0 3px;
+            font-family: 'Verdana', sans-serif;
+        }
+
+        .retro-button:hover {
+            background: #e8e8e8;
+        }
+
+        .retro-button:active {
+            border: 2px inset #d0d0d0;
+            background: #d8d8d8;
+        }
+
+        .retro-button.primary {
+            background: linear-gradient(to bottom, #4682b4 0%, #2c5aa0 100%);
+            color: white;
+            border-color: #4682b4;
+        }
+
+        .retro-button.primary:hover {
+            background: linear-gradient(to bottom, #5a8bc4 0%, #3d6bb0 100%);
+        }
+
+        .retro-button.primary:active {
+            border: 2px inset #4682b4;
+        }
+
+        /* Links Section */
+        .links-section {
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .links-section a {
+            color: #2c5aa0;
+            text-decoration: none;
+            font-size: 10px;
+            margin: 0 8px;
+        }
+
+        .links-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Info Sidebar */
+        .info-sidebar {
+            flex: 1;
+            max-width: 250px;
+        }
+
+        .info-box {
+            border: 2px inset #d0d0d0;
+            background: #f8f8f8;
+            margin-bottom: 15px;
+        }
+
+        .info-box-header {
+            background: linear-gradient(to bottom, #e8f4fd 0%, #b8d5f2 100%);
+            padding: 5px 10px;
+            border-bottom: 1px solid #4682b4;
+        }
+
+        .info-box-header h4 {
+            color: #2c5aa0;
+            font-size: 11px;
+            margin: 0;
+        }
+
+        .info-box-content {
+            padding: 10px;
+            font-size: 10px;
+            line-height: 1.3;
+        }
+
+        .demo-accounts {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .demo-accounts td {
+            border: 1px solid #ddd;
+            padding: 4px;
+            font-size: 9px;
+        }
+
+        .demo-accounts th {
+            background: #e8f4fd;
+            border: 1px solid #4682b4;
+            padding: 3px;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        .demo-fill-btn {
+            padding: 2px 6px;
+            font-size: 8px;
+            border: 1px outset #d0d0d0;
+            background: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .demo-fill-btn:active {
+            border: 1px inset #d0d0d0;
+        }
+
+        /* Message Box */
+        .message-box {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid;
+            font-size: 10px;
+        }
+
+        .message-error {
+            background: #ffeeee;
+            border-color: #cc0000;
+            color: #cc0000;
+        }
+
+        .message-success {
+            background: #eeffee;
+            border-color: #009900;
+            color: #009900;
+        }
+
+        .message-info {
+            background: #eeeeff;
+            border-color: #0066cc;
+            color: #0066cc;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(to bottom, #e8f4fd 0%, #b8d5f2 100%);
+            border-top: 2px solid #4682b4;
+            margin-top: 30px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 760px;
+            margin: 0 auto;
+            color: #2c5aa0;
+            font-size: 9px;
+        }
+
+        .footer-links {
+            margin-top: 5px;
+        }
+
+        .footer-links a {
+            color: #2c5aa0;
+            text-decoration: none;
+            margin: 0 5px;
+            font-size: 9px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Retro Effects */
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        /* Responsive dla bardzo małych ekranów */
+        @media (max-width: 600px) {
+            .main-container {
+                margin: 10px;
+                max-width: none;
+            }
+            
+            .login-content {
+                flex-direction: column;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+            }
+            
+            .nav-menu li {
+                border-right: none;
+                border-left: none;
+                border-bottom: 1px solid #1e3a5f;
+            }
+        }
+
+        /* Dodatkowe retro elementy */
+        .retro-separator {
+            height: 2px;
+            background: linear-gradient(to right, #d0d0d0, #888, #d0d0d0);
+            margin: 10px 0;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #00ff00;
+            border: 1px solid #333;
+            margin-right: 3px;
+        }
+
+        .counter {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #00ff00;
+            padding: 1px 3px;
+            font-size: 9px;
+            border: 1px inset #333;
         }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="header-top">
-            <div class="container">
-                <div class="logo-section">
-                    <img src="img/logo.png" alt="POLchatka" class="logo">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">PŁ</div>
+                <div class="site-info">
                     <h1>POLchatka</h1>
-                    <span class="tagline">Polski Portal Społecznościowy</span>
+                    <span class="tagline">Czuj się jak u siebie.</span>
                 </div>
-                <div class="user-actions">
-                    <a href="index.html" class="btn btn-login">Strona główna</a>
-                    <a href="register.html" class="btn btn-register">Zarejestruj się</a>
-                </div>
+            </div>
+            <div class="header-links">
+                <a href="index.html" class="header-btn">Strona główna</a>
+                <a href="register.html" class="header-btn">Zarejestruj się</a>
+                <a href="#" class="header-btn">Pomoc</a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <div class="back-home">
-                <a href="index.html">← Powrót do strony głównej</a>
-            </div>
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-content">
+            <ul class="nav-menu">
+                <li><a href="/">Start</a></li>
+                <li><a href="/ludzie">Ludzie</a></li>
+                <li><a href="/gry">Gry</a></li>
+                <li><a href="/sciana">Ściana</a></li>
+                <li><a href="/grupy">Grupy</a></li>
+                <li><a href="/forum">Forum</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/kontakt">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
 
-            <div class="login-container">
-                <div class="login-header">
-                    <h2>🔐 Zaloguj się</h2>
-                    <p>Witaj z powrotem w POLchatce!</p>
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="content-header">
+            <h2>🔐 Logowanie do POLchatki</h2>
+        </div>
+        
+        <div class="breadcrumb">
+            <a href="index.html">Strona główna</a> &raquo; Logowanie
+        </div>
+
+        <div class="login-content">
+            <!-- Login Form -->
+            <div class="login-form-container">
+                <div class="form-box">
+                    <h3>Zaloguj się do swojego konta</h3>
+                    
+                    <div id="messageContainer"></div>
+                    
+                    <form id="loginForm" method="POST" action="php/session_login.php">
+                        <table class="form-table">
+                            <tr>
+                                <td width="80"><label for="username">Login:</label></td>
+                                <td><input type="text" id="username" name="username" required maxlength="30"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="password">Hasło:</label></td>
+                                <td><input type="password" id="password" name="password" required maxlength="50"></td>
+                            </tr>
+                        </table>
+                        
+                        <div class="checkbox-row">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">Zapamiętaj mnie na tym komputerze</label>
+                        </div>
+                        
+                        <div class="button-row">
+                            <button type="submit" class="retro-button primary">Zaloguj się</button>
+                            <button type="reset" class="retro-button">Wyczyść</button>
+                        </div>
+                    </form>
+                    
+                    <div class="links-section">
+                        <a href="#" onclick="forgotPassword()">Zapomniałeś hasła?</a> |
+                        <a href="register.html">Załóż nowe konto</a> |
+                        <a href="#" onclick="showHelp()">Pomoc</a>
+                    </div>
                 </div>
 
-                <form class="login-form" action="session_login.php" method="POST" id="loginForm">
-                    <div id="messageContainer"></div>
-
-                    <div class="form-group">
-                        <label for="username">Nazwa użytkownika:</label>
-                        <input type="text" id="username" name="username" required placeholder="Wpisz swoją nazwę użytkownika">
+                <!-- Alternative Login -->
+                <div class="form-box">
+                    <h3>Inne sposoby logowania</h3>
+                    <div style="text-align: center;">
+                        <button class="retro-button" onclick="socialLogin('facebook')" style="margin: 3px;">
+                            🌐 Facebook
+                        </button>
+                        <button class="retro-button" onclick="socialLogin('google')" style="margin: 3px;">
+                            🔍 Google
+                        </button>
                     </div>
-
-                    <div class="form-group">
-                        <label for="password">Hasło:</label>
-                        <input type="password" id="password" name="password" required placeholder="Wpisz swoje hasło">
+                    <div style="margin-top: 8px; font-size: 9px; color: #666; text-align: center;">
+                        (Funkcje będą dostępne wkrótce)
                     </div>
-
-                    <div class="remember-me">
-                        <input type="checkbox" id="remember" name="remember">
-                        <label for="remember">Zapamiętaj mnie</label>
-                    </div>
-
-                    <button type="submit" class="login-btn">Zaloguj się</button>
-
-                    <div class="form-links">
-                        <a href="#" onclick="forgotPassword()">Zapomniałeś hasła?</a> |
-                        <a href="register.html">Nie masz konta? Zarejestruj się</a>
-                    </div>
-
-                    <div class="social-login">
-                        <h4>Lub zaloguj się przez:</h4>
-                        <div class="social-buttons">
-                            <a href="#" class="social-btn facebook" onclick="socialLogin('facebook')">📘 Facebook</a>
-                            <a href="#" class="social-btn google" onclick="socialLogin('google')">🔍 Google</a>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
 
-            <!-- Demo Accounts Info -->
-            <div class="login-container" style="margin-top: 20px;">
-                <div style="padding: 20px; text-align: center; background: #f8f9fa;">
-                    <h3 style="color: #333; font-size: 14px; margin-bottom: 10px;">🎮 Konta demonstracyjne</h3>
-                    <p style="font-size: 11px; color: #666; margin-bottom: 15px;">Wypróbuj POLchatkę używając testowych kont:</p>
-                    
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
-                        <div style="background: #fff; padding: 10px; border-radius: 4px; border: 1px solid #ddd;">
-                            <strong style="color: #2196f3; font-size: 11px;">Administrator</strong><br>
-                            <small style="color: #666;">Login: admin</small><br>
-                            <small style="color: #666;">Hasło: admin123</small>
-                        </div>
-                        <div style="background: #fff; padding: 10px; border-radius: 4px; border: 1px solid #ddd;">
-                            <strong style="color: #4caf50; font-size: 11px;">Użytkownik</strong><br>
-                            <small style="color: #666;">Login: user</small><br>
-                            <small style="color: #666;">Hasło: user123</small>
+            <!-- Info Sidebar -->
+            <div class="info-sidebar">
+                <!-- Demo Accounts -->
+                <div class="info-box">
+                    <div class="info-box-header">
+                        <h4>🎮 Konta testowe</h4>
+                    </div>
+                    <div class="info-box-content">
+                        <p>Wypróbuj POLchatkę używając gotowych kont:</p>
+                        
+                        <table class="demo-accounts">
+                            <tr>
+                                <th>Typ</th>
+                                <th>Login</th>
+                                <th>Hasło</th>
+                                <th>Akcja</th>
+                            </tr>
+                            <tr>
+                                <td>Admin</td>
+                                <td><code>admin</code></td>
+                                <td><code>admin123</code></td>
+                                <td><button class="demo-fill-btn" onclick="fillDemo('admin', 'admin123')">Użyj</button></td>
+                            </tr>
+                            <tr>
+                                <td>User</td>
+                                <td><code>user</code></td>
+                                <td><code>user123</code></td>
+                                <td><button class="demo-fill-btn" onclick="fillDemo('user', 'user123')">Użyj</button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="info-box">
+                    <div class="info-box-header">
+                        <h4>📊 Statystyki portalu</h4>
+                    </div>
+                    <div class="info-box-content">
+                        <table style="width: 100%; font-size: 9px;">
+                            <tr>
+                                <td>Użytkowników:</td>
+                                <td align="right"><span class="counter">125847</span></td>
+                            </tr>
+                            <tr>
+                                <td>Online teraz:</td>
+                                <td align="right"><span class="counter blink">2456</span></td>
+                            </tr>
+                            <tr>
+                                <td>Zdjęć:</td>
+                                <td align="right"><span class="counter">89213</span></td>
+                            </tr>
+                            <tr>
+                                <td>Postów:</td>
+                                <td align="right"><span class="counter">456789</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- News -->
+                <div class="info-box">
+                    <div class="info-box-header">
+                        <h4>📰 Aktualności</h4>
+                    </div>
+                    <div class="info-box-content">
+                        <p style="margin-bottom: 5px;"><strong>2.08.2025</strong></p>
+                        <p style="margin-bottom: 8px;">Nowe funkcje personalizacji profilu!</p>
+                        
+                        <p style="margin-bottom: 5px;"><strong>30.07.2025</strong></p>
+                        <p style="margin-bottom: 8px;">Konkurs na najlepsze zdjęcie lata.</p>
+                        
+                        <div style="text-align: center; margin-top: 8px;">
+                            <a href="/blog" style="font-size: 9px;">» Zobacz więcej</a>
                         </div>
                     </div>
-                    
-                    <button onclick="fillDemoLogin('admin', 'admin123')" style="margin: 5px; padding: 5px 10px; background: #2196f3; color: #fff; border: none; border-radius: 3px; font-size: 10px; cursor: pointer;">Wypełnij dane admina</button>
-                    <button onclick="fillDemoLogin('user', 'user123')" style="margin: 5px; padding: 5px 10px; background: #4caf50; color: #fff; border: none; border-radius: 3px; font-size: 10px; cursor: pointer;">Wypełnij dane użytkownika</button>
+                </div>
+
+                <!-- Links -->
+                <div class="info-box">
+                    <div class="info-box-header">
+                        <h4>🔗 Przydatne linki</h4>
+                    </div>
+                    <div class="info-box-content">
+                        <p><a href="/regulamin">📋 Regulamin portalu</a></p>
+                        <p><a href="/prywatnosc">🛡️ Polityka prywatności</a></p>
+                        <p><a href="/pomoc">❓ Centrum pomocy</a></p>
+                        <p><a href="/kontakt">📞 Kontakt z nami</a></p>
+                        <div class="retro-separator"></div>
+                        <p><a href="/mobile">📱 Wersja mobilna</a></p>
+                        <p><a href="/api">🔧 API dla deweloperów</a></p>
+                    </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>POLchatka</h4>
-                    <p>Polski portal społecznościowy łączący ludzi od 2025</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Pomoc</h4>
-                    <ul>
-                        <li><a href="#">Regulamin</a></li>
-                        <li><a href="#">Prywatność</a></li>
-                        <li><a href="#">Kontakt</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Społeczność</h4>
-                    <ul>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Forum</a></li>
-                        <li><a href="#">Aplikacje</a></li>
-                    </ul>
-                </div>
+        <div class="footer-content">
+            <div>
+                © 2025 POLchatka.pl | Projekt hobbystyczny
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 POLchatka. Wszystkie prawa zastrzeżone.</p>
+            <div class="footer-links">
+                <a href="/regulamin">Regulamin</a> |
+                <a href="/prywatnosc">Prywatność</a> |
+                <a href="/kontakt">Kontakt</a> |
+                <a href="/blog">Blog</a>
+            </div>
+            <div style="margin-top: 5px; font-size: 8px; color: #666;">
+                Zainspirowane klasycznymi polskimi portalami z lat 2000
             </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
     <script>
-        // Demo login functionality
-        function fillDemoLogin(username, password) {
+        // Demo account filling
+        function fillDemo(username, password) {
             document.getElementById('username').value = username;
             document.getElementById('password').value = password;
+        }
+
+        // Message display
+        function showMessage(message, type = 'info') {
+            const container = document.getElementById('messageContainer');
+            const messageClass = 'message-' + type;
+            
+            container.innerHTML = `<div class="${messageClass}">${message}</div>`;
+            
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 5000);
         }
 
         // Social login placeholders
@@ -341,19 +737,12 @@
             showMessage('Funkcja resetowania hasła będzie dostępna wkrótce!', 'info');
         }
 
-        // Message display function
-        function showMessage(message, type = 'info') {
-            const container = document.getElementById('messageContainer');
-            const messageClass = type === 'error' ? 'error-message' : type === 'success' ? 'success-message' : 'error-message';
-            
-            container.innerHTML = `<div class="${messageClass}">${message}</div>`;
-            
-            setTimeout(() => {
-                container.innerHTML = '';
-            }, 5000);
+        // Help
+        function showHelp() {
+            alert('Pomoc POLchatka:\n\n• Wpisz swoją nazwę użytkownika i hasło\n• Zaznacz "Zapamiętaj mnie" aby pozostać zalogowanym\n• Użyj kont testowych do wypróbowania portalu\n\nW razie problemów skontaktuj się z nami!');
         }
 
-        // Form submission handling
+        // Form submission
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -361,17 +750,17 @@
             const password = document.getElementById('password').value;
             
             if (!username || !password) {
-                showMessage('Proszę wypełnić wszystkie pola!', 'error');
+                showMessage('Wypełnij wszystkie pola!', 'error');
                 return;
             }
             
-            // Show loading state
-            const submitBtn = document.querySelector('.login-btn');
+            // Show loading
+            const submitBtn = document.querySelector('.retro-button.primary');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Logowanie...';
             submitBtn.disabled = true;
             
-            // Simulate login process
+            // Simulate login
             setTimeout(() => {
                 if ((username === 'admin' && password === 'admin123') || 
                     (username === 'user' && password === 'user123')) {
@@ -380,11 +769,16 @@
                         window.location.href = 'profile.html';
                     }, 1500);
                 } else {
-                    showMessage('Nieprawidłowa nazwa użytkownika lub hasło!', 'error');
+                    showMessage('Nieprawidłowy login lub hasło!', 'error');
                     submitBtn.textContent = originalText;
                     submitBtn.disabled = false;
                 }
             }, 1000);
+        });
+
+        // Retro keyboard sounds (optional)
+        document.addEventListener('keypress', function(e) {
+            // Można dodać dźwięki klawiatury w stylu lat 2000
         });
     </script>
 </body>

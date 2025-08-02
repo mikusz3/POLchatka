@@ -1,0 +1,10 @@
+{% extends "page.html" %}
+
+{% block content %}
+<h2>{{ section.title }}</h2>
+<ul>
+  {% for page in section.pages %}
+    <li><a href="{{ page.permalink }}">{{ page.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock content %}

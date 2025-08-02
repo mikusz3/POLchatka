@@ -169,8 +169,8 @@ Projekt POLchatka jest udostępniany na licencji MIT - patrz plik [LICENSE](LICE
 
 *Powrót do czasów, gdy internet był prosty, kolorowy i pełen możliwości*
 
-[![GitHub stars](https://img.shields.io/github/stars/username/polchatka.svg?style=social&label=Star)](https://github.com/username/polchatka)
-[![Discord](https://img.shields.io/discord/123456789?color=7289da&label=Discord&logo=discord&logoColor=white)](https://discord.gg/polchatka)
+[![GitHub stars](https://img.shields.io/github/stars/mikusz3/POLchatka.svg?style=social&label=Star)](https://github.com/mikusz3/POLchatka)
+[![Discord](https://img.shields.io/discord/123456789?color=7289da&label=Discord&logo=discord&logoColor=white)](https://discord.gg/Rh5RQyqNs8)
 
 </div>
 

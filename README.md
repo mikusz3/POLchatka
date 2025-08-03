@@ -159,7 +159,7 @@ polchatka/
 
 ## 🔗 Przydatne linki
 
-- 🎨 **Inspiracje**: [Poszkole.pl (ARCHIWUM Z WEB.ARCHIVE.ORG [DOKŁADNA DATA: 18 KWIETNIA 2010])](https://web.archive.org/web/20100418121938/http://poszkole.pl), [NaszaKlasa.pl (później NK.pl) (ARCHIWUM Z WEB.ARCHIVE.ORG [DOKŁADNA DATA: 1 MAJA 2008])](web.archive.org/web/20080430215623/http://www.naszaklasa.pl), [SpaceHey](https://spacehey.com)
+- 🎨 **Inspiracje**: [Poszkole.pl (ARCHIWUM Z WEB.ARCHIVE.ORG [DOKŁADNA DATA: 18 KWIETNIA 2010])](https://web.archive.org/web/20100418121938/http://poszkole.pl), [NaszaKlasa.pl (później NK.pl) (ARCHIWUM Z WEB.ARCHIVE.ORG [DOKŁADNA DATA: 1 MAJA 2008])](https://web.archive.org/web/20080430215623/http://www.naszaklasa.pl), [SpaceHey](https://spacehey.com)
 - 🎮 **Retro gaming**: [Ruffle Flash Emulator](https://ruffle.rs)
 - 📚 **Zola docs**: [getzola.org](https://getzola.org)
 

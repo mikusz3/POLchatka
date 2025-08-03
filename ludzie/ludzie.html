@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ludzie - POLchatka</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Verdana', 'Tahoma', sans-serif;
+            font-size: 11px;
+            background: #e4f1ce url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==') repeat-x;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        /* Header - identyczny jak w index.html */
+        .header {
+            background: linear-gradient(to bottom, #ffffff 0%, #e8f5e8 50%, #d0f28f 100%);
+            border-bottom: 3px solid #4caf50;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+            border: 3px solid #2e7d32;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold;
+        }
+
+        .site-title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .site-title h1 {
+            font-size: 28px;
+            color: #2e7d32;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+            margin-bottom: 2px;
+            font-weight: bold;
+        }
+
+        .site-title .tagline {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .login-box {
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 15px;
+            min-width: 280px;
+        }
+
+        .login-box h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .login-form input {
+            padding: 4px 6px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 11px;
+        }
+
+        .login-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .btn {
+            padding: 4px 12px;
+            font-size: 10px;
+            font-weight: bold;
+            border: 1px solid;
+            border-radius: 3px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            flex: 1;
+        }
+
+        .btn-login {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+            border-color: #2e7d32;
+        }
+
+        .btn-register {
+            background: linear-gradient(to bottom, #ff9800 0%, #f57c00 100%);
+            color: white;
+            border-color: #e65100;
+        }
+
+        /* Navigation - identyczna jak w index.html */
+        .navigation {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            border-bottom: 2px solid #2e7d32;
+            box-shadow: inset 0 1px 0 #66bb6a;
+        }
+
+        .nav-content {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu li {
+            border-right: 1px solid #2e7d32;
+        }
+
+        .nav-menu li:last-child {
+            border-right: none;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 8px 16px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 11px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            transition: background 0.2s;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(46, 125, 50, 0.5);
+        }
+
+        .nav-menu a.active {
+            background: rgba(46, 125, 50, 0.7);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 200px 1fr 180px;
+            gap: 15px;
+        }
+
+        /* Page Header Banner */
+        .page-banner {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c8 100%);
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .page-banner h2 {
+            color: #2e7d32;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .page-banner p {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .breadcrumb {
+            font-size: 10px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .breadcrumb a {
+            color: #2e7d32;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Sidebar Widgets - identyczne jak w index.html */
+        .widget {
+            background: white;
+            border: 2px solid #4caf50;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .widget-header {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+            padding: 6px 10px;
+            font-weight: bold;
+            font-size: 11px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        }
+
+        .widget-content {
+            padding: 10px;
+        }
+
+        /* Search Form */
+        .search-form {
+            margin-bottom: 10px;
+        }
+
+        .search-form table {
+            width: 100%;
+        }
+
+        .search-form td {
+            padding: 3px 2px;
+            vertical-align: middle;
+        }
+
+        .search-form label {
+            font-size: 10px;
+            color: #333;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .search-form input,
+        .search-form select {
+            width: 100%;
+            padding: 3px 4px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 10px;
+            font-family: inherit;
+        }
+
+        .retro-button {
+            padding: 4px 8px;
+            font-size: 10px;
+            font-weight: bold;
+            border: 1px solid #4caf50;
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+            cursor: pointer;
+            margin: 2px;
+            border-radius: 3px;
+            text-decoration: none;
+        }
+
+        .retro-button:hover {
+            background: linear-gradient(to bottom, #66bb6a 0%, #4caf50 100%);
+        }
+
+        .retro-button.secondary {
+            background: linear-gradient(to bottom, #f0f0f0 0%, #e0e0e0 100%);
+            color: #333;
+            border-color: #ccc;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            background: white;
+            border: 2px solid #4caf50;
+            border-radius: 6px;
+            padding: 15px;
+        }
+
+        /* Users Section */
+        .users-section {
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            border: 1px solid #4caf50;
+            border-radius: 4px;
+            padding: 8px 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h3 {
+            color: #2e7d32;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .results-info {
+            font-size: 9px;
+            color: #666;
+        }
+
+        /* Users Table */
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border: 1px solid #4caf50;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .users-table th {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+            padding: 6px 8px;
+            font-size: 10px;
+            font-weight: bold;
+            text-align: left;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        }
+
+        .users-table td {
+            border-bottom: 1px solid #eee;
+            padding: 8px;
+            font-size: 10px;
+            vertical-align: middle;
+        }
+
+        .users-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .users-table tr:hover {
+            background: #fff8dc;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+            border: 2px solid #2e7d32;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .username {
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .username a {
+            color: #2e7d32;
+            text-decoration: none;
+        }
+
+        .username a:hover {
+            text-decoration: underline;
+            color: #1976d2;
+        }
+
+        .user-info {
+            color: #666;
+            font-size: 9px;
+            margin-top: 2px;
+        }
+
+        .status-online {
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .status-offline {
+            color: #999;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 3px;
+        }
+
+        .action-btn {
+            padding: 3px 6px;
+            font-size: 8px;
+            border: 1px solid #4caf50;
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: linear-gradient(to bottom, #66bb6a 0%, #4caf50 100%);
+            transform: translateY(-1px);
+        }
+
+        /* Pagination */
+        .pagination {
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #eee;
+            background: #f8f9fa;
+        }
+
+        .pagination a {
+            padding: 4px 8px;
+            margin: 0 2px;
+            border: 1px solid #4caf50;
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            color: #2e7d32;
+            text-decoration: none;
+            font-size: 10px;
+            border-radius: 3px;
+        }
+
+        .pagination a:hover {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+        }
+
+        .pagination .current {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+            border-color: #2e7d32;
+        }
+
+        /* Stats Counter */
+        .counter {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: #4caf50;
+            padding: 2px 4px;
+            font-size: 9px;
+            border: 1px solid #2e7d32;
+            border-radius: 2px;
+            font-weight: bold;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+        }
+
+        /* Online Users List - z index.html */
+        .user-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .user-item:last-child {
+            border-bottom: none;
+        }
+
+        .user-item .user-avatar {
+            width: 20px;
+            height: 20px;
+            font-size: 10px;
+        }
+
+        .user-item .user-info {
+            flex: 1;
+        }
+
+        .user-item .username {
+            font-weight: bold;
+            color: #1976d2;
+            font-size: 10px;
+        }
+
+        .user-item .user-status {
+            font-size: 8px;
+            color: #666;
+        }
+
+        .online-indicator {
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Footer - identyczny jak w index.html */
+        .footer {
+            background: linear-gradient(to bottom, #e8f5e8 0%, #d0f28f 100%);
+            border-top: 2px solid #4caf50;
+            margin-top: 40px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 960px;
+            margin: 0 auto;
+            color: #2e7d32;
+            font-size: 10px;
+        }
+
+        .footer-links {
+            margin-top: 8px;
+        }
+
+        .footer-links a {
+            color: #1976d2;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+            }
+
+            .nav-menu li {
+                border-right: none;
+                border-bottom: 1px solid #2e7d32;
+            }
+        }
+
+        /* Retro Effects */
+        .retro-glow {
+            text-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        .blink {
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">PŁ</div>
+                <div class="site-title">
+                    <h1 class="retro-glow">POLchatka</h1>
+                    <span class="tagline">Czuj się jak u siebie.</span>
+                </div>
+            </div>
+
+            <div class="login-box">
+                <h3>🔐 Zaloguj się</h3>
+                <form class="login-form">
+                    <input type="text" placeholder="Nazwa użytkownika" required>
+                    <input type="password" placeholder="Hasło" required>
+                    <div class="login-buttons">
+                        <button type="submit" class="btn btn-login">Zaloguj</button>
+                        <a href="register" class="btn btn-register">Zarejestruj</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-content">
+            <ul class="nav-menu">
+                <li><a href="/">🏠 Start</a></li>
+                <li><a href="/content/ludzie" class="active">👥 Ludzie</a></li>
+                <li><a href="/gry">🎮 Gry Online</a></li>
+                <li><a href="/sciana">📝 Ściana</a></li>
+                <li><a href="/grupy">👨‍👩‍👧‍👦 Grupy</a></li>
+                <li><a href="/quizy">🧠 Quizy</a></li>
+                <li><a href="https://polchatka.forumpolish.com">💬 Forum</a></li>
+                <li><a href="/blog">📰 Blog</a></li>
+                <li><a href="/poczta">📧 Poczta</a></li>
+                <li><a href="/sklep">🛒 Sklep</a></li>
+                <li><a href="https://discord.gg/Rh5RQyqNs8">Discord</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Page Banner -->
+        <div class="page-banner">
+            <h2>👥 Poznaj ludzi w POLchatce!</h2>
+            <p>
+                Znajdź nowych znajomych, nawiąż znajomości i buduj relacje w największej polskiej społeczności online.
+                Użyj filtrów wyszukiwania, aby znaleźć osoby o podobnych zainteresowaniach.
+            </p>
+            <div class="breadcrumb">
+                <a href="/">Strona główna</a> &raquo; Ludzie
+            </div>
+        </div>
+
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <!-- Search Panel -->
+            <div class="widget">
+                <div class="widget-header">🔍 Wyszukaj ludzi</div>
+                <div class="widget-content">
+                    <form class="search-form" id="searchForm">
+                        <table>
+                            <tr>
+                                <td><label>Imię:</label></td>
+                                <td><input type="text" id="searchName" placeholder="np. Anna"></td>
+                            </tr>
+                            <tr>
+                                <td><label>Miasto:</label></td>
+                                <td>
+                                    <select id="searchCity">
+                                        <option value="">-- wszystkie --</option>
+                                        <option value="warszawa">Warszawa</option>
+                                        <option value="krakow">Kraków</option>
+                                        <option value="gdansk">Gdańsk</option>
+                                        <option value="wroclaw">Wrocław</option>
+                                        <option value="poznan">Poznań</option>
+                                        <option value="katowice">Katowice</option>
+                                        <option value="lodz">Łódź</option>
+                                        <option value="szczecin">Szczecin</option>
+                                        <option value="lublin">Lublin</option>
+                                        <option value="bydgoszcz">Bydgoszcz</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>Wiek:</label></td>
+                                <td>
+                                    <select id="searchAge">
+                                        <option value="">-- dowolny --</option>
+                                        <option value="13-17">13-17 lat</option>
+                                        <option value="18-25">18-25 lat</option>
+                                        <option value="26-35">26-35 lat</option>
+                                        <option value="36-50">36-50 lat</option>
+                                        <option value="50+">50+ lat</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>Płeć:</label></td>
+                                <td>
+                                    <select id="searchGender">
+                                        <option value="">-- wszystkie --</option>
+                                        <option value="M">Mężczyzna</option>
+                                        <option value="K">Kobieta</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>Status:</label></td>
+                                <td>
+                                    <select id="searchStatus">
+                                        <option value="">-- wszystkie --</option>
+                                        <option value="online">Tylko online</option>
+                                        <option value="photo">Ze zdjęciem</option>
+                                        <option value="new">Nowi (7 dni)</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="text-align: center; margin-top: 8px;">
+                            <button type="submit" class="retro-button">Szukaj</button>
+                            <button type="reset" class="retro-button secondary">Wyczyść</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Online Users - jak w index.html -->
+            <div class="widget">
+                <div class="widget-header">👥 Kto jest online</div>
+                <div class="widget-content">
+                    <div class="user-item">
+                        <div class="user-avatar">👤</div>
+                        <div class="user-info">
+                            <div class="username">Ania123</div>
+                            <div class="user-status">Warszawa</div>
+                        </div>
+                        <div class="online-indicator"></div>
+                    </div>
+                    <div class="user-item">
+                        <div class="user-avatar">👨</div>
+                        <div class="user-info">
+                            <div class="username">PiotrGamer</div>
+                            <div class="user-status">Kraków</div>
+                        </div>
+                        <div class="online-indicator"></div>
+                    </div>
+                    <div class="user-item">
+                        <div class="user-avatar">👩</div>
+                        <div class="user-info">
+                            <div class="username">Kasia_PL</div>
+                            <div class="user-status">Gdańsk</div>
+                        </div>
+                        <div class="online-indicator"></div>
+                    </div>
+                    <div class="user-item">
+                        <div class="user-avatar">🧑</div>
+                        <div class="user-info">
+                            <div class="username">mikusz3</div>
+                            <div class="user-status">Kołobrzeg</div>
+                        </div>
+                        <div class="online-indicator"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="widget">
+                <div class="widget-header">⚡ Szybkie wyszukiwania</div>
+                <div class="widget-content">
+                    <div style="text-align: center;">
+                        <button class="retro-button" onclick="quickSearch('online')" style="display: block; width: 100%; margin-bottom: 5px;">🟢 Online teraz</button>
+                        <button class="retro-button" onclick="quickSearch('new')" style="display: block; width: 100%; margin-bottom: 5px;">🆕 Nowi użytkownicy</button>
+                        <button class="retro-button" onclick="quickSearch('photo')" style="display: block; width: 100%; margin-bottom: 5px;">📸 Ze zdjęciami</button>
+                        <button class="retro-button" onclick="quickSearch('birthday')" style="display: block; width: 100%;">🎂 Urodziny dzisiaj</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Users List -->
+            <div class="users-section">
+                <div class="section-header">
+                    <h3>Lista użytkowników</h3>
+                    <div class="results-info">
+                        Znaleziono <strong>2456</strong> użytkowników (strona 1 z 246)
+                    </div>
+                </div>
+                
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th width="50">Zdjęcie</th>
+                            <th>Użytkownik</th>
+                            <th width="80">Wiek</th>
+                            <th width="100">Miasto</th>
+                            <th width="80">Status</th>
+                            <th width="120">Akcje</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <tr>
+                            <td><div class="user-avatar">👩</div></td>
+                            <td>
+                                <div class="username"><a href="#" onclick="showProfile('ania123')">Ania123</a></div>
+                                <div class="user-info">Anna • 5 minut temu</div>
+                            </td>
+                            <td>22 lata</td>
+                            <td>Warszawa</td>
+                            <td><span class="status-online">● Online</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="action-btn" onclick="sendMessage('ania123')" title="Wyślij wiadomość">✉️</a>
+                                    <a href="#" class="action-btn" onclick="addFriend('ania123')" title="Dodaj znajomego">👥</a>
+                                    <a href="#" class="action-btn" onclick="showProfile('piotr87')" title="Zobacz profil">👁️</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div class="user-avatar">👩</div></td>
+                            <td>
+                                <div class="username"><a href="#" onclick="showProfile('kasia_pl')">Kasia_PL</a></div>
+                                <div class="user-info">Katarzyna • 1 minuta temu</div>
+                            </td>
+                            <td>19 lat</td>
+                            <td>Gdańsk</td>
+                            <td><span class="status-online">● Online</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="action-btn" onclick="sendMessage('kasia_pl')" title="Wyślij wiadomość">✉️</a>
+                                    <a href="#" class="action-btn" onclick="addFriend('kasia_pl')" title="Dodaj znajomego">👥</a>
+                                    <a href="#" class="action-btn" onclick="showProfile('kasia_pl')" title="Zobacz profil">👁️</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div class="user-avatar">🧑</div></td>
+                            <td>
+                                <div class="username"><a href="#" onclick="showProfile('tomek91')">Tomek91</a></div>
+                                <div class="user-info">Tomasz • 30 minut temu</div>
+                            </td>
+                            <td>33 lata</td>
+                            <td>Wrocław</td>
+                            <td><span class="status-online">● Online</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="action-btn" onclick="sendMessage('tomek91')" title="Wyślij wiadomość">✉️</a>
+                                    <a href="#" class="action-btn" onclick="addFriend('tomek91')" title="Dodaj znajomego">👥</a>
+                                    <a href="#" class="action-btn" onclick="showProfile('tomek91')" title="Zobacz profil">👁️</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div class="user-avatar">👩</div></td>
+                            <td>
+                                <div class="username"><a href="#" onclick="showProfile('ola_w')">Ola_W</a></div>
+                                <div class="user-info">Aleksandra • 3 godziny temu</div>
+                            </td>
+                            <td>27 lat</td>
+                            <td>Poznań</td>
+                            <td><span class="status-offline">○ Offline</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="action-btn" onclick="sendMessage('ola_w')" title="Wyślij wiadomość">✉️</a>
+                                    <a href="#" class="action-btn" onclick="addFriend('ola_w')" title="Dodaj znajomego">👥</a>
+                                    <a href="#" class="action-btn" onclick="showProfile('ola_w')" title="Zobacz profil">👁️</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div class="user-avatar">👨</div></td>
+                            <td>
+                                <div class="username"><a href="#" onclick="showProfile('marek_k')">Marek_K</a></div>
+                                <div class="user-info">Marek • 1 dzień temu</div>
+                            </td>
+                            <td>31 lat</td>
+                            <td>Katowice</td>
+                            <td><span class="status-offline">○ Offline</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="action-btn" onclick="sendMessage('marek_k')" title="Wyślij wiadomość">✉️</a>
+                                    <a href="#" class="action-btn" onclick="addFriend('marek_k')" title="Dodaj znajomego">👥</a>
+                                    <a href="#" class="action-btn" onclick="showProfile('marek_k')" title="Zobacz profil">👁️</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div class="user-avatar">🎭</div></td>
+                            <td>
+                                <div class="username"><a href="#" onclick="showProfile('asia22')">Asia22</a></div>
+                                <div class="user-info">Joanna • 15 minut temu</div>
+                            </td>
+                            <td>24 lata</td>
+                            <td>Łódź</td>
+                            <td><span class="status-online">● Online</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="action-btn" onclick="sendMessage('asia22')" title="Wyślij wiadomość">✉️</a>
+                                    <a href="#" class="action-btn" onclick="addFriend('asia22')" title="Dodaj znajomego">👥</a>
+                                    <a href="#" class="action-btn" onclick="showProfile('asia22')" title="Zobacz profil">👁️</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div class="user-avatar">👨‍💼</div></td>
+                            <td>
+                                <div class="username"><a href="#" onclick="showProfile('robert_s')">Robert_S</a></div>
+                                <div class="user-info">Robert • 45 minut temu</div>
+                            </td>
+                            <td>29 lat</td>
+                            <td>Szczecin</td>
+                            <td><span class="status-online">● Online</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="action-btn" onclick="sendMessage('robert_s')" title="Wyślij wiadomość">✉️</a>
+                                    <a href="#" class="action-btn" onclick="addFriend('robert_s')" title="Dodaj znajomego">👥</a>
+                                    <a href="#" class="action-btn" onclick="showProfile('robert_s')" title="Zobacz profil">👁️</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div class="user-avatar">👩‍💼</div></td>
+                            <td>
+                                <div class="username"><a href="#" onclick="showProfile('magda_123')">Magda_123</a></div>
+                                <div class="user-info">Magdalena • 2 godziny temu</div>
+                            </td>
+                            <td>26 lat</td>
+                            <td>Lublin</td>
+                            <td><span class="status-offline">○ Offline</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="action-btn" onclick="sendMessage('magda_123')" title="Wyślij wiadomość">✉️</a>
+                                    <a href="#" class="action-btn" onclick="addFriend('magda_123')" title="Dodaj znajomego">👥</a>
+                                    <a href="#" class="action-btn" onclick="showProfile('magda_123')" title="Zobacz profil">👁️</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div class="user-avatar">🎮</div></td>
+                            <td>
+                                <div class="username"><a href="#" onclick="showProfile('gamer_pl')">Gamer_PL</a></div>
+                                <div class="user-info">Michał • 10 minut temu</div>
+                            </td>
+                            <td>20 lat</td>
+                            <td>Bydgoszcz</td>
+                            <td><span class="status-online">● Online</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="action-btn" onclick="sendMessage('gamer_pl')" title="Wyślij wiadomość">✉️</a>
+                                    <a href="#" class="action-btn" onclick="addFriend('gamer_pl')" title="Dodaj znajomego">👥</a>
+                                    <a href="#" class="action-btn" onclick="showProfile('gamer_pl')" title="Zobacz profil">👁️</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <a href="#" onclick="changePage(1)">&laquo; Pierwsza</a>
+                    <a href="#" onclick="changePage(1)">&lt; Poprzednia</a>
+                    <span class="current">1</span>
+                    <a href="#" onclick="changePage(2)">2</a>
+                    <a href="#" onclick="changePage(3)">3</a>
+                    <a href="#" onclick="changePage(4)">4</a>
+                    <a href="#" onclick="changePage(5)">5</a>
+                    <span>...</span>
+                    <a href="#" onclick="changePage(246)">246</a>
+                    <a href="#" onclick="changePage(2)">Następna &gt;</a>
+                    <a href="#" onclick="changePage(246)">Ostatnia &raquo;</a>
+                </div>
+            </div>
+
+            <!-- Random Users -->
+            <div class="users-section">
+                <div class="section-header">
+                    <h3>🎲 Losowi użytkownicy</h3>
+                    <div class="results-info">
+                        <button class="retro-button" onclick="refreshRandomUsers()">🔄 Odśwież</button>
+                    </div>
+                </div>
+                
+                <table class="users-table">
+                    <tbody id="randomUsersTable">
+                        <tr>
+                            <td><div class="user-avatar">🌟</div></td>
+                            <td>
+                                <div class="username"><a href="#" onclick="showProfile('zosia_w')">Zosia_W</a></div>
+                                <div class="user-info">Zofia • 1 godzina temu</div>
+                            </td>
+                            <td>23 lata</td>
+                            <td>Toruń</td>
+                            <td><span class="status-offline">○ Offline</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="action-btn" onclick="sendMessage('zosia_w')" title="Wyślij wiadomość">✉️</a>
+                                    <a href="#" class="action-btn" onclick="addFriend('zosia_w')" title="Dodaj znajomego">👥</a>
+                                    <a href="#" class="action-btn" onclick="showProfile('zosia_w')" title="Zobacz profil">👁️</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div class="user-avatar">⚽</div></td>
+                            <td>
+                                <div class="username"><a href="#" onclick="showProfile('football_fan')">Football_Fan</a></div>
+                                <div class="user-info">Łukasz • 3 minuty temu</div>
+                            </td>
+                            <td>28 lat</td>
+                            <td>Gdynia</td>
+                            <td><span class="status-online">● Online</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="action-btn" onclick="sendMessage('football_fan')" title="Wyślij wiadomość">✉️</a>
+                                    <a href="#" class="action-btn" onclick="addFriend('football_fan')" title="Dodaj znajomego">👥</a>
+                                    <a href="#" class="action-btn" onclick="showProfile('football_fan')" title="Zobacz profil">👁️</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div class="user-avatar">🎵</div></td>
+                            <td>
+                                <div class="username"><a href="#" onclick="showProfile('music_lover')">Music_Lover</a></div>
+                                <div class="user-info">Patrycja • 20 minut temu</div>
+                            </td>
+                            <td>21 lat</td>
+                            <td>Rzeszów</td>
+                            <td><span class="status-online">● Online</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="action-btn" onclick="sendMessage('music_lover')" title="Wyślij wiadomość">✉️</a>
+                                    <a href="#" class="action-btn" onclick="addFriend('music_lover')" title="Dodaj znajomego">👥</a>
+                                    <a href="#" class="action-btn" onclick="showProfile('music_lover')" title="Zobacz profil">👁️</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="sidebar">
+            <!-- Stats Panel -->
+            <div class="widget">
+                <div class="widget-header">📊 Statystyki</div>
+                <div class="widget-content">
+                    <div style="font-size: 9px; line-height: 1.4;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span>Wszystkich użytkowników:</span>
+                            <span class="counter">125847</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span>Online teraz:</span>
+                            <span class="counter blink">2456</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span>Nowych dziś:</span>
+                            <span class="counter">47</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span>Nowych w tym tygodniu:</span>
+                            <span class="counter">342</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span>Mężczyzn:</span>
+                            <span class="counter">68204</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Kobiet:</span>
+                            <span class="counter">57643</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="widget">
+                <div class="widget-header">🔗 Szybkie linki</div>
+                <div class="widget-content">
+                    <div style="font-size: 9px;">
+                        <a href="/regulamin" style="color: #1976d2; text-decoration: none; display: block; margin-bottom: 3px;">📋 Regulamin</a>
+                        <a href="/prywatnosc" style="color: #1976d2; text-decoration: none; display: block; margin-bottom: 3px;">🛡️ Prywatność</a>
+                        <a href="/kontakt" style="color: #1976d2; text-decoration: none; display: block; margin-bottom: 3px;">📞 Kontakt</a>
+                        <a href="/pomoc" style="color: #1976d2; text-decoration: none; display: block; margin-bottom: 3px;">❓ Pomoc</a>
+                        <a href="/mobile" style="color: #1976d2; text-decoration: none; display: block;">📱 Aplikacja</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advertisement -->
+            <div class="widget">
+                <div class="widget-header">📢 Reklama</div>
+                <div class="widget-content" style="text-align: center; padding: 15px 10px;">
+                    <div style="background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), linear-gradient(-45deg, #f0f0f0 25%, transparent 25%); background-size: 8px 8px; border: 2px dashed #ccc; padding: 20px; border-radius: 4px;">
+                        <div style="font-size: 12px; color: #666; margin-bottom: 5px;">🎯</div>
+                        <div style="font-size: 9px; color: #666;">Twoja reklama tutaj</div>
+                        <div style="font-size: 8px; color: #999; margin-top: 5px;">Skontaktuj się z nami</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                © 2025 POLchatka.pl | Projekt hobbystyczny | 
+                <span class="footer-links">
+                    <a href="/kontakt">Kontakt</a>
+                    <a href="/regulamin">Regulamin</a>
+                    <a href="/prywatnosc">Prywatność</a>
+                    <a href="/blog">Blog</a>
+                </span>
+            </div>
+            <div style="margin-top: 5px; font-size: 9px; color: #666;">
+                Zainspirowane klasycznymi polskimi portalami społecznościowymi z lat 2000
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample user data for demonstration
+        const sampleUsers = [
+            {username: 'ania123', name: 'Anna', age: 22, city: 'Warszawa', status: 'online', avatar: '👩', lastSeen: '5 minut temu'},
+            {username: 'piotr87', name: 'Piotr', age: 25, city: 'Kraków', status: 'offline', avatar: '👨', lastSeen: '2 godziny temu'},
+            {username: 'kasia_pl', name: 'Katarzyna', age: 19, city: 'Gdańsk', status: 'online', avatar: '👩', lastSeen: '1 minuta temu'},
+            {username: 'tomek91', name: 'Tomasz', age: 33, city: 'Wrocław', status: 'online', avatar: '🧑', lastSeen: '30 minut temu'},
+            {username: 'ola_w', name: 'Aleksandra', age: 27, city: 'Poznań', status: 'offline', avatar: '👩', lastSeen: '3 godziny temu'},
+            {username: 'marek_k', name: 'Marek', age: 31, city: 'Katowice', status: 'offline', avatar: '👨', lastSeen: '1 dzień temu'},
+            {username: 'asia22', name: 'Joanna', age: 24, city: 'Łódź', status: 'online', avatar: '🎭', lastSeen: '15 minut temu'},
+            {username: 'robert_s', name: 'Robert', age: 29, city: 'Szczecin', status: 'online', avatar: '👨‍💼', lastSeen: '45 minut temu'},
+            {username: 'magda_123', name: 'Magdalena', age: 26, city: 'Lublin', status: 'offline', avatar: '👩‍💼', lastSeen: '2 godziny temu'},
+            {username: 'gamer_pl', name: 'Michał', age: 20, city: 'Bydgoszcz', status: 'online', avatar: '🎮', lastSeen: '10 minut temu'}
+        ];
+
+        // Search functionality
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            performSearch();
+        });
+
+        function performSearch() {
+            const name = document.getElementById('searchName').value.toLowerCase();
+            const city = document.getElementById('searchCity').value;
+            const age = document.getElementById('searchAge').value;
+            const gender = document.getElementById('searchGender').value;
+            const status = document.getElementById('searchStatus').value;
+
+            let filteredUsers = sampleUsers.filter(user => {
+                if (name && !user.name.toLowerCase().includes(name) && !user.username.toLowerCase().includes(name)) {
+                    return false;
+                }
+                if (city && user.city.toLowerCase() !== city) {
+                    return false;
+                }
+                if (status === 'online' && user.status !== 'online') {
+                    return false;
+                }
+                return true;
+            });
+
+            updateUsersTable(filteredUsers);
+        }
+
+        function updateUsersTable(users) {
+            const tbody = document.getElementById('usersTableBody');
+            tbody.innerHTML = '';
+
+            users.forEach(user => {
+                const row = createUserRow(user);
+                tbody.appendChild(row);
+            });
+
+            const resultsInfo = document.querySelector('.results-info');
+            resultsInfo.innerHTML = `Znaleziono <strong>${users.length}</strong> użytkowników`;
+        }
+
+        function createUserRow(user) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><div class="user-avatar">${user.avatar}</div></td>
+                <td>
+                    <div class="username"><a href="#" onclick="showProfile('${user.username}')">${user.username}</a></div>
+                    <div class="user-info">${user.name} • ${user.lastSeen}</div>
+                </td>
+                <td>${user.age} ${user.age === 1 ? 'rok' : (user.age < 5 ? 'lata' : 'lat')}</td>
+                <td>${user.city}</td>
+                <td><span class="status-${user.status}">${user.status === 'online' ? '● Online' : '○ Offline'}</span></td>
+                <td>
+                    <div class="action-buttons">
+                        <a href="#" class="action-btn" onclick="sendMessage('${user.username}')" title="Wyślij wiadomość">✉️</a>
+                        <a href="#" class="action-btn" onclick="addFriend('${user.username}')" title="Dodaj znajomego">👥</a>
+                        <a href="#" class="action-btn" onclick="showProfile('${user.username}')" title="Zobacz profil">👁️</a>
+                    </div>
+                </td>
+            `;
+            return row;
+        }
+
+        // Quick search functions
+        function quickSearch(type) {
+            document.getElementById('searchForm').reset();
+
+            switch(type) {
+                case 'online':
+                    document.getElementById('searchStatus').value = 'online';
+                    break;
+                case 'new':
+                    document.getElementById('searchStatus').value = 'new';
+                    break;
+                case 'photo':
+                    document.getElementById('searchStatus').value = 'photo';
+                    break;
+                case 'birthday':
+                    alert('🎂 Dziś urodziny mają:\n• Ania123 (22 lata)\n• Tomek91 (33 lata)\n• Music_Lover (21 lat)\n\nWyślij im życzenia!');
+                    return;
+            }
+            performSearch();
+        }
+
+        // Action functions
+        function showProfile(username) {
+            alert(`👤 Profil użytkownika: ${username}\n\nFunkcja będzie dostępna wkrótce!`);
+        }
+
+        function sendMessage(username) {
+            alert(`✉️ Wyślij wiadomość do: ${username}\n\nPrzenosisz do poczty...`);
+        }
+
+        function addFriend(username) {
+            if (confirm(`👥 Czy chcesz dodać ${username} do znajomych?`)) {
+                alert(`✅ ${username} został dodany do Twoich znajomych!`);
+            }
+        }
+
+        function changePage(page) {
+            alert(`📄 Przechodzisz na stronę ${page}\n\nFunkcja będzie dostępna wkrótce!`);
+        }
+
+        function refreshRandomUsers() {
+            const randomUsers = sampleUsers.sort(() => 0.5 - Math.random()).slice(0, 3);
+            const tbody = document.getElementById('randomUsersTable');
+            tbody.innerHTML = '';
+
+            randomUsers.forEach(user => {
+                const row = createUserRow(user);
+                tbody.appendChild(row);
+            });
+
+            tbody.style.opacity = '0.5';
+            setTimeout(() => {
+                tbody.style.opacity = '1';
+            }, 300);
+        }
+
+        // Auto-refresh online counter
+        function updateOnlineCounter() {
+            const counters = document.querySelectorAll('.counter.blink');
+            counters.forEach(counter => {
+                const current = parseInt(counter.textContent);
+                const change = Math.floor(Math.random() * 10) - 5;
+                const newValue = Math.max(1, current + change);
+                counter.textContent = newValue.toString();
+            });
+        }
+
+        setInterval(updateOnlineCounter, 30000);
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('👥 Strona Ludzie załadowana - POLchatka');
+            
+            // Login form handler
+            document.querySelector('.login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Demo: Funkcja logowania zostanie wkrótce zaimplementowana!');
+            });
+        });
+    </script>
+</body>
+</html>Profile('ania123')" title="Zobacz profil">👁️</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div class="user-avatar">👨</div></td>
+                            <td>
+                                <div class="username"><a href="#" onclick="showProfile('piotr87')">Piotr87</a></div>
+                                <div class="user-info">Piotr • 2 godziny temu</div>
+                            </td>
+                            <td>25 lat</td>
+                            <td>Kraków</td>
+                            <td><span class="status-offline">○ Offline</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="action-btn" onclick="sendMessage('piotr87')" title="Wyślij wiadomość">✉️</a>
+                                    <a href="#" class="action-btn" onclick="addFriend('piotr87')" title="Dodaj znajomego">👥</a>
+                                    <a href="#" class="action-btn" onclick="show

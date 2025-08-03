@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ściana - POLchatka</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Verdana', 'Tahoma', sans-serif;
+            font-size: 11px;
+            background: #e4f1ce url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==') repeat-x;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        /* Header - identyczny jak w index.html */
+        .header {
+            background: linear-gradient(to bottom, #ffffff 0%, #e8f5e8 50%, #d0f28f 100%);
+            border-bottom: 3px solid #4caf50;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+            border: 3px solid #2e7d32;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold;
+        }
+
+        .site-title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .site-title h1 {
+            font-size: 28px;
+            color: #2e7d32;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+            margin-bottom: 2px;
+            font-weight: bold;
+        }
+
+        .site-title .tagline {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .login-box {
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 15px;
+            min-width: 280px;
+        }
+
+        .login-box h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .login-form input {
+            padding: 4px 6px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 11px;
+        }
+
+        .login-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .btn {
+            padding: 4px 12px;
+            font-size: 10px;
+            font-weight: bold;
+            border: 1px solid;
+            border-radius: 3px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            flex: 1;
+        }
+
+        .btn-login {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+            border-color: #2e7d32;
+        }
+
+        .btn-register {
+            background: linear-gradient(to bottom, #ff9800 0%, #f57c00 100%);
+            color: white;
+            border-color: #e65100;
+        }
+
+        /* Navigation - identyczna jak w index.html */
+        .navigation {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            border-bottom: 2px solid #2e7d32;
+            box-shadow: inset 0 1px 0 #66bb6a;
+        }
+
+        .nav-content {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu li {
+            border-right: 1px solid #2e7d32;
+        }
+
+        .nav-menu li:last-child {
+            border-right: none;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 8px 16px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 11px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            transition: background 0.2s;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(46, 125, 50, 0.5);
+        }
+
+        .nav-menu a.active {
+            background: rgba(46, 125, 50, 0.7);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 200px 1fr 180px;
+            gap: 15px;
+        }
+
+        /* Page Banner */
+        .page-banner {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c8 100%);
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .page-banner h2 {
+            color: #2e7d32;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .page-banner p {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .breadcrumb {
+            font-size: 10px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .breadcrumb a {
+            color: #2e7d32;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Sidebar Widgets - identyczne jak w index.html */
+        .widget {
+            background: white;
+            border: 2px solid #4caf50;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .widget-header {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+            padding: 6px 10px;
+            font-weight: bold;
+            font-size: 11px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        }
+
+        .widget-content {
+            padding: 10px;
+        }
+
+        /* User List */
+        .user-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .user-item:last-child {
+            border-bottom: none;
+        }
+
+        .user-avatar {
+            width: 20px;
+            height: 20px;
+            background: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .username {
+            font-weight: bold;
+            color: #1976d2;
+            font-size: 10px;
+        }
+
+        .user-status {
+            font-size: 8px;
+            color: #666;
+        }
+
+        .online-indicator {
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            background: white;
+            border: 2px solid #4caf50;
+            border-radius: 6px;
+            padding: 15px;
+        }
+
+        /* Post Form */
+        .post-form {
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #4caf50;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .post-form h3 {
+            color: #2e7d32;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .post-input {
+            width: 100%;
+            min-height: 80px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 11px;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        .post-options {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .emoji-picker {
+            display: flex;
+            gap: 3px;
+            flex-wrap: wrap;
+        }
+
+        .emoji-btn {
+            padding: 2px 4px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        .emoji-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .retro-button {
+            padding: 4px 12px;
+            font-size: 10px;
+            font-weight: bold;
+            border: 1px solid #4caf50;
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+            cursor: pointer;
+            border-radius: 3px;
+            text-decoration: none;
+        }
+
+        .retro-button:hover {
+            background: linear-gradient(to bottom, #66bb6a 0%, #4caf50 100%);
+        }
+
+        .retro-button.secondary {
+            background: linear-gradient(to bottom, #f0f0f0 0%, #e0e0e0 100%);
+            color: #333;
+            border-color: #ccc;
+        }
+
+        /* Wall Posts */
+        .wall-posts {
+            margin-top: 20px;
+        }
+
+        .post {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .post:hover {
+            border-color: #4caf50;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+        }
+
+        .post.admin {
+            border-color: #ff9800;
+            background: linear-gradient(to bottom, #fff8e1 0%, #fff3c4 100%);
+        }
+
+        .post.pinned {
+            border-color: #2196f3;
+            background: linear-gradient(to bottom, #e3f2fd 0%, #bbdefb 100%);
+        }
+
+        .post-header {
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            padding: 8px 12px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post.admin .post-header {
+            background: linear-gradient(to bottom, #ff9800 0%, #f57c00 100%);
+            color: white;
+        }
+
+        .post.pinned .post-header {
+            background: linear-gradient(to bottom, #2196f3 0%, #1976d2 100%);
+            color: white;
+        }
+
+        .post-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .post-author-avatar {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+            border: 1px solid #2e7d32;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+        }
+
+        .post-author-info {
+            flex: 1;
+        }
+
+        .post-author-name {
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .post-meta {
+            font-size: 8px;
+            color: #666;
+        }
+
+        .post.admin .post-meta,
+        .post.pinned .post-meta {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .post-date {
+            font-size: 8px;
+            color: #666;
+        }
+
+        .post.admin .post-date,
+        .post.pinned .post-date {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .post-content {
+            padding: 12px;
+        }
+
+        .post-text {
+            font-size: 11px;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .post-media {
+            margin: 8px 0;
+        }
+
+        .post-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .post-footer {
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+            padding: 6px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 9px;
+            color: #666;
+        }
+
+        .post-actions-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .post-action-btn {
+            padding: 2px 6px;
+            font-size: 8px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            border-radius: 2px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .post-action-btn:hover {
+            background: #f0f0f0;
+            border-color: #4caf50;
+        }
+
+        .post-action-btn.liked {
+            background: #ffebee;
+            border-color: #f44336;
+            color: #f44336;
+        }
+
+        /* Comments */
+        .comments {
+            background: #fafafa;
+            border-top: 1px solid #e0e0e0;
+            padding: 8px 12px;
+            display: none;
+        }
+
+        .comments.show {
+            display: block;
+        }
+
+        .comment {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px dotted #ddd;
+        }
+
+        .comment:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .comment-avatar {
+            width: 16px;
+            height: 16px;
+            background: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            flex-shrink: 0;
+        }
+
+        .comment-content {
+            flex: 1;
+        }
+
+        .comment-author {
+            font-weight: bold;
+            font-size: 9px;
+            color: #1976d2;
+        }
+
+        .comment-text {
+            font-size: 9px;
+            margin-top: 2px;
+        }
+
+        .comment-date {
+            font-size: 7px;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        .comment-form {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 4px 6px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 9px;
+            font-family: inherit;
+            margin-bottom: 5px;
+        }
+
+        /* Post Categories */
+        .post-category {
+            display: inline-block;
+            padding: 2px 6px;
+            font-size: 7px;
+            background: #e0e0e0;
+            color: #666;
+            border-radius: 10px;
+            margin-right: 5px;
+            text-transform: uppercase;
+        }
+
+        .post-category.news {
+            background: #2196f3;
+            color: white;
+        }
+
+        .post-category.event {
+            background: #ff9800;
+            color: white;
+        }
+
+        .post-category.discussion {
+            background: #4caf50;
+            color: white;
+        }
+
+        .post-category.media {
+            background: #9c27b0;
+            color: white;
+        }
+
+        /* Trending Topics */
+        .trending-tag {
+            display: inline-block;
+            padding: 2px 4px;
+            font-size: 8px;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            margin: 2px;
+            cursor: pointer;
+        }
+
+        .trending-tag:hover {
+            background: #4caf50;
+            color: white;
+            border-color: #2e7d32;
+        }
+
+        /* Wall Filter */
+        .wall-filter {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 4px 8px;
+            font-size: 9px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .filter-btn.active {
+            background: #4caf50;
+            color: white;
+            border-color: #2e7d32;
+        }
+
+        /* Footer - identyczny jak w index.html */
+        .footer {
+            background: linear-gradient(to bottom, #e8f5e8 0%, #d0f28f 100%);
+            border-top: 2px solid #4caf50;
+            margin-top: 40px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 960px;
+            margin: 0 auto;
+            color: #2e7d32;
+            font-size: 10px;
+        }
+
+        .footer-links {
+            margin-top: 8px;
+        }
+
+        .footer-links a {
+            color: #1976d2;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+            }
+
+            .nav-menu li {
+                border-right: none;
+                border-bottom: 1px solid #2e7d32;
+            }
+
+            .post-options {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* Retro Effects */
+        .retro-glow {
+            text-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        .blink {
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        /* Scroll animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .post {
+            animation: slideIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">PŁ</div>
+                <div class="site-title">
+                    <h1 class="retro-glow">POLchatka</h1>
+                    <span class="tagline">Czuj się jak u siebie.</span>
+                </div>
+            </div>
+
+            <div class="login-box">
+                <h3>🔐 Zaloguj się</h3>
+                <form class="login-form">
+                    <input type="text" placeholder="Nazwa użytkownika" required>
+                    <input type="password" placeholder="Hasło" required>
+                    <div class="login-buttons">
+                        <button type="submit" class="btn btn-login">Zaloguj</button>
+                        <a href="register" class="btn btn-register">Zarejestruj</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-content">
+            <ul class="nav-menu">
+                <li><a href="/">🏠 Start</a></li>
+                <li><a href="/content/ludzie">👥 Ludzie</a></li>
+                <li><a href="/gry">🎮 Gry Online</a></li>
+                <li><a href="/sciana" class="active">📝 Ściana</a></li>
+                <li><a href="/grupy">👨‍👩‍👧‍👦 Grupy</a></li>
+                <li><a href="/quizy">🧠 Quizy</a></li>
+                <li><a href="https://polchatka.forumpolish.com">💬 Forum</a></li>
+                <li><a href="/blog">📰 Blog</a></li>
+                <li><a href="/poczta">📧 Poczta</a></li>
+                <li><a href="/sklep">🛒 Sklep</a></li>
+                <li><a href="https://discord.gg/Rh5RQyqNs8">Discord</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Page Banner -->
+        <div class="page-banner">
+            <h2>📝 Ściana POLchatki</h2>
+            <p>
+                Dziel się swoimi myślami, zdjęciami i linkami z całą społecznością! 
+                Komentuj, lajkuj i bierz udział w dyskusjach w prawdziwym retro stylu.
+            </p>
+            <div class="breadcrumb">
+                <a href="/">Strona główna</a> &raquo; Ściana
+            </div>
+        </div>
+
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <!-- Online Users -->
+            <div class="widget">
+                <div class="widget-header">👥 Kto jest online</div>
+                <div class="widget-content">
+                    <div class="user-item">
+                        <div class="user-avatar">👤</div>
+                        <div class="user-info">
+                            <div class="username">Ania123</div>
+                            <div class="user-status">Warszawa</div>
+                        </div>
+                        <div class="online-indicator"></div>
+                    </div>
+                    <div class="user-item">
+                        <div class="user-avatar">👨</div>
+                        <div class="user-info">
+                            <div class="username">PiotrGamer</div>
+                            <div class="user-status">Kraków</div>
+                        </div>
+                        <div class="online-indicator"></div>
+                    </div>
+                    <div class="user-item">
+                        <div class="user-avatar">👩</div>
+                        <div class="user-info">
+                            <div class="username">Kasia_PL</div>
+                            <div class="user-status">Gdańsk</div>
+                        </div>
+                        <div class="online-indicator"></div>
+                    </div>
+                    <div class="user-item">
+                        <div class="user-avatar">🧑</div>
+                        <div class="user-info">
+                            <div class="username">mikusz3</div>
+                            <div class="user-status">Kołobrzeg</div>
+                        </div>
+                        <div class="online-indicator"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trending Topics -->
+            <div class="widget">
+                <div class="widget-header">🔥 Popularne tematy</div>
+                <div class="widget-content">
+                    <div class="trending-tag" onclick="filterPosts('retro')">#RetroVibes</div>
+                    <div class="trending-tag" onclick="filterPosts('gry')">#GryOnline</div>
+                    <div class="trending-tag" onclick="filterPosts('muzyka')">#MuzykaLat2000</div>
+                    <div class="trending-tag" onclick="filterPosts('nostalgia')">#Nostalgia</div>
+                    <div class="trending-tag" onclick="filterPosts('znajomi')">#Znajomi</div>
+                    <div class="trending-tag" onclick="filterPosts('zdjecia')">#Zdjęcia</div>
+                    <div class="trending-tag" onclick="filterPosts('anime')">#Anime</div>
+                    <div class="trending-tag" onclick="filterPosts('pilka')">#PiłkaNożna</div>
+                </div>
+            </div>
+
+            <!-- Wall Stats -->
+            <div class="widget">
+                <div class="widget-header">📊 Statystyki Ściany</div>
+                <div class="widget-content">
+                    <div style="font-size: 9px; line-height: 1.4;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span>Postów dzisiaj:</span>
+                            <span style="font-weight: bold; color: #4caf50;">127</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span>Komentarzy:</span>
+                            <span style="font-weight: bold; color: #4caf50;">543</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span>Lajków:</span>
+                            <span style="font-weight: bold; color: #4caf50;">1,234</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Aktywnych dziś:</span>
+                            <span style="font-weight: bold; color: #4caf50;">89</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Post Form -->
+            <div class="post-form">
+                <h3>✍️ Napisz na ścianie</h3>
+                <textarea class="post-input" placeholder="Co słychać? Podziel się swoimi myślami..."></textarea>
+                
+                <div class="post-options">
+                    <div>
+                        <label style="font-size: 9px; margin-right: 8px;">Kategoria:</label>
+                        <select style="font-size: 9px; margin-right: 15px;">
+                            <option value="general">Ogólne</option>
+                            <option value="news">Aktualności</option>
+                            <option value="event">Wydarzenie</option>
+                            <option value="discussion">Dyskusja</option>
+                            <option value="media">Zdjęcia/Media</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label style="font-size: 9px; margin-right: 8px;">Emotki:</label>
+                        <div class="emoji-picker">
+                            <button type="button" class="emoji-btn" onclick="addEmoji('😊')">😊</button>
+                            <button type="button" class="emoji-btn" onclick="addEmoji('😎')">😎</button>
+                            <button type="button" class="emoji-btn" onclick="addEmoji('😍')">😍</button>
+                            <button type="button" class="emoji-btn" onclick="addEmoji('🤔')">🤔</button>
+                            <button type="button" class="emoji-btn" onclick="addEmoji('😂')">😂</button>
+                            <button type="button" class="emoji-btn" onclick="addEmoji('❤️')">❤️</button>
+                            <button type="button" class="emoji-btn" onclick="addEmoji('👌')">👌</button>
+                            <button type="button" class="emoji-btn" onclick="addEmoji('🔥')">🔥</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post-actions">
+                    <button type="button" class="retro-button secondary" onclick="clearPost()">Wyczyść</button>
+                    <button type="button" class="retro-button" onclick="publishPost()">Opublikuj</button>
+                </div>
+            </div>
+
+            <!-- Wall Filter -->
+            <div class="wall-filter">
+                <button class="filter-btn active" onclick="filterWall('all')">Wszystkie</button>
+                <button class="filter-btn" onclick="filterWall('news')">Aktualności</button>
+                <button class="filter-btn" onclick="filterWall('discussion')">Dyskusje</button>
+                <button class="filter-btn" onclick="filterWall('media')">Zdjęcia</button>
+                <button class="filter-btn" onclick="filterWall('friends')">Znajomi</button>
+                <button class="filter-btn" onclick="filterWall('popular')">Popularne</button>
+            </div>
+
+            <!-- Wall Posts -->
+            <div class="wall-posts" id="wallPosts">
+                <!-- Pinned Admin Post -->
+                <article class="post pinned">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="post-author-avatar">👑</div>
+                            <div class="post-author-info">
+                                <div class="post-author-name">Admin POLchatki</div>
+                                <div class="post-meta">Administrator • Moderator</div>
+                            </div>
+                        </div>
+                        <div class="post-date">📌 Przypięte • 1 sierpnia 2025</div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-category news">Aktualności</div>
+                        <div class="post-text">
+                            🎉 <strong>Witajcie na nowej ścianie POLchatki!</strong><br>
+                            Dodaliśmy masę nowych funkcji inspirowanych NK.pl i innymi kultowymi portalami z lat 2000:<br>
+                            • Komentarze i lajki<br>
+                            • Kategorie postów<br>
+                            • Popularne tagi<br>
+                            • Filtrowanie treści<br>
+                            • Emotki i GIFy<br><br>
+                            Czujcie się jak u siebie! 💚
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <span>❤️ 47 lajków</span>
+                            <span>💬 12 komentarzy</span>
+                            <span>👀 234 wyświetlenia</span>
+                        </div>
+                        <div class="post-actions-buttons">
+                            <button class="post-action-btn liked" onclick="toggleLike(this)">❤️ Lubię</button>
+                            <button class="post-action-btn" onclick="toggleComments(this)">💬 Komentuj</button>
+                            <button class="post-action-btn" onclick="sharePost(this)">📤 Udostępnij</button>
+                        </div>
+                    </div>
+                    <div class="comments show">
+                        <div class="comment">
+                            <div class="comment-avatar">👩</div>
+                            <div class="comment-content">
+                                <div class="comment-author">Ania123</div>
+                                <div class="comment-text">Super! Dokładnie tak wyglądało NK! 😍</div>
+                                <div class="comment-date">5 minut temu</div>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <div class="comment-avatar">👨</div>
+                            <div class="comment-content">
+                                <div class="comment-author">RetroFan69</div>
+                                <div class="comment-text">Nostalgia total! Brawo za odtworzenie klimatu 👌</div>
+                                <div class="comment-date">3 minuty temu</div>
+                            </div>
+                        </div>
+                        <div class="comment-form">
+                            <input type="text" class="comment-input" placeholder="Napisz komentarz...">
+                            <button class="retro-button" style="font-size: 8px; padding: 2px 6px; margin-top: 3px;">Dodaj</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Regular Posts -->
+                <article class="post">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="post-author-avatar">👩</div>
+                            <div class="post-author-info">
+                                <div class="post-author-name">Kasia_PL</div>
+                                <div class="post-meta">19 lat • Gdańsk</div>
+                            </div>
+                        </div>
+                        <div class="post-date">3 sierpnia 2025, 14:23</div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-category media">Zdjęcia</div>
+                        <div class="post-text">
+                            Znalazłam stary album ze zdjęciami z liceum! 📸 Kto pamięta takie fryzury? 😂 #Nostalgia #Zdjęcia
+                        </div>
+                        <div class="post-media">
+                            <div style="background: #f0f0f0; border: 2px dashed #ccc; padding: 40px; text-align: center; border-radius: 4px; color: #666;">
+                                📷 [Zdjęcie zostało usunięte z przyczyn technicznych]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <span>❤️ 23 lajków</span>
+                            <span>💬 8 komentarzy</span>
+                            <span>👀 156 wyświetleń</span>
+                        </div>
+                        <div class="post-actions-buttons">
+                            <button class="post-action-btn" onclick="toggleLike(this)">❤️ Lubię</button>
+                            <button class="post-action-btn" onclick="toggleComments(this)">💬 Komentuj</button>
+                            <button class="post-action-btn" onclick="sharePost(this)">📤 Udostępnij</button>
+                        </div>
+                    </div>
+                    <div class="comments">
+                        <div class="comment">
+                            <div class="comment-avatar">👨</div>
+                            <div class="comment-content">
+                                <div class="comment-author">Tomek91</div>
+                                <div class="comment-text">Haha, ja też miałem takie zdjęcia! 😅</div>
+                                <div class="comment-date">2 minuty temu</div>
+                            </div>
+                        </div>
+                        <div class="comment-form">
+                            <input type="text" class="comment-input" placeholder="Napisz komentarz...">
+                            <button class="retro-button" style="font-size: 8px; padding: 2px 6px; margin-top: 3px;">Dodaj</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="post-author-avatar">🎮</div>
+                            <div class="post-author-info">
+                                <div class="post-author-name">Gamer_PL</div>
+                                <div class="post-meta">20 lat • Bydgoszcz</div>
+                            </div>
+                        </div>
+                        <div class="post-date">3 sierpnia 2025, 13:45</div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-category discussion">Dyskusja</div>
+                        <div class="post-text">
+                            Kto pamięta gry flash z Miniclip i Newgrounds? 🎮 Które były Wasze ulubione? Ja uwielbiałem "Stick War" i "Line Rider"! #GryOnline #RetroVibes
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <span>❤️ 34 lajków</span>
+                            <span>💬 15 komentarzy</span>
+                            <span>👀 289 wyświetleń</span>
+                        </div>
+                        <div class="post-actions-buttons">
+                            <button class="post-action-btn" onclick="toggleLike(this)">❤️ Lubię</button>
+                            <button class="post-action-btn" onclick="toggleComments(this)">💬 Komentuj</button>
+                            <button class="post-action-btn" onclick="sharePost(this)">📤 Udostępnij</button>
+                        </div>
+                    </div>
+                    <div class="comments">
+                        <div class="comment">
+                            <div class="comment-avatar">👩</div>
+                            <div class="comment-content">
+                                <div class="comment-author">Ania123</div>
+                                <div class="comment-text">Club Penguin! 🐧 Tęsknię za tym...</div>
+                                <div class="comment-date">10 minut temu</div>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <div class="comment-avatar">🎭</div>
+                            <div class="comment-content">
+                                <div class="comment-author">Klaudia_Anime</div>
+                                <div class="comment-text">Ja grałam w "Fancy Pants Adventure"! 😊</div>
+                                <div class="comment-date">8 minut temu</div>
+                            </div>
+                        </div>
+                        <div class="comment-form">
+                            <input type="text" class="comment-input" placeholder="Napisz komentarz...">
+                            <button class="retro-button" style="font-size: 8px; padding: 2px 6px; margin-top: 3px;">Dodaj</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="post-author-avatar">🎵</div>
+                            <div class="post-author-info">
+                                <div class="post-author-name">Music_Lover</div>
+                                <div class="post-meta">21 lat • Rzeszów</div>
+                            </div>
+                        </div>
+                        <div class="post-date">3 sierpnia 2025, 12:30</div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-category event">Wydarzenie</div>
+                        <div class="post-text">
+                            Organizuję retro party z muzyką z lat 2000-2010! 🎉 Będzie Evanescence, Linkin Park, Simple Plan, Good Charlotte! Kto chętny? 🎵 #MuzykaLat2000 #Party #Rzeszów
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <span>❤️ 18 lajków</span>
+                            <span>💬 6 komentarzy</span>
+                            <span>👀 127 wyświetleń</span>
+                        </div>
+                        <div class="post-actions-buttons">
+                            <button class="post-action-btn" onclick="toggleLike(this)">❤️ Lubię</button>
+                            <button class="post-action-btn" onclick="toggleComments(this)">💬 Komentuj</button>
+                            <button class="post-action-btn" onclick="sharePost(this)">📤 Udostępnij</button>
+                        </div>
+                    </div>
+                    <div class="comments">
+                        <div class="comment-form">
+                            <input type="text" class="comment-input" placeholder="Napisz komentarz...">
+                            <button class="retro-button" style="font-size: 8px; padding: 2px 6px; margin-top: 3px;">Dodaj</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post admin">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="post-author-avatar">🛠️</div>
+                            <div class="post-author-info">
+                                <div class="post-author-name">mikusz3</div>
+                                <div class="post-meta">Administrator • Developer</div>
+                            </div>
+                        </div>
+                        <div class="post-date">2 sierpnia 2025, 20:15</div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-category news">Aktualności</div>
+                        <div class="post-text">
+                            <strong>Update serwera:</strong><br>
+                            ✅ Naprawiono błędy z komentarzami<br>
+                            ✅ Dodano nowe emotki<br>
+                            ✅ Poprawiono wydajność ściany<br>
+                            🔄 W przygotowaniu: system prywatnych wiadomości<br><br>
+                            Zgłaszajcie ewentualne bugi na forum! 🐛
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <span>❤️ 67 lajków</span>
+                            <span>💬 21 komentarzy</span>
+                            <span>👀 445 wyświetleń</span>
+                        </div>
+                        <div class="post-actions-buttons">
+                            <button class="post-action-btn" onclick="toggleLike(this)">❤️ Lubię</button>
+                            <button class="post-action-btn" onclick="toggleComments(this)">💬 Komentuj</button>
+                            <button class="post-action-btn" onclick="sharePost(this)">📤 Udostępnij</button>
+                        </div>
+                    </div>
+                    <div class="comments">
+                        <div class="comment">
+                            <div class="comment-avatar">👨</div>
+                            <div class="comment-content">
+                                <div class="comment-author">RetroFan69</div>
+                                <div class="comment-text">Dzięki za ciężką pracę! 👏</div>
+                                <div class="comment-date">1 godzina temu</div>
+                            </div>
+                        </div>
+                        <div class="comment-form">
+                            <input type="text" class="comment-input" placeholder="Napisz komentarz...">
+                            <button class="retro-button" style="font-size: 8px; padding: 2px 6px; margin-top: 3px;">Dodaj</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Load More Button -->
+                <div style="text-align: center; margin: 20px 0;">
+                    <button class="retro-button" onclick="loadMorePosts()">📄 Załaduj więcej postów</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="sidebar">
+            <!-- Quick Links -->
+            <div class="widget">
+                <div class="widget-header">🔗 Szybkie linki</div>
+                <div class="widget-content">
+                    <div style="font-size: 9px;">
+                        <a href="/regulamin" style="color: #1976d2; text-decoration: none; display: block; margin-bottom: 3px;">📋 Regulamin ściany</a>
+                        <a href="/prywatnosc" style="color: #1976d2; text-decoration: none; display: block; margin-bottom: 3px;">🛡️ Prywatność</a>
+                        <a href="/kontakt" style="color: #1976d2; text-decoration: none; display: block; margin-bottom: 3px;">📞 Zgłoś post</a>
+                        <a href="/pomoc" style="color: #1976d2; text-decoration: none; display: block; margin-bottom: 3px;">❓ Jak używać ściany</a>
+                        <a href="/mobile" style="color: #1976d2; text-decoration: none; display: block;">📱 Aplikacja</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Users -->
+            <div class="widget">
+                <div class="widget-header">✍️ Aktywni na ścianie</div>
+                <div class="widget-content">
+                    <div class="user-item">
+                        <div class="user-avatar">🎮</div>
+                        <div class="user-info">
+                            <div class="username">Gamer_PL</div>
+                            <div class="user-status">2 posty dzisiaj</div>
+                        </div>
+                    </div>
+                    <div class="user-item">
+                        <div class="user-avatar">👩</div>
+                        <div class="user-info">
+                            <div class="username">Kasia_PL</div>
+                            <div class="user-status">1 post dzisiaj</div>
+                        </div>
+                    </div>
+                    <div class="user-item">
+                        <div class="user-avatar">🎵</div>
+                        <div class="user-info">
+                            <div class="username">Music_Lover</div>
+                            <div class="user-status">1 post dzisiaj</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advertisement -->
+            <div class="widget">
+                <div class="widget-header">📢 Reklama</div>
+                <div class="widget-content" style="text-align: center; padding: 15px 10px;">
+                    <div style="background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), linear-gradient(-45deg, #f0f0f0 25%, transparent 25%); background-size: 8px 8px; border: 2px dashed #ccc; padding: 20px; border-radius: 4px;">
+                        <div style="font-size: 12px; color: #666; margin-bottom: 5px;">🎯</div>
+                        <div style="font-size: 9px; color: #666;">Twoja reklama tutaj</div>
+                        <div style="font-size: 8px; color: #999; margin-top: 5px;">Skontaktuj się z nami</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                © 2025 POLchatka.pl | Projekt hobbystyczny | 
+                <span class="footer-links">
+                    <a href="/kontakt">Kontakt</a>
+                    <a href="/regulamin">Regulamin</a>
+                    <a href="/prywatnosc">Prywatność</a>
+                    <a href="/blog">Blog</a>
+                </span>
+            </div>
+            <div style="margin-top: 5px; font-size: 9px; color: #666;">
+                Zainspirowane klasycznymi polskimi portalami społecznościowymi z lat 2000
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Post functionality
+        function addEmoji(emoji) {
+            const postInput = document.querySelector('.post-input');
+            postInput.value += emoji;
+            postInput.focus();
+        }
+
+        function clearPost() {
+            const postInput = document.querySelector('.post-input');
+            postInput.value = '';
+            postInput.focus();
+        }
+
+        function publishPost() {
+            const postInput = document.querySelector('.post-input');
+            const content = postInput.value.trim();
+            
+            if (!content) {
+                alert('Napisz coś przed opublikowaniem!');
+                return;
+            }
+
+            // Create new post
+            const wallPosts = document.getElementById('wallPosts');
+            const newPost = document.createElement('article');
+            newPost.className = 'post';
+            newPost.innerHTML = `
+                <div class="post-header">
+                    <div class="post-author">
+                        <div class="post-author-avatar">👤</div>
+                        <div class="post-author-info">
+                            <div class="post-author-name">Ty</div>
+                            <div class="post-meta">Użytkownik</div>
+                        </div>
+                    </div>
+                    <div class="post-date">Właśnie teraz</div>
+                </div>
+                <div class="post-content">
+                    <div class="post-category discussion">Dyskusja</div>
+                    <div class="post-text">${content.replace(/\n/g, '<br>')}</div>
+                </div>
+                <div class="post-footer">
+                    <div class="post-stats">
+                        <span>❤️ 0 lajków</span>
+                        <span>💬 0 komentarzy</span>
+                        <span>👀 1 wyświetlenie</span>
+                    </div>
+                    <div class="post-actions-buttons">
+                        <button class="post-action-btn" onclick="toggleLike(this)">❤️ Lubię</button>
+                        <button class="post-action-btn" onclick="toggleComments(this)">💬 Komentuj</button>
+                        <button class="post-action-btn" onclick="sharePost(this)">📤 Udostępnij</button>
+                    </div>
+                </div>
+                <div class="comments">
+                    <div class="comment-form">
+                        <input type="text" class="comment-input" placeholder="Napisz komentarz...">
+                        <button class="retro-button" style="font-size: 8px; padding: 2px 6px; margin-top: 3px;">Dodaj</button>
+                    </div>
+                </div>
+            `;
+
+            // Insert at the beginning (after pinned post)
+            const firstRegularPost = wallPosts.querySelector('.post:not(.pinned)');
+            if (firstRegularPost) {
+                wallPosts.insertBefore(newPost, firstRegularPost);
+            } else {
+                wallPosts.appendChild(newPost);
+            }
+
+            // Clear form
+            postInput.value = '';
+            
+            // Success message
+            alert('✅ Post został opublikowany!');
+        }
+
+        function toggleLike(button) {
+            const isLiked = button.classList.contains('liked');
+            const postStats = button.closest('.post-footer').querySelector('.post-stats');
+            const likesSpan = postStats.querySelector('span');
+            
+            if (isLiked) {
+                button.classList.remove('liked');
+                button.innerHTML = '❤️ Lubię';
+                // Decrease likes count
+                const currentLikes = parseInt(likesSpan.textContent.match(/\d+/)[0]);
+                likesSpan.innerHTML = `❤️ ${currentLikes - 1} lajków`;
+            } else {
+                button.classList.add('liked');
+                button.innerHTML = '💚 Lubisz to';
+                // Increase likes count
+                const currentLikes = parseInt(likesSpan.textContent.match(/\d+/)[0]);
+                likesSpan.innerHTML = `❤️ ${currentLikes + 1} lajków`;
+            }
+        }
+
+        function toggleComments(button) {
+            const post = button.closest('.post');
+            const comments = post.querySelector('.comments');
+            
+            if (comments.classList.contains('show')) {
+                comments.classList.remove('show');
+                button.innerHTML = '💬 Komentuj';
+            } else {
+                comments.classList.add('show');
+                button.innerHTML = '💬 Ukryj';
+                comments.querySelector('.comment-input').focus();
+            }
+        }
+
+        function sharePost(button) {
+            const post = button.closest('.post');
+            const postContent = post.querySelector('.post-text').textContent;
+            const postAuthor = post.querySelector('.post-author-name').textContent;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: `Post od ${postAuthor} - POLchatka`,
+                    text: postContent,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback
+                navigator.clipboard.writeText(`${postContent} - ${postAuthor} na POLchatka.pl`);
+                alert('📋 Link do posta został skopiowany do schowka!');
+            }
+        }
+
+        function filterPosts(tag) {
+            alert(`🔍 Filtrowanie postów z tagiem: #${tag}\n\nFunkcja będzie dostępna wkrótce!`);
+        }
+
+        function filterWall(category) {
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            const posts = document.querySelectorAll('.post:not(.pinned)');
+            
+            posts.forEach(post => {
+                if (category === 'all') {
+                    post.style.display = 'block';
+                } else {
+                    const postCategory = post.querySelector('.post-category');
+                    const categoryClass = postCategory ? postCategory.className.split(' ')[1] : '';
+                    
+                    if (category === 'friends') {
+                        // Show posts from followed users (mock)
+                        const isFromFriend = Math.random() > 0.5; // Random for demo
+                        post.style.display = isFromFriend ? 'block' : 'none';
+                    } else if (category === 'popular') {
+                        // Show posts with more than 10 likes
+                        const likesText = post.querySelector('.post-stats span').textContent;
+                        const likes = parseInt(likesText.match(/\d+/)[0]);
+                        post.style.display = likes > 10 ? 'block' : 'none';
+                    } else {
+                        post.style.display = categoryClass === category ? 'block' : 'none';
+                    }
+                }
+            });
+        }
+
+        function loadMorePosts() {
+            alert('📄 Ładowanie więcej postów...\n\nW pełnej wersji tutaj byłyby ładowane starsze posty z bazy danych.');
+        }
+
+        // Comment functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.comment-form .retro-button')) {
+                const commentForm = e.target.closest('.comment-form');
+                const commentInput = commentForm.querySelector('.comment-input');
+                const content = commentInput.value.trim();
+                
+                if (!content) {
+                    alert('Napisz coś w komentarzu!');
+                    return;
+                }
+
+                // Add comment
+                const commentsContainer = commentForm.parentNode;
+                const newComment = document.createElement('div');
+                newComment.className = 'comment';
+                newComment.innerHTML = `
+                    <div class="comment-avatar">👤</div>
+                    <div class="comment-content">
+                        <div class="comment-author">Ty</div>
+                        <div class="comment-text">${content}</div>
+                        <div class="comment-date">Właśnie teraz</div>
+                    </div>
+                `;
+
+                commentsContainer.insertBefore(newComment, commentForm);
+                commentInput.value = '';
+
+                // Update comment count
+                const post = commentsContainer.closest('.post');
+                const statsSpan = post.querySelector('.post-stats span:nth-child(2)');
+                const currentComments = parseInt(statsSpan.textContent.match(/\d+/)[0]);
+                statsSpan.innerHTML = `💬 ${currentComments + 1} komentarzy`;
+            }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📝 Ściana POLchatki załadowana');
+
+            // Login form handler
+            document.querySelector('.login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Demo: Funkcja logowania zostanie wkrótce zaimplementowana!');
+            });
+
+            // Auto-focus on post input when page loads
+            document.querySelector('.post-input').focus();
+
+            // Auto-resize textarea
+            const postInput = document.querySelector('.post-input');
+            postInput.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = Math.min(this.scrollHeight, 200) + 'px';
+            });
+
+            // Enter to submit comment (Shift+Enter for new line)
+            document.addEventListener('keydown', function(e) {
+                if (e.target.classList.contains('comment-input') && e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    e.target.parentNode.querySelector('.retro-button').click();
+                }
+            });
+
+            // Simulate real-time updates
+            setInterval(function() {
+                const onlineCounters = document.querySelectorAll('.post-stats span');
+                onlineCounters.forEach(counter => {
+                    if (counter.textContent.includes('wyświetlenia') || counter.textContent.includes('wyświetleń')) {
+                        const current = parseInt(counter.textContent.match(/\d+/)[0]);
+                        const increase = Math.floor(Math.random() * 3);
+                        if (increase > 0) {
+                            counter.innerHTML = counter.innerHTML.replace(/\d+/, current + increase);
+                        }
+                    }
+                });
+            }, 30000); // Update every 30 seconds
+
+            // Add smooth scroll to new posts
+            window.scrollToNewPost = function() {
+                const firstPost = document.querySelector('.post:not(.pinned)');
+                if (firstPost) {
+                    firstPost.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + Enter to publish post
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter' && e.target.classList.contains('post-input')) {
+                publishPost();
+            }
+            
+            // ESC to clear post
+            if (e.key === 'Escape' && e.target.classList.contains('post-input')) {
+                clearPost();
+            }
+        });
+
+        // Retro sound effects (placeholder)
+        function playRetroSound(type) {
+            console.log(`🔊 Playing retro sound: ${type}`);
+            // Here you could add actual retro sound effects from the 2000s
+        }
+
+        // Add sound effects to interactions
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('post-action-btn')) {
+                playRetroSound('click');
+            }
+            if (e.target.classList.contains('emoji-btn')) {
+                playRetroSound('emoji');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -14,117 +14,120 @@
         }
 
         body {
-            font-family: 'Verdana', 'Tahoma', 'MS Sans Serif', sans-serif;
+            font-family: 'Verdana', 'Tahoma', sans-serif;
             font-size: 11px;
-            background: #e4f1ce url('data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==') repeat;
+            background: #e4f1ce url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==') repeat-x;
             color: #333;
-            line-height: 1.2;
+            line-height: 1.3;
             min-height: 100vh;
         }
 
-        /* Header w stylu Poszkole */
+        /* Header */
         .header {
-            background: linear-gradient(to bottom, #ffffff 0%, #e8f4fd 50%, #b8d5f2 100%);
-            border-bottom: 3px solid #4682b4;
-            padding: 8px 0;
+            background: linear-gradient(to bottom, #ffffff 0%, #e8f5e8 50%, #d0f28f 100%);
+            border-bottom: 3px solid #4caf50;
+            padding: 10px 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .header-content {
-            max-width: 760px;
+            max-width: 960px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 10px;
+            padding: 0 15px;
         }
 
         .logo-section {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         .logo {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #4682b4 0%, #87ceeb 100%);
-            border: 2px outset #4682b4;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+            border: 3px solid #2e7d32;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 28px;
             color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             font-weight: bold;
         }
 
-        .site-info h1 {
-            font-size: 20px;
-            color: #2c5aa0;
-            margin-bottom: 2px;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        .site-title {
+            display: flex;
+            flex-direction: column;
         }
 
-        .site-info .tagline {
-            font-size: 10px;
+        .site-title h1 {
+            font-size: 28px;
+            color: #2e7d32;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+            margin-bottom: 2px;
+            font-weight: bold;
+        }
+
+        .site-title .tagline {
+            font-size: 12px;
             color: #666;
             font-style: italic;
         }
 
         .header-links {
             display: flex;
-            gap: 5px;
+            gap: 8px;
         }
 
         .header-btn {
-            padding: 3px 8px;
+            padding: 4px 12px;
             font-size: 10px;
             font-weight: bold;
-            border: 1px outset #d0d0d0;
-            background: #f0f0f0;
-            color: #333;
+            border: 1px solid #4caf50;
+            border-radius: 3px;
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            color: #2e7d32;
             text-decoration: none;
             cursor: pointer;
-            transition: none;
+            transition: all 0.2s;
         }
 
         .header-btn:hover {
-            border: 1px inset #d0d0d0;
-            background: #e0e0e0;
+            background: linear-gradient(to bottom, #e9ecef 0%, #dee2e6 100%);
+            border-color: #388e3c;
         }
 
         .header-btn:active {
-            border: 1px inset #d0d0d0;
-            background: #d0d0d0;
+            background: #dee2e6;
         }
 
-        /* Navigation w stylu lat 2000 */
+        /* Navigation */
         .navigation {
-            background: linear-gradient(to bottom, #4682b4 0%, #2c5aa0 100%);
-            border-bottom: 1px solid #1e3a5f;
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            border-bottom: 2px solid #2e7d32;
+            box-shadow: inset 0 1px 0 #66bb6a;
         }
 
         .nav-content {
-            max-width: 760px;
+            max-width: 960px;
             margin: 0 auto;
-            padding: 0 10px;
+            padding: 0 15px;
         }
 
         .nav-menu {
             list-style: none;
             display: flex;
-            justify-content: flex-start;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
         .nav-menu li {
-            border-right: 1px solid #1e3a5f;
-            border-left: 1px solid #87ceeb;
-        }
-
-        .nav-menu li:first-child {
-            border-left: none;
+            border-right: 1px solid #2e7d32;
         }
 
         .nav-menu li:last-child {
@@ -133,51 +136,54 @@
 
         .nav-menu a {
             display: block;
-            padding: 5px 12px;
+            padding: 8px 16px;
             color: white;
             text-decoration: none;
             font-weight: bold;
-            font-size: 10px;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-            transition: none;
+            font-size: 11px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            transition: background 0.2s;
         }
 
         .nav-menu a:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(46, 125, 50, 0.5);
         }
 
         /* Main Content */
         .main-container {
-            max-width: 760px;
+            max-width: 960px;
             margin: 20px auto;
-            padding: 0 10px;
+            padding: 0 15px;
             background: white;
-            border: 2px outset #d0d0d0;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .content-header {
-            background: linear-gradient(to bottom, #e8f4fd 0%, #b8d5f2 100%);
-            border-bottom: 1px solid #4682b4;
-            padding: 8px 15px;
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px 6px 0 0;
+            margin: -2px -2px 0 -2px;
         }
 
         .content-header h2 {
-            color: #2c5aa0;
-            font-size: 14px;
+            font-size: 16px;
             margin: 0;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
 
         .breadcrumb {
-            background: #f8f8f8;
-            border-bottom: 1px solid #ddd;
-            padding: 4px 15px;
-            font-size: 9px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            padding: 6px 20px;
+            font-size: 10px;
             color: #666;
         }
 
         .breadcrumb a {
-            color: #2c5aa0;
+            color: #2e7d32;
             text-decoration: none;
         }
 
@@ -187,69 +193,82 @@
 
         /* Login Form */
         .login-content {
-            padding: 20px;
+            padding: 25px 20px;
             display: flex;
-            gap: 20px;
+            gap: 30px;
             align-items: flex-start;
         }
 
         .login-form-container {
             flex: 1;
-            max-width: 350px;
+            max-width: 400px;
         }
 
         .form-box {
-            border: 2px inset #d0d0d0;
-            background: #f8f8f8;
-            padding: 15px;
-            margin-bottom: 15px;
+            border: 2px solid #4caf50;
+            border-radius: 6px;
+            background: #f8f9fa;
+            margin-bottom: 20px;
+            overflow: hidden;
         }
 
-        .form-box h3 {
-            color: #2c5aa0;
+        .form-box-header {
+            background: linear-gradient(to bottom, #66bb6a 0%, #4caf50 100%);
+            color: white;
+            padding: 8px 15px;
+            font-weight: bold;
             font-size: 12px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 3px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        }
+
+        .form-box-content {
+            padding: 20px;
         }
 
         .form-table {
             width: 100%;
+            border-collapse: collapse;
         }
 
         .form-table td {
-            padding: 3px;
+            padding: 6px;
             vertical-align: middle;
         }
 
         .form-table label {
             font-weight: bold;
-            font-size: 10px;
-            color: #333;
+            font-size: 11px;
+            color: #2e7d32;
         }
 
         .form-table input[type="text"],
         .form-table input[type="password"] {
             width: 100%;
-            padding: 2px 4px;
-            border: 1px inset #d0d0d0;
+            padding: 4px 8px;
+            border: 2px solid #e9ecef;
+            border-radius: 4px;
             background: white;
             font-size: 11px;
             font-family: 'Verdana', sans-serif;
+            transition: border-color 0.2s;
         }
 
         .form-table input[type="text"]:focus,
         .form-table input[type="password"]:focus {
             outline: none;
+            border-color: #4caf50;
             background: #fffffe;
         }
 
         .checkbox-row {
-            margin: 8px 0;
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .checkbox-row input[type="checkbox"] {
-            margin-right: 5px;
+            margin: 0;
         }
 
         .checkbox-row label {
@@ -259,57 +278,62 @@
 
         .button-row {
             text-align: center;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .retro-button {
-            padding: 4px 12px;
-            font-size: 10px;
+            padding: 6px 16px;
+            font-size: 11px;
             font-weight: bold;
-            border: 2px outset #d0d0d0;
-            background: #f0f0f0;
-            color: #333;
+            border: 2px solid;
+            border-radius: 4px;
             cursor: pointer;
-            margin: 0 3px;
+            margin: 0 5px;
             font-family: 'Verdana', sans-serif;
+            transition: all 0.2s;
         }
 
         .retro-button:hover {
-            background: #e8e8e8;
+            transform: translateY(-1px);
         }
 
         .retro-button:active {
-            border: 2px inset #d0d0d0;
-            background: #d8d8d8;
+            transform: translateY(0);
         }
 
         .retro-button.primary {
-            background: linear-gradient(to bottom, #4682b4 0%, #2c5aa0 100%);
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
             color: white;
-            border-color: #4682b4;
+            border-color: #2e7d32;
         }
 
         .retro-button.primary:hover {
-            background: linear-gradient(to bottom, #5a8bc4 0%, #3d6bb0 100%);
+            background: linear-gradient(to bottom, #66bb6a 0%, #4caf50 100%);
         }
 
-        .retro-button.primary:active {
-            border: 2px inset #4682b4;
+        .retro-button.secondary {
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            color: #2e7d32;
+            border-color: #4caf50;
+        }
+
+        .retro-button.secondary:hover {
+            background: linear-gradient(to bottom, #e9ecef 0%, #dee2e6 100%);
         }
 
         /* Links Section */
         .links-section {
-            border-top: 1px solid #ddd;
-            padding-top: 10px;
-            margin-top: 10px;
+            border-top: 1px solid #e9ecef;
+            padding-top: 15px;
+            margin-top: 15px;
             text-align: center;
         }
 
         .links-section a {
-            color: #2c5aa0;
+            color: #2e7d32;
             text-decoration: none;
             font-size: 10px;
-            margin: 0 8px;
+            margin: 0 10px;
         }
 
         .links-section a:hover {
@@ -319,116 +343,123 @@
         /* Info Sidebar */
         .info-sidebar {
             flex: 1;
-            max-width: 250px;
+            max-width: 300px;
         }
 
         .info-box {
-            border: 2px inset #d0d0d0;
-            background: #f8f8f8;
-            margin-bottom: 15px;
+            border: 2px solid #4caf50;
+            border-radius: 6px;
+            background: white;
+            margin-bottom: 20px;
+            overflow: hidden;
         }
 
         .info-box-header {
-            background: linear-gradient(to bottom, #e8f4fd 0%, #b8d5f2 100%);
-            padding: 5px 10px;
-            border-bottom: 1px solid #4682b4;
-        }
-
-        .info-box-header h4 {
-            color: #2c5aa0;
+            background: linear-gradient(to bottom, #66bb6a 0%, #4caf50 100%);
+            color: white;
+            padding: 8px 15px;
+            font-weight: bold;
             font-size: 11px;
-            margin: 0;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
         }
 
         .info-box-content {
-            padding: 10px;
+            padding: 15px;
             font-size: 10px;
-            line-height: 1.3;
+            line-height: 1.4;
         }
 
         .demo-accounts {
             border-collapse: collapse;
             width: 100%;
-            margin-top: 5px;
+            margin-top: 8px;
         }
 
         .demo-accounts td {
-            border: 1px solid #ddd;
-            padding: 4px;
+            border: 1px solid #e9ecef;
+            padding: 6px;
             font-size: 9px;
         }
 
         .demo-accounts th {
-            background: #e8f4fd;
-            border: 1px solid #4682b4;
-            padding: 3px;
+            background: linear-gradient(to bottom, #e8f5e8 0%, #c8e6c8 100%);
+            border: 1px solid #4caf50;
+            padding: 4px 6px;
             font-size: 9px;
             font-weight: bold;
+            color: #2e7d32;
         }
 
         .demo-fill-btn {
-            padding: 2px 6px;
+            padding: 2px 8px;
             font-size: 8px;
-            border: 1px outset #d0d0d0;
-            background: #f0f0f0;
+            border: 1px solid #4caf50;
+            border-radius: 2px;
+            background: #f8f9fa;
+            color: #2e7d32;
             cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .demo-fill-btn:hover {
+            background: #e8f5e8;
         }
 
         .demo-fill-btn:active {
-            border: 1px inset #d0d0d0;
+            background: #c8e6c8;
         }
 
         /* Message Box */
         .message-box {
-            margin-bottom: 10px;
-            padding: 8px;
-            border: 1px solid;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 2px solid;
+            border-radius: 4px;
             font-size: 10px;
         }
 
         .message-error {
-            background: #ffeeee;
-            border-color: #cc0000;
-            color: #cc0000;
+            background: #ffebee;
+            border-color: #f44336;
+            color: #c62828;
         }
 
         .message-success {
-            background: #eeffee;
-            border-color: #009900;
-            color: #009900;
+            background: #e8f5e8;
+            border-color: #4caf50;
+            color: #2e7d32;
         }
 
         .message-info {
-            background: #eeeeff;
-            border-color: #0066cc;
-            color: #0066cc;
+            background: #e3f2fd;
+            border-color: #2196f3;
+            color: #1565c0;
         }
 
         /* Footer */
         .footer {
-            background: linear-gradient(to bottom, #e8f4fd 0%, #b8d5f2 100%);
-            border-top: 2px solid #4682b4;
-            margin-top: 30px;
-            padding: 10px;
+            background: linear-gradient(to bottom, #e8f5e8 0%, #d0f28f 100%);
+            border-top: 2px solid #4caf50;
+            margin-top: 40px;
+            padding: 15px;
             text-align: center;
         }
 
         .footer-content {
-            max-width: 760px;
+            max-width: 960px;
             margin: 0 auto;
-            color: #2c5aa0;
-            font-size: 9px;
+            color: #2e7d32;
+            font-size: 10px;
         }
 
         .footer-links {
-            margin-top: 5px;
+            margin-top: 8px;
         }
 
         .footer-links a {
-            color: #2c5aa0;
+            color: #1976d2;
             text-decoration: none;
-            margin: 0 5px;
-            font-size: 9px;
+            margin: 0 8px;
         }
 
         .footer-links a:hover {
@@ -436,8 +467,12 @@
         }
 
         /* Retro Effects */
+        .retro-glow {
+            text-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
         .blink {
-            animation: blink 1s infinite;
+            animation: blink 1.5s infinite;
         }
 
         @keyframes blink {
@@ -445,15 +480,47 @@
             51%, 100% { opacity: 0.3; }
         }
 
-        /* Responsive dla bardzo małych ekranów */
-        @media (max-width: 600px) {
+        .retro-separator {
+            height: 2px;
+            background: linear-gradient(to right, #e9ecef, #4caf50, #e9ecef);
+            margin: 15px 0;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border: 1px solid #2e7d32;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .counter {
+            font-family: 'Courier New', monospace;
+            background: #2e7d32;
+            color: #4caf50;
+            padding: 2px 6px;
+            font-size: 9px;
+            border: 1px solid #388e3c;
+            border-radius: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
             .main-container {
-                margin: 10px;
+                margin: 15px;
                 max-width: none;
             }
             
             .login-content {
                 flex-direction: column;
+                gap: 20px;
             }
             
             .nav-menu {
@@ -462,34 +529,12 @@
             
             .nav-menu li {
                 border-right: none;
-                border-left: none;
-                border-bottom: 1px solid #1e3a5f;
+                border-bottom: 1px solid #2e7d32;
             }
-        }
 
-        /* Dodatkowe retro elementy */
-        .retro-separator {
-            height: 2px;
-            background: linear-gradient(to right, #d0d0d0, #888, #d0d0d0);
-            margin: 10px 0;
-        }
-
-        .status-indicator {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #00ff00;
-            border: 1px solid #333;
-            margin-right: 3px;
-        }
-
-        .counter {
-            font-family: 'Courier New', monospace;
-            background: #000;
-            color: #00ff00;
-            padding: 1px 3px;
-            font-size: 9px;
-            border: 1px inset #333;
+            .nav-menu li:last-child {
+                border-bottom: none;
+            }
         }
     </style>
 </head>
@@ -499,8 +544,8 @@
         <div class="header-content">
             <div class="logo-section">
                 <div class="logo">PŁ</div>
-                <div class="site-info">
-                    <h1>POLchatka</h1>
+                <div class="site-title">
+                    <h1 class="retro-glow">POLchatka</h1>
                     <span class="tagline">Czuj się jak u siebie.</span>
                 </div>
             </div>
@@ -516,14 +561,17 @@
     <nav class="navigation">
         <div class="nav-content">
             <ul class="nav-menu">
-                <li><a href="/">Start</a></li>
-                <li><a href="content/ludzie">Ludzie</a></li>
-                <li><a href="/gry">Gry</a></li>
-                <li><a href="/sciana">Ściana</a></li>
-                <li><a href="/grupy">Grupy</a></li>
-                <li><a href="/forum">Forum</a></li>
-                <li><a href="/blog">Blog</a></li>
-                <li><a href="/kontakt">Kontakt</a></li>
+                <li><a href="/">🏠 Start</a></li>
+                <li><a href="/content/ludzie">👥 Ludzie</a></li>
+                <li><a href="/gry">🎮 Gry Online</a></li>
+                <li><a href="/sciana">📝 Ściana</a></li>
+                <li><a href="/grupy">👨‍👩‍👧‍👦 Grupy</a></li>
+                <li><a href="/quizy">🧠 Quizy</a></li>
+                <li><a href="https://polchatka.forumpolish.com">💬 Forum</a></li>
+                <li><a href="/blog">📰 Blog</a></li>
+                <li><a href="/poczta">📧 Poczta</a></li>
+                <li><a href="/sklep">🛒 Sklep</a></li>
+                <li><a href="https://discord.gg/Rh5RQyqNs8">Discord</a></li>
             </ul>
         </div>
     </nav>
@@ -542,53 +590,58 @@
             <!-- Login Form -->
             <div class="login-form-container">
                 <div class="form-box">
-                    <h3>Zaloguj się do swojego konta</h3>
-                    
-                    <div id="messageContainer"></div>
-                    
-                    <form id="loginForm" method="POST" action="php/session_login.php">
-                        <table class="form-table">
-                            <tr>
-                                <td width="80"><label for="username">Login:</label></td>
-                                <td><input type="text" id="username" name="username" required maxlength="30"></td>
-                            </tr>
-                            <tr>
-                                <td><label for="password">Hasło:</label></td>
-                                <td><input type="password" id="password" name="password" required maxlength="50"></td>
-                            </tr>
-                        </table>
+                    <div class="form-box-header">
+                        Zaloguj się do swojego konta
+                    </div>
+                    <div class="form-box-content">
+                        <div id="messageContainer"></div>
                         
-                        <div class="checkbox-row">
-                            <input type="checkbox" id="remember" name="remember">
-                            <label for="remember">Zapamiętaj mnie na tym komputerze</label>
-                        </div>
+                        <form id="loginForm" method="POST" action="php/session_login.php">
+                            <table class="form-table">
+                                <tr>
+                                    <td width="80"><label for="username">Login:</label></td>
+                                    <td><input type="text" id="username" name="username" required maxlength="30"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="password">Hasło:</label></td>
+                                    <td><input type="password" id="password" name="password" required maxlength="50"></td>
+                                </tr>
+                            </table>
+                            
+                            <div class="checkbox-row">
+                                <input type="checkbox" id="remember" name="remember">
+                                <label for="remember">Zapamiętaj mnie na tym komputerze</label>
+                            </div>
+                            
+                            <div class="button-row">
+                                <button type="submit" class="retro-button primary">Zaloguj się</button>
+                                <button type="reset" class="retro-button secondary">Wyczyść</button>
+                            </div>
+                        </form>
                         
-                        <div class="button-row">
-                            <button type="submit" class="retro-button primary">Zaloguj się</button>
-                            <button type="reset" class="retro-button">Wyczyść</button>
+                        <div class="links-section">
+                            <a href="#" onclick="forgotPassword()">Zapomniałeś hasła?</a> |
+                            <a href="register.html">Załóż nowe konto</a> |
+                            <a href="#" onclick="showHelp()">Pomoc</a>
                         </div>
-                    </form>
-                    
-                    <div class="links-section">
-                        <a href="#" onclick="forgotPassword()">Zapomniałeś hasła?</a> |
-                        <a href="register.html">Załóż nowe konto</a> |
-                        <a href="#" onclick="showHelp()">Pomoc</a>
                     </div>
                 </div>
 
                 <!-- Alternative Login -->
                 <div class="form-box">
-                    <h3>Inne sposoby logowania</h3>
-                    <div style="text-align: center;">
-                        <button class="retro-button" onclick="socialLogin('facebook')" style="margin: 3px;">
+                    <div class="form-box-header">
+                        Inne sposoby logowania
+                    </div>
+                    <div class="form-box-content" style="text-align: center;">
+                        <button class="retro-button secondary" onclick="socialLogin('facebook')" style="margin: 5px;">
                             🌐 Facebook
                         </button>
-                        <button class="retro-button" onclick="socialLogin('google')" style="margin: 3px;">
+                        <button class="retro-button secondary" onclick="socialLogin('google')" style="margin: 5px;">
                             🔍 Google
                         </button>
-                    </div>
-                    <div style="margin-top: 8px; font-size: 9px; color: #666; text-align: center;">
-                        (Funkcje będą dostępne wkrótce)
+                        <div style="margin-top: 12px; font-size: 9px; color: #666;">
+                            (Funkcje będą dostępne wkrótce)
+                        </div>
                     </div>
                 </div>
             </div>
@@ -598,7 +651,7 @@
                 <!-- Demo Accounts -->
                 <div class="info-box">
                     <div class="info-box-header">
-                        <h4>🎮 Konta testowe</h4>
+                        🎮 Konta testowe
                     </div>
                     <div class="info-box-content">
                         <p>Wypróbuj POLchatkę używając gotowych kont:</p>
@@ -629,7 +682,7 @@
                 <!-- Stats -->
                 <div class="info-box">
                     <div class="info-box-header">
-                        <h4>📊 Statystyki portalu</h4>
+                        📊 Statystyki portalu
                     </div>
                     <div class="info-box-content">
                         <table style="width: 100%; font-size: 9px;">
@@ -656,17 +709,17 @@
                 <!-- News -->
                 <div class="info-box">
                     <div class="info-box-header">
-                        <h4>📰 Aktualności</h4>
+                        📰 Aktualności
                     </div>
                     <div class="info-box-content">
-                        <p style="margin-bottom: 5px;"><strong>2.08.2025</strong></p>
-                        <p style="margin-bottom: 8px;">Nowe funkcje personalizacji profilu!</p>
+                        <p style="margin-bottom: 8px;"><strong>2.08.2025</strong></p>
+                        <p style="margin-bottom: 12px;">Nowe funkcje personalizacji profilu!</p>
                         
-                        <p style="margin-bottom: 5px;"><strong>30.07.2025</strong></p>
-                        <p style="margin-bottom: 8px;">Konkurs na najlepsze zdjęcie lata.</p>
+                        <p style="margin-bottom: 8px;"><strong>30.07.2025</strong></p>
+                        <p style="margin-bottom: 12px;">Konkurs na najlepsze zdjęcie lata.</p>
                         
-                        <div style="text-align: center; margin-top: 8px;">
-                            <a href="/blog" style="font-size: 9px;">» Zobacz więcej</a>
+                        <div style="text-align: center; margin-top: 12px;">
+                            <a href="/blog" style="font-size: 9px; color: #2e7d32;">» Zobacz więcej</a>
                         </div>
                     </div>
                 </div>
@@ -674,16 +727,16 @@
                 <!-- Links -->
                 <div class="info-box">
                     <div class="info-box-header">
-                        <h4>🔗 Przydatne linki</h4>
+                        🔗 Przydatne linki
                     </div>
                     <div class="info-box-content">
-                        <p><a href="/regulamin">📋 Regulamin portalu</a></p>
-                        <p><a href="/prywatnosc">🛡️ Polityka prywatności</a></p>
-                        <p><a href="/pomoc">❓ Centrum pomocy</a></p>
-                        <p><a href="/kontakt">📞 Kontakt z nami</a></p>
+                        <p><a href="/regulamin" style="color: #2e7d32; text-decoration: none;">📋 Regulamin portalu</a></p>
+                        <p><a href="/prywatnosc" style="color: #2e7d32; text-decoration: none;">🛡️ Polityka prywatności</a></p>
+                        <p><a href="/pomoc" style="color: #2e7d32; text-decoration: none;">❓ Centrum pomocy</a></p>
+                        <p><a href="/kontakt" style="color: #2e7d32; text-decoration: none;">📞 Kontakt z nami</a></p>
                         <div class="retro-separator"></div>
-                        <p><a href="/mobile">📱 Wersja mobilna</a></p>
-                        <p><a href="/api">🔧 API dla deweloperów</a></p>
+                        <p><a href="/mobile" style="color: #2e7d32; text-decoration: none;">📱 Wersja mobilna</a></p>
+                        <p><a href="/api" style="color: #2e7d32; text-decoration: none;">🔧 API dla deweloperów</a></p>
                     </div>
                 </div>
             </div>

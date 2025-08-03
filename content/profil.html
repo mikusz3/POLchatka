@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil: mikusz3 - POLchatka</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Verdana', 'Tahoma', sans-serif;
+            font-size: 11px;
+            background: #e4f1ce url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==') repeat-x;
+            color: #333;
+            line-height: 1.3;
+            min-height: 100vh;
+        }
+
+        /* Header (zachowany z głównej strony) */
+        .header {
+            background: linear-gradient(to bottom, #ffffff 0%, #e8f5e8 50%, #d0f28f 100%);
+            border-bottom: 3px solid #4caf50;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+            border: 3px solid #2e7d32;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold;
+        }
+
+        .site-title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .site-title h1 {
+            font-size: 28px;
+            color: #2e7d32;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+            margin-bottom: 2px;
+            font-weight: bold;
+        }
+
+        .site-title .tagline {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .user-info-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 10px 15px;
+        }
+
+        .user-avatar-small {
+            width: 32px;
+            height: 32px;
+            background: #4caf50;
+            border: 2px solid #2e7d32;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: white;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 12px;
+        }
+
+        .user-status {
+            font-size: 9px;
+            color: #666;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-btn {
+            padding: 4px 12px;
+            font-size: 10px;
+            font-weight: bold;
+            border: 1px solid #4caf50;
+            border-radius: 3px;
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            color: #2e7d32;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .header-btn:hover {
+            background: linear-gradient(to bottom, #e9ecef 0%, #dee2e6 100%);
+            border-color: #388e3c;
+        }
+
+        /* Navigation */
+        .navigation {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            border-bottom: 2px solid #2e7d32;
+            box-shadow: inset 0 1px 0 #66bb6a;
+        }
+
+        .nav-content {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu li {
+            border-right: 1px solid #2e7d32;
+        }
+
+        .nav-menu li:last-child {
+            border-right: none;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 8px 16px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 11px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            transition: background 0.2s;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(46, 125, 50, 0.5);
+        }
+
+        /* Profile Container */
+        .profile-container {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 15px;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            grid-column: 1 / -1;
+            background: white;
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .profile-header-content {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border: 3px solid #2e7d32;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #4caf50;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-username {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .profile-realname {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 3px;
+        }
+
+        .profile-location {
+            font-size: 10px;
+            opacity: 0.8;
+        }
+
+        .profile-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .profile-btn {
+            padding: 6px 16px;
+            font-size: 10px;
+            font-weight: bold;
+            border: 2px solid white;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            backdrop-filter: blur(5px);
+        }
+
+        .profile-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .profile-stats {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .stat-label {
+            font-size: 9px;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        /* Theme Selector */
+        .theme-selector {
+            background: white;
+            border: 2px solid #4caf50;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .theme-header {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 11px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        }
+
+        .theme-content {
+            padding: 12px;
+        }
+
+        .theme-tabs {
+            display: flex;
+            margin-bottom: 10px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .theme-tab {
+            flex: 1;
+            padding: 6px 8px;
+            background: #e9ecef;
+            border: none;
+            font-size: 9px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .theme-tab.active {
+            background: #4caf50;
+            color: white;
+        }
+
+        .theme-presets {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .theme-preset {
+            padding: 8px;
+            border: 2px solid #e9ecef;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 9px;
+            transition: all 0.2s;
+        }
+
+        .theme-preset:hover,
+        .theme-preset.active {
+            border-color: #4caf50;
+            background: #e8f5e8;
+        }
+
+        .custom-css {
+            width: 100%;
+            height: 80px;
+            padding: 8px;
+            border: 2px solid #e9ecef;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 9px;
+            resize: vertical;
+        }
+
+        .custom-css:focus {
+            border-color: #4caf50;
+            outline: none;
+        }
+
+        /* Components Panel */
+        .components-panel {
+            background: white;
+            border: 2px solid #4caf50;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .components-header {
+            background: linear-gradient(to bottom, #ff9800 0%, #f57c00 100%);
+            color: white;
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 11px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        }
+
+        .components-list {
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .component-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 8px;
+            margin-bottom: 4px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            font-size: 9px;
+        }
+
+        .component-toggle {
+            padding: 2px 8px;
+            font-size: 8px;
+            border: 1px solid #4caf50;
+            border-radius: 2px;
+            background: white;
+            color: #4caf50;
+            cursor: pointer;
+        }
+
+        .component-toggle.active {
+            background: #4caf50;
+            color: white;
+        }
+
+        /* Profile Main Content */
+        .profile-main {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        /* Component Styles */
+        .profile-component {
+            background: white;
+            border: 2px solid #4caf50;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .component-header {
+            background: linear-gradient(to bottom, #66bb6a 0%, #4caf50 100%);
+            color: white;
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 11px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .component-content {
+            padding: 12px;
+        }
+
+        .component-controls {
+            display: flex;
+            gap: 4px;
+        }
+
+        .component-control {
+            width: 16px;
+            height: 16px;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 2px;
+            font-size: 8px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .component-control:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Specific Component Styles */
+        .opis-glowny .component-content {
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
+        .zdjecia-galeria {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .zdjecie-thumb {
+            aspect-ratio: 1;
+            background: #e9ecef;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .zdjecie-thumb:hover {
+            border-color: #4caf50;
+            background: #e8f5e8;
+        }
+
+        .dane-osobowe {
+            font-size: 9px;
+        }
+
+        .dane-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            padding: 4px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dane-label {
+            font-weight: bold;
+            color: #666;
+        }
+
+        .dane-value {
+            color: #333;
+        }
+
+        .quizy-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .quiz-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quiz-item:hover {
+            background: #e8f5e8;
+            border-color: #4caf50;
+        }
+
+        .quiz-title {
+            font-weight: bold;
+            font-size: 10px;
+            color: #333;
+            margin-bottom: 2px;
+        }
+
+        .quiz-desc {
+            font-size: 8px;
+            color: #666;
+        }
+
+        .horoskop-content {
+            text-align: center;
+        }
+
+        .zodiac-sign {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        .horoskop-details {
+            font-size: 9px;
+            line-height: 1.3;
+        }
+
+        .countdown-display {
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+
+        .countdown-title {
+            font-size: 10px;
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        .countdown-time {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 4px;
+        }
+
+        .countdown-label {
+            font-size: 8px;
+            color: #666;
+        }
+
+        .glosowanie-opcje {
+            margin-bottom: 10px;
+        }
+
+        .glosowanie-opcja {
+            margin-bottom: 6px;
+        }
+
+        .opcja-bar {
+            background: #e9ecef;
+            border-radius: 2px;
+            height: 16px;
+            position: relative;
+            margin-top: 2px;
+        }
+
+        .opcja-fill {
+            background: linear-gradient(to right, #4caf50, #66bb6a);
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+
+        .opcja-text {
+            position: absolute;
+            top: 50%;
+            left: 8px;
+            transform: translateY(-50%);
+            font-size: 8px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+        }
+
+        .zainteresowani-lista {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .zainteresowany-item {
+            text-align: center;
+        }
+
+        .zainteresowany-avatar {
+            width: 32px;
+            height: 32px;
+            background: #e9ecef;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 0 auto 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .zainteresowany-name {
+            font-size: 8px;
+            color: #333;
+        }
+
+        /* Theme Variants */
+        .theme-emo {
+            background: linear-gradient(45deg, #000, #330033) !important;
+            color: #ff00ff !important;
+        }
+
+        .theme-emo .profile-component {
+            border-color: #ff00ff !important;
+            background: #1a0d1a !important;
+            color: #ff00ff !important;
+        }
+
+        .theme-emo .component-header {
+            background: linear-gradient(to bottom, #ff00ff, #cc00cc) !important;
+        }
+
+        .theme-rap {
+            background: linear-gradient(45deg, #000, #333) !important;
+            color: #ffd700 !important;
+        }
+
+        .theme-rap .profile-component {
+            border-color: #ffd700 !important;
+            background: #1a1a1a !important;
+            color: #ffd700 !important;
+        }
+
+        .theme-rap .component-header {
+            background: linear-gradient(to bottom, #ffd700, #cc9900) !important;
+            color: #000 !important;
+        }
+
+        .theme-dziewczeco {
+            background: linear-gradient(45deg, #ffb3d9, #ffe6f2) !important;
+            color: #cc0066 !important;
+        }
+
+        .theme-dziewczeco .profile-component {
+            border-color: #ff69b4 !important;
+            background: #fff0f8 !important;
+            color: #cc0066 !important;
+        }
+
+        .theme-dziewczeco .component-header {
+            background: linear-gradient(to bottom, #ff69b4, #e6459a) !important;
+        }
+
+        .theme-anime {
+            background: linear-gradient(45deg, #e6f3ff, #cce7ff) !important;
+            color: #0066cc !important;
+        }
+
+        .theme-anime .profile-component {
+            border-color: #66b3ff !important;
+            background: #f0f8ff !important;
+            color: #0066cc !important;
+        }
+
+        .theme-anime .component-header {
+            background: linear-gradient(to bottom, #66b3ff, #4da6ff) !important;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(to bottom, #e8f5e8 0%, #d0f28f 100%);
+            border-top: 2px solid #4caf50;
+            margin-top: 40px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 960px;
+            margin: 0 auto;
+            color: #2e7d32;
+            font-size: 10px;
+        }
+
+        .footer-links {
+            margin-top: 8px;
+        }
+
+        .footer-links a {
+            color: #1976d2;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .profile-container {
+                grid-template-columns: 1fr;
+                margin: 15px;
+                max-width: none;
+            }
+
+            .profile-header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .profile-main {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+            }
+
+            .nav-menu li {
+                border-right: none;
+                border-bottom: 1px solid #2e7d32;
+            }
+
+            .nav-menu li:last-child {
+                border-bottom: none;
+            }
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-component {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .component-hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">PŁ</div>
+                <div class="site-title">
+                    <h1>POLchatka</h1>
+                    <span class="tagline">Czuj się jak u siebie.</span>
+                </div>
+            </div>
+
+            <div class="user-info-header">
+                <div class="user-avatar-small">🎭</div>
+                <div class="user-details">
+                    <div class="user-name">mikusz3</div>
+                    <div class="user-status">🟢 Online</div>
+                </div>
+                <div class="header-actions">
+                    <a href="#" class="header-btn">Edytuj profil</a>
+                    <a href="index.html" class="header-btn">Wyjdź</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-content">
+            <ul class="nav-menu">
+                <li><a href="index.html">🏠 Start</a></li>
+                <li><a href="#" class="active">👤 Mój profil</a></li>
+                <li><a href="#">👥 Ludzie</a></li>
+                <li><a href="#">🎮 Gry Online</a></li>
+                <li><a href="#">📝 Ściana</a></li>
+                <li><a href="#">👨‍👩‍👧‍👦 Grupy</a></li>
+                <li><a href="#">🧠 Quizy</a></li>
+                <li><a href="#">💬 Forum</a></li>
+                <li><a href="#">📧 Poczta</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Profile Container -->
+    <div class="profile-container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-header-content">
+                <div class="profile-avatar">🎭</div>
+                <div class="profile-info">
+                    <div class="profile-username">mikusz3</div>
+                    <div class="profile-realname">Michał Żybura</div>
+                    <div class="profile-location">📍 Kołobrzeg, Polska</div>
+                </div>
+                <div class="profile-actions">
+                    <a href="#" class="profile-btn">📝 Wyślij wiadomość</a>
+                    <a href="#" class="profile-btn">❤️ Dodaj do ulubionych</a>
+                    <a href="#" class="profile-btn">📸 Zobacz zdjęcia</a>
+                </div>
+            </div>
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-number">127</span>
+                    <span class="stat-label">Znajomi</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">89</span>
+                    <span class="stat-label">Zdjęcia</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">456</span>
+                    <span class="stat-label">Posty</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">2.3k</span>
+                    <span class="stat-label">Odwiedziny</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Left Sidebar -->
+        <aside class="profile-sidebar">
+            <!-- Theme Customization -->
+            <div class="theme-selector">
+                <div class="theme-header">🎨 Motyw profilu</div>
+                <div class="theme-content">
+                    <div class="theme-tabs">
+                        <button class="theme-tab active" onclick="showThemeTab('presets')">Gotowe</button>
+                        <button class="theme-tab" onclick="showThemeTab('custom')">CSS</button>
+                    </div>
+                    
+                    <div id="theme-presets" class="theme-presets">
+                        <div class="theme-preset active" onclick="applyTheme('default')">🌿 Domyślny</div>
+                        <div class="theme-preset" onclick="applyTheme('emo')">🖤 Emo</div>
+                        <div class="theme-preset" onclick="applyTheme('rap')">🎤 Rap</div>
+                        <div class="theme-preset" onclick="applyTheme('dziewczeco')">💕 Różowy</div>
+                        <div class="theme-preset" onclick="applyTheme('anime')">🎌 Anime</div>
+                        <div class="theme-preset" onclick="applyTheme('retro')">📺 Retro</div>
+                    </div>
+                    
+                    <div id="theme-custom" style="display: none;">
+                        <textarea class="custom-css" placeholder="/* Wpisz swój kod CSS */
+body { background: #ff0000; }
+.profile-component { 
+    border-color: #00ff00; 
+}"></textarea>
+                        <button onclick="applyCustomCSS()" style="margin-top: 8px; padding: 4px 8px; font-size: 9px;">Zastosuj CSS</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Components Panel -->
+            <div class="components-panel">
+                <div class="components-header">🧩 Komponenty profilu</div>
+                <div class="components-list">
+                    <div class="component-item">
+                        <span>📝 Opis Główny</span>
+                        <button class="component-toggle active" onclick="toggleComponent('opis-glowny')">ON</button>
+                    </div>
+                    <div class="component-item">
+                        <span>📊 Dane Osobowe</span>
+                        <button class="component-toggle active" onclick="toggleComponent('dane-osobowe')">ON</button>
+                    </div>
+                    <div class="component-item">
+                        <span>📸 Galeria Zdjęć</span>
+                        <button class="component-toggle active" onclick="toggleComponent('galeria-zdjec')">ON</button>
+                    </div>
+                    <div class="component-item">
+                        <span>🧠 Quizy</span>
+                        <button class="component-toggle active" onclick="toggleComponent('quizy')">ON</button>
+                    </div>
+                    <div class="component-item">
+                        <span>⭐ Horoskop</span>
+                        <button class="component-toggle active" onclick="toggleComponent('horoskop')">ON</button>
+                    </div>
+                    <div class="component-item">
+                        <span>📍 Tutaj Jestem</span>
+                        <button class="component-toggle active" onclick="toggleComponent('tutaj-jestem')">ON</button>
+                    </div>
+                    <div class="component-item">
+                        <span>⏰ Odliczanie</span>
+                        <button class="component-toggle active" onclick="toggleComponent('odliczanie')">ON</button>
+                    </div>
+                    <div class="component-item">
+                        <span>📊 Głosowanie</span>
+                        <button class="component-toggle" onclick="toggleComponent('glosowanie')">OFF</button>
+                    </div>
+                    <div class="component-item">
+                        <span>💕 Związki</span>
+                        <button class="component-toggle active" onclick="toggleComponent('zwiazki')">ON</button>
+                    </div>
+                    <div class="component-item">
+                        <span>👥 Zainteresowani mną</span>
+                        <button class="component-toggle active" onclick="toggleComponent('zainteresowani')">ON</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Profile Content -->
+        <main class="profile-main">
+            <!-- Opis Główny -->
+            <div class="profile-component opis-glowny" id="component-opis-glowny">
+                <div class="component-header">
+                    📝 O mnie
+                    <div class="component-controls">
+                        <div class="component-control" onclick="editComponent('opis-glowny')">✏️</div>
+                        <div class="component-control" onclick="toggleComponent('opis-glowny')">👁️</div>
+                    </div>
+                </div>
+                <div class="component-content">
+                    <p>Prosty chłopak z miasta próbujący się dopasować do świata, a w międzyczasie rozwijać swoje pasje.</p>
+                    <p><strong>Zajawki:</strong> gry, komputery, sport, kulturystyka, retro, anime</p>
+                    <p><strong>Pseudonim:</strong> Misiek, Arnold</p>
+                </div>
+            </div>
+
+            <!-- Dane Osobowe -->
+            <div class="profile-component dane-osobowe" id="component-dane-osobowe">
+                <div class="component-header">
+                    📊 Dane osobowe
+                    <div class="component-controls">
+                        <div class="component-control" onclick="editComponent('dane-osobowe')">✏️</div>
+                        <div class="component-control" onclick="toggleComponent('dane-osobowe')">👁️</div>
+                    </div>
+                </div>
+                <div class="component-content">
+                    <div class="dane-row">
+                        <span class="dane-label">Imię:</span>
+                        <span class="dane-value">Michał</span>
+                    </div>
+                    <div class="dane-row">
+                        <span class="dane-label">Nazwisko:</span>
+                        <span class="dane-value">Żybura</span>
+                    </div>
+                    <div class="dane-row">
+                        <span class="dane-label">Data urodzenia:</span>
+                        <span class="dane-value">01.02.2000</span>
+                    </div>
+                    <div class="dane-row">
+                        <span class="dane-label">Płeć:</span>
+                        <span class="dane-value">Mężczyzna</span>
+                    </div>
+                    <div class="dane-row">
+                        <span class="dane-label">Miejscowość:</span>
+                        <span class="dane-value">Kołobrzeg</span>
+                    </div>
+                    <div class="dane-row">
+                        <span class="dane-label">GG:</span>
+                        <span class="dane-value">69609412</span>
+                    </div>
+                    <div class="dane-row">
+                        <span class="dane-label">Discord:</span>
+                        <span class="dane-value">mikusz3_new</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Galeria Zdjęć -->
+            <div class="profile-component galeria-zdjec" id="component-galeria-zdjec">
+                <div class="component-header">
+                    📸 Slajdy (Galeria zdjęć)
+                    <div class="component-controls">
+                        <div class="component-control" onclick="addPhoto()">➕</div>
+                        <div class="component-control" onclick="toggleComponent('galeria-zdjec')">👁️</div>
+                    </div>
+                </div>
+                <div class="component-content">
+                    <div class="zdjecia-galeria">
+                        <div class="zdjecie-thumb" onclick="showPhoto(1)">🏞️</div>
+                        <div class="zdjecie-thumb" onclick="showPhoto(2)">🌅</div>
+                        <div class="zdjecie-thumb" onclick="showPhoto(3)">🎉</div>
+                        <div class="zdjecie-thumb" onclick="showPhoto(4)">🏖️</div>
+                        <div class="zdjecie-thumb" onclick="showPhoto(5)">🎭</div>
+                        <div class="zdjecie-thumb" onclick="showPhoto(6)">⚽</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quizy -->
+            <div class="profile-component quizy" id="component-quizy">
+                <div class="component-header">
+                    🧠 Moje quizy
+                    <div class="component-controls">
+                        <div class="component-control" onclick="addQuiz()">➕</div>
+                        <div class="component-control" onclick="toggleComponent('quizy')">👁️</div>
+                    </div>
+                </div>
+                <div class="component-content">
+                    <div class="quizy-lista">
+                        <div class="quiz-item" onclick="takeQuiz(1)">
+                            <div class="quiz-title">Jaki typ osobowości masz?</div>
+                            <div class="quiz-desc">Sprawdź swoją osobowość w 10 pytaniach</div>
+                        </div>
+                        <div class="quiz-item" onclick="takeQuiz(2)">
+                            <div class="quiz-title">Test z anime</div>
+                            <div class="quiz-desc">Poznaj swoją anime osobowość</div>
+                        </div>
+                        <div class="quiz-item" onclick="takeQuiz(3)">
+                            <div class="quiz-title">Czy znasz stare gry?</div>
+                            <div class="quiz-desc">Quiz o grach z lat 90. i 2000.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Horoskop -->
+            <div class="profile-component horoskop" id="component-horoskop">
+                <div class="component-header">
+                    ⭐ Horoskop
+                    <div class="component-controls">
+                        <div class="component-control" onclick="editComponent('horoskop')">✏️</div>
+                        <div class="component-control" onclick="toggleComponent('horoskop')">👁️</div>
+                    </div>
+                </div>
+                <div class="component-content">
+                    <div class="horoskop-content">
+                        <div class="zodiac-sign">♒</div>
+                        <div class="horoskop-details">
+                            <strong>Wodnik (20.01 - 18.02)</strong><br>
+                            <strong>Zalety:</strong> kreatywny, niezależny, humanitarny<br>
+                            <strong>Wady:</strong> uparty, nieprzewidywalny<br>
+                            <strong>Dziś:</strong> Dobry dzień na nowe projekty!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tutaj Jestem -->
+            <div class="profile-component tutaj-jestem" id="component-tutaj-jestem">
+                <div class="component-header">
+                    📍 Tutaj jestem
+                    <div class="component-controls">
+                        <div class="component-control" onclick="editComponent('tutaj-jestem')">✏️</div>
+                        <div class="component-control" onclick="toggleComponent('tutaj-jestem')">👁️</div>
+                    </div>
+                </div>
+                <div class="component-content">
+                    <p>🏠 W domu, słucham muzyki i gram w gry retro. Dziś testuje nowe emulatory!</p>
+                    <small style="color: #666; font-size: 8px;">Zaktualizowano: 2 minuty temu</small>
+                </div>
+            </div>
+
+            <!-- Odliczanie -->
+            <div class="profile-component odliczanie" id="component-odliczanie">
+                <div class="component-header">
+                    ⏰ Odliczanie
+                    <div class="component-controls">
+                        <div class="component-control" onclick="editComponent('odliczanie')">✏️</div>
+                        <div class="component-control" onclick="toggleComponent('odliczanie')">👁️</div>
+                    </div>
+                </div>
+                <div class="component-content">
+                    <div class="countdown-display">
+                        <div class="countdown-title">Do Nowego Roku:</div>
+                        <div class="countdown-time" id="countdown-timer">127:15:42:33</div>
+                        <div class="countdown-label">dni:godziny:minuty:sekundy</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Głosowanie -->
+            <div class="profile-component glosowanie component-hidden" id="component-glosowanie">
+                <div class="component-header">
+                    📊 Głosowanie
+                    <div class="component-controls">
+                        <div class="component-control" onclick="editComponent('glosowanie')">✏️</div>
+                        <div class="component-control" onclick="toggleComponent('glosowanie')">👁️</div>
+                    </div>
+                </div>
+                <div class="component-content">
+                    <p style="margin-bottom: 10px; font-weight: bold;">Najlepszy portal z lat 2000?</p>
+                    <div class="glosowanie-opcje">
+                        <div class="glosowanie-opcja">
+                            <div style="font-size: 9px; margin-bottom: 2px;">Nasza Klasa</div>
+                            <div class="opcja-bar">
+                                <div class="opcja-fill" style="width: 45%"></div>
+                                <div class="opcja-text">45% (23 głosy)</div>
+                            </div>
+                        </div>
+                        <div class="glosowanie-opcja">
+                            <div style="font-size: 9px; margin-bottom: 2px;">Poszkole.pl</div>
+                            <div class="opcja-bar">
+                                <div class="opcja-fill" style="width: 35%"></div>
+                                <div class="opcja-text">35% (18 głosów)</div>
+                            </div>
+                        </div>
+                        <div class="glosowanie-opcja">
+                            <div style="font-size: 9px; margin-bottom: 2px;">Grono.net</div>
+                            <div class="opcja-bar">
+                                <div class="opcja-fill" style="width: 20%"></div>
+                                <div class="opcja-text">20% (10 głosów)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="vote()" style="padding: 4px 8px; font-size: 9px;">Zagłosuj</button>
+                </div>
+            </div>
+
+            <!-- Związki -->
+            <div class="profile-component zwiazki" id="component-zwiazki">
+                <div class="component-header">
+                    💕 Status związku
+                    <div class="component-controls">
+                        <div class="component-control" onclick="editComponent('zwiazki')">✏️</div>
+                        <div class="component-control" onclick="toggleComponent('zwiazki')">👁️</div>
+                    </div>
+                </div>
+                <div class="component-content">
+                    <div style="text-align: center;">
+                        <div style="font-size: 24px; margin-bottom: 8px;">💔</div>
+                        <div style="font-weight: bold; color: #666;">Kawaler</div>
+                        <div style="font-size: 8px; color: #999; margin-top: 4px;">
+                            Szukam drugiej połówki do wspólnego grania w retro gry!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zainteresowani mną -->
+            <div class="profile-component zainteresowani" id="component-zainteresowani">
+                <div class="component-header">
+                    👥 Zainteresowani mną (8)
+                    <div class="component-controls">
+                        <div class="component-control" onclick="toggleComponent('zainteresowani')">👁️</div>
+                    </div>
+                </div>
+                <div class="component-content">
+                    <div class="zainteresowani-lista">
+                        <div class="zainteresowany-item">
+                            <div class="zainteresowany-avatar">👩</div>
+                            <div class="zainteresowany-name">Ania22</div>
+                        </div>
+                        <div class="zainteresowany-item">
+                            <div class="zainteresowany-avatar">👨</div>
+                            <div class="zainteresowany-name">Piotr91</div>
+                        </div>
+                        <div class="zainteresowany-item">
+                            <div class="zainteresowany-avatar">👩</div>
+                            <div class="zainteresowany-name">Kasia_PL</div>
+                        </div>
+                        <div class="zainteresowany-item">
+                            <div class="zainteresowany-avatar">👨</div>
+                            <div class="zainteresowany-name">Tomek87</div>
+                        </div>
+                        <div class="zainteresowany-item">
+                            <div class="zainteresowany-avatar">👩</div>
+                            <div class="zainteresowany-name">Magda_W</div>
+                        </div>
+                        <div class="zainteresowany-item">
+                            <div class="zainteresowany-avatar">👨</div>
+                            <div class="zainteresowany-name">Marek_K</div>
+                        </div>
+                        <div class="zainteresowany-item">
+                            <div class="zainteresowany-avatar">👩</div>
+                            <div class="zainteresowany-name">Ola123</div>
+                        </div>
+                        <div class="zainteresowany-item">
+                            <div class="zainteresowany-avatar">👨</div>
+                            <div class="zainteresowany-name">Jakub_G</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                © 2025 POLchatka.pl | Projekt hobbystyczny
+            </div>
+            <div class="footer-links">
+                <a href="/regulamin">Regulamin</a> |
+                <a href="/prywatnosc">Prywatność</a> |
+                <a href="/kontakt">Kontakt</a> |
+                <a href="/blog">Blog</a>
+            </div>
+            <div style="margin-top: 5px; font-size: 8px; color: #666;">
+                Zainspirowane klasycznymi polskimi portalami z lat 2000
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Management
+        let currentTheme = 'default';
+        let customStyleElement = null;
+
+        function showThemeTab(tab) {
+            document.querySelectorAll('.theme-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (tab === 'presets') {
+                document.getElementById('theme-presets').style.display = 'grid';
+                document.getElementById('theme-custom').style.display = 'none';
+            } else {
+                document.getElementById('theme-presets').style.display = 'none';
+                document.getElementById('theme-custom').style.display = 'block';
+            }
+        }
+
+        function applyTheme(theme) {
+            // Remove previous theme classes
+            document.body.className = document.body.className.replace(/theme-\w+/g, '');
+            
+            // Remove custom styles
+            if (customStyleElement) {
+                customStyleElement.remove();
+                customStyleElement = null;
+            }
+            
+            // Apply new theme
+            if (theme !== 'default') {
+                document.body.classList.add('theme-' + theme);
+            }
+            
+            currentTheme = theme;
+            
+            // Update active preset
+            document.querySelectorAll('.theme-preset').forEach(p => p.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function applyCustomCSS() {
+            const customCSS = document.querySelector('.custom-css').value;
+            
+            // Remove previous custom styles
+            if (customStyleElement) {
+                customStyleElement.remove();
+            }
+            
+            // Remove theme classes
+            document.body.className = document.body.className.replace(/theme-\w+/g, '');
+            
+            // Create and apply custom styles
+            customStyleElement = document.createElement('style');
+            customStyleElement.textContent = customCSS;
+            document.head.appendChild(customStyleElement);
+            
+            currentTheme = 'custom';
+            
+            // Update theme presets
+            document.querySelectorAll('.theme-preset').forEach(p => p.classList.remove('active'));
+        }
+
+        // Component Management
+        function toggleComponent(componentId) {
+            const component = document.getElementById('component-' + componentId);
+            const toggle = event.target;
+            
+            if (component.classList.contains('component-hidden')) {
+                component.classList.remove('component-hidden');
+                toggle.textContent = 'ON';
+                toggle.classList.add('active');
+            } else {
+                component.classList.add('component-hidden');
+                toggle.textContent = 'OFF';
+                toggle.classList.remove('active');
+            }
+        }
+
+        function editComponent(componentId) {
+            alert(`Edycja komponentu: ${componentId}\n\nTa funkcja zostanie zaimplementowana w pełnej wersji POLchatki.`);
+        }
+
+        // Interactive Functions
+        function addPhoto() {
+            alert('Dodawanie zdjęć będzie dostępne po zalogowaniu!');
+        }
+
+        function showPhoto(photoId) {
+            alert(`Przeglądanie zdjęcia #${photoId}\n\nW pełnej wersji tutaj otworzy się galeria zdjęć.`);
+        }
+
+        function addQuiz() {
+            alert('Kreator quizów będzie dostępny wkrótce!');
+        }
+
+        function takeQuiz(quizId) {
+            alert(`Rozpoczynanie quizu #${quizId}\n\nW pełnej wersji zostaniesz przekierowany do quizu.`);
+        }
+
+        function vote() {
+            alert('Dziękujemy za głos! Wyniki zostały zaktualizowane.');
+        }
+
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date();
+            const newYear = new Date(now.getFullYear() + 1, 0, 1);
+            const diff = newYear - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            const countdownElement = document.getElementById('countdown-timer');
+            if (countdownElement) {
+                countdownElement.textContent = `${days}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+        }
+
+        // Initialize countdown
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Profile interactions
+        function sendMessage() {
+            alert('Wiadomość zostanie wysłana po zalogowaniu!');
+        }
+
+        function addToFavorites() {
+            alert('Użytkownik dodany do ulubionych!');
+        }
+
+        // Initialize profile
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('POLchatka Profile loaded - mikusz3');
+            
+            // Animate components on load
+            const components = document.querySelectorAll('.profile-component');
+            components.forEach((component, index) => {
+                component.style.animationDelay = (index * 0.1) + 's';
+            });
+        });
+
+        // Retro sound effects (placeholder)
+        function playRetroSound(type) {
+            // W pełnej wersji tutaj będą dźwięki z lat 2000
+            console.log(`Playing retro sound: ${type}`);
+        }
+
+        // Component drag and drop (advanced feature)
+        function enableDragAndDrop() {
+            // Ta funkcja zostanie zaimplementowana dla zaawansowanej customizacji
+            console.log('Drag and drop dla komponentów będzie dostępne wkrótce!');
+        }
+    </script>
+</body>
+</html>
+                        

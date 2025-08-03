@@ -155,7 +155,7 @@ polchatka/
 ![polchatka_projekt_1](/polchatka_projekt_1.png)
 ![polchatka_projekt_2](/polchatka_projekt_2.png)
 ![polchatka_projekt_3](/polchatka_projekt_3.png)
-![polchatka_projekt_4](/polchatka_projekt_4.png)
+[polchatka_projekt_4](/polchatka_projekt_4.png)
 
 ## 🔗 Przydatne linki
 

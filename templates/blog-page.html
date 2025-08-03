@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - Blog POLchatki</title>
+    <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
+    <link rel="icon" href="{{ get_url(path='favicon.ico') }}" type="image/x-icon">
+    <style>
+        /* Style dla pojedynczego posta w stylu retro */
+        .post-container {
+            max-width: 760px;
+            margin: 0 auto;
+            background: white;
+            border: 2px outset #d0d0d0;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .post-header {
+            background: linear-gradient(to bottom, #e8f4fd 0%, #b8d5f2 100%);
+            border-bottom: 2px solid #4682b4;
+            padding: 15px;
+        }
+
+        .post-title {
+            color: #2c5aa0;
+            font-size: 18px;
+            margin: 0 0 8px 0;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        .post-meta {
+            font-size: 10px;
+            color: #666;
+            padding: 5px 0;
+            border-top: 1px solid #ccc;
+        }
+
+        .post-meta .meta-item {
+            display: inline-block;
+            margin-right: 15px;
+            background: #f0f8ff;
+            padding: 2px 6px;
+            border: 1px solid #4682b4;
+            border-radius: 3px;
+        }
+
+        .breadcrumb {
+            background: #f8f8f8;
+            border-bottom: 1px solid #ddd;
+            padding: 8px 15px;
+            font-size: 9px;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .blog-nav {
+            background: linear-gradient(to bottom, #4682b4 0%, #2c5aa0 100%);
+            border-bottom: 1px solid #1e3a5f;
+            padding: 8px 0;
+        }
+
+        .blog-nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .blog-nav li {
+            border-right: 1px solid #1e3a5f;
+            border-left: 1px solid #87ceeb;
+        }
+
+        .blog-nav li:first-child { border-left: none; }
+        .blog-nav li:last-child { border-right: none; }
+
+        .blog-nav a {
+            display: block;
+            padding: 8px 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 11px;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+        }
+
+        .blog-nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .post-content {
+            padding: 20px;
+        }
+
+        .post-body {
+            font-size: 11px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .post-body h1, .post-body h2, .post-body h3 {
+            color: #2c5aa0;
+            border-bottom: 1px solid #4682b4;
+            padding-bottom: 3px;
+        }
+
+        .post-body h1 { font-size: 16px; }
+        .post-body h2 { font-size: 14px; }
+        .post-body h3 { font-size: 12px; }
+
+        .post-body p {
+            margin: 10px 0;
+        }
+
+        .post-body ul, .post-body ol {
+            margin: 10px 0 10px 20px;
+        }
+
+        .post-body li {
+            margin: 3px 0;
+        }
+
+        .post-body blockquote {
+            background: #f0f8ff;
+            border-left: 4px solid #4682b4;
+            margin: 15px 0;
+            padding: 10px 15px;
+            font-style: italic;
+            color: #555;
+        }
+
+        .post-body code {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 2px 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+        }
+
+        .post-body pre {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 10px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            margin: 10px 0;
+        }
+
+        .post-body img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .post-tags {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 20px 0;
+        }
+
+        .post-tags h4 {
+            color: #2c5aa0;
+            font-size: 11px;
+            margin: 0 0 8px 0;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e8f4fd;
+            color: #2c5aa0;
+            padding: 3px 8px;
+            border-radius: 3px;
+            margin: 2px 3px 2px 0;
+            text-decoration: none;
+            border: 1px solid #4682b4;
+            font-size: 10px;
+        }
+
+        .tag:hover {
+            background: #d0e8f2;
+        }
+
+        .post-navigation {
+            background: #f0f8ff;
+            border: 1px solid #4682b4;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #2c5aa0;
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border: 1px outset #d0d0d0;
+            background: #f0f0f0;
+            border-radius: 3px;
+        }
+
+        .nav-link:hover {
+            background: #e0e0e0;
+            border: 1px inset #d0d0d0;
+        }
+
+        .nav-link.disabled {
+            color: #999;
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            cursor: not-allowed;
+        }
+
+        .comments-section {
+            background: #f8f8f8;
+            border: 2px inset #d0d0d0;
+            margin: 20px 0;
+        }
+
+        .comments-header {
+            background: linear-gradient(to bottom, #e8f4fd 0%, #b8d5f2 100%);
+            padding: 10px 15px;
+            border-bottom: 1px solid #4682b4;
+        }
+
+        .comments-header h3 {
+            color: #2c5aa0;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .comments-content {
+            padding: 15px;
+            text-align: center;
+            color: #666;
+            font-size: 10px;
+        }
+
+        .sidebar {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .sidebar h3 {
+            color: #2c5aa0;
+            font-size: 12px;
+            margin: 0 0 10px 0;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            padding: 3px 0;
+            font-size: 10px;
+        }
+
+        .sidebar a {
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+
+        .retro-counter {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #00ff00;
+            padding: 2px 5px;
+            font-size: 10px;
+            border: 1px inset #333;
+            margin-left: 5px;
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        .footer {
+            background: linear-gradient(to bottom, #e8f4fd 0%, #b8d5f2 100%);
+            border-top: 2px solid #4682b4;
+            text-align: center;
+            padding: 10px;
+            font-size: 9px;
+            color: #2c5aa0;
+        }
+
+        .footer a {
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .post-container {
+                margin: 5px;
+                max-width: none;
+            }
+
+            .post-navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .blog-nav ul {
+                flex-direction: column;
+            }
+
+            .blog-nav li {
+                border-right: none;
+                border-left: none;
+                border-bottom: 1px solid #1e3a5f;
+            }
+        }
+    </style>
+</head>
+<body style="background: #e4f1ce; font-family: 'Verdana', sans-serif; font-size: 11px; margin: 0; padding: 10px;">
+
+<div class="post-container">
+    <!-- Navigation -->
+    <nav class="blog-nav">
+        <ul>
+            <li><a href="{{ get_url(path='/') }}">🏠 Strona główna</a></li>
+            <li><a href="{{ get_url(path='blog/') }}">📝 Blog</a></li>
+            <li><a href="{{ get_url(path='forum/') }}">💬 Forum</a></li>
+            <li><a href="{{ get_url(path='ludzie/') }}">👥 Ludzie</a></li>
+            <li><a href="{{ get_url(path='gry/') }}">🎮 Gry</a></li>
+        </ul>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="{{ get_url(path='/') }}">Strona główna</a> &raquo; 
+        <a href="{{ get_url(path='blog/') }}">Blog</a> &raquo; 
+        {{ page.title }}
+    </div>
+
+    <!-- Post Header -->
+    <div class="post-header">
+        <h1 class="post-title">{{ page.title }}</h1>
+        
+        <div class="post-meta">
+            <span class="meta-item">📅 {{ page.date | date(format="%d.%m.%Y") }}</span>
+            {% if page.extra.author %}
+            <span class="meta-item">👤 {{ page.extra.author }}</span>
+            {% endif %}
+            {% if page.reading_time %}
+            <span class="meta-item">⏱️ {{ page.reading_time }} min czytania</span>
+            {% endif %}
+            <span class="meta-item">👁️ <span class="retro-counter blink">{{ page.extra.views | default(value="42") }}</span> wyświetleń</span>
+        </div>
+    </div>
+
+    <!-- Post Content -->
+    <div class="post-content">
+        <div class="post-body">
+            {{ page.content | safe }}
+        </div>
+
+        <!-- Tags -->
+        {% if page.taxonomies.tags %}
+        <div class="post-tags">
+            <h4>🏷️ Tagi:</h4>
+            {% for tag in page.taxonomies.tags %}
+            <a href="{{ get_url(path='tags/' ~ tag ~ '/') }}" class="tag">{{ tag }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Post Navigation -->
+        <div class="post-navigation">
+            {% if page.earlier %}
+            <a href="{{ page.earlier.permalink }}" class="nav-link">« {{ page.earlier.title }}</a>
+            {% else %}
+            <span class="nav-link disabled">« Brak starszego posta</span>
+            {% endif %}
+
+            <a href="{{ get_url(path='blog/') }}" class="nav-link">📝 Wszystkie posty</a>
+
+            {% if page.later %}
+            <a href="{{ page.later.permalink }}" class="nav-link">{{ page.later.title }} »</a>
+            {% else %}
+            <span class="nav-link disabled">Brak nowszego posta »</span>
+            {% endif %}
+        </div>
+
+        <!-- Comments Section -->
+        <div class="comments-section">
+            <div class="comments-header">
+                <h3>💬 Komentarze</h3>
+            </div>
+            <div class="comments-content">
+                <p>Komentarze będą dostępne wkrótce!</p>
+                <p>W międzyczasie możesz napisać na <a href="{{ get_url(path='forum/') }}">forum POLchatki</a>.</p>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>📚 Podobne posty</h3>
+            <ul>
+                <li><a href="#">🛠️ Backend - co i jak?</a></li>
+                <li><a href="#">🎨 Frontend i design</a></li>
+                <li><a href="#">🔧 Funkcje portalu</a></li>
+            </ul>
+
+            <h3>📊 Statystyki posta</h3>
+            <ul>
+                <li>Słów: <span class="retro-counter">{{ page.word_count | default(value="1337") }}</span></li>
+                <li>Znaków: <span class="retro-counter">{{ page.content | length }}</span></li>
+                <li>Wyświetleń: <span class="retro-counter blink">{{ page.extra.views | default(value="42") }}</span></li>
+            </ul>
+
+            <h3>👨‍💻 O autorze</h3>
+            <div style="background: #f0f8ff; padding: 10px; border: 1px solid #4682b4; border-radius: 3px; font-size: 10px;">
+                <p><strong>{{ page.extra.author | default(value="mikusz3") }}</strong></p>
+                <p>Twórca POLchatki, nostalgik lat 2000, programista z pasją do retro designu.</p>
+                <p><a href="#">📧 Kontakt</a> | <a href="#">🌐 Strona</a></p>
+            </div>
+
+            <h3>🔗 Przydatne linki</h3>
+            <ul>
+                <li><a href="https://poszkole.pl">📚 Poszkole.pl</a></li>
+                <li><a href="https://nk.pl">🌐 NK.pl</a></li>
+                <li><a href="https://kaptur.network">💻 kaptur.network</a></li>
+                <li><a href="https://mikusz3.netlify.app">👨‍💻 mikusz3.netlify.app</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2025 POLchatka.pl | Projekt hobbystyczny | <a href="/kontakt">Kontakt</a></p>
+    <p style="margin-top: 5px; font-size: 8px;">Zainspirowane klasycznymi polskimi portalami z lat 2000</p>
+</div>
+
+</body>
+</html>

@@ -9,10 +9,21 @@ build_search_index = true
 
 theme = "polchatka-retro"
 
+# Define taxonomies
+taxonomies = [
+    {name = "tags", feed = true},
+    {name = "categories", feed = true},
+]
+
 [markdown]
 # Whether to do syntax highlighting
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
-highlight_code = false
+highlight_code = true
+highlight_theme = "base16-ocean-dark"
 
 [extra]
 # Put all your custom variables here
+site_author = "Zespół POLchatki"
+site_description = "Polski portal społecznościowy inspirowany latami 2000"
+enable_legacy_support = true
+max_profile_css_size = "50KB"

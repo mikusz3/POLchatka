@@ -1,31 +1,545 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %}POLchatka{% endblock title %}</title>
-  <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
-  <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POLchatka - Polski Portal Społecznościowy</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Verdana', 'Tahoma', sans-serif;
+            font-size: 11px;
+            background: #e4f1ce url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==') repeat-x;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(to bottom, #ffffff 0%, #e8f5e8 50%, #d0f28f 100%);
+            border-bottom: 3px solid #4caf50;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+            border: 3px solid #2e7d32;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold;
+        }
+
+        .site-title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .site-title h1 {
+            font-size: 28px;
+            color: #2e7d32;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+            margin-bottom: 2px;
+            font-weight: bold;
+        }
+
+        .site-title .tagline {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .login-box {
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 15px;
+            min-width: 280px;
+        }
+
+        .login-box h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .login-form input {
+            padding: 4px 6px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 11px;
+        }
+
+        .login-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .btn {
+            padding: 4px 12px;
+            font-size: 10px;
+            font-weight: bold;
+            border: 1px solid;
+            border-radius: 3px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            flex: 1;
+        }
+
+        .btn-login {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+            border-color: #2e7d32;
+        }
+
+        .btn-register {
+            background: linear-gradient(to bottom, #ff9800 0%, #f57c00 100%);
+            color: white;
+            border-color: #e65100;
+        }
+
+        /* Navigation */
+        .navigation {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            border-bottom: 2px solid #2e7d32;
+            box-shadow: inset 0 1px 0 #66bb6a;
+        }
+
+        .nav-content {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu li {
+            border-right: 1px solid #2e7d32;
+        }
+
+        .nav-menu li:last-child {
+            border-right: none;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 8px 16px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 11px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            transition: background 0.2s;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(46, 125, 50, 0.5);
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 200px 1fr 180px;
+            gap: 15px;
+        }
+
+        /* Welcome Section */
+        .welcome-banner {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border: 2px solid #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .welcome-banner h2 {
+            color: #e65100;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .welcome-banner p {
+            color: #bf360c;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 15px;
+        }
+
+        .stat-box {
+            text-align: center;
+            background: white;
+            border: 1px solid #ff9800;
+            border-radius: 4px;
+            padding: 8px 12px;
+            min-width: 80px;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 16px;
+            font-weight: bold;
+            color: #e65100;
+        }
+
+        .stat-label {
+            font-size: 9px;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        /* Sidebar Widgets */
+        .widget {
+            background: white;
+            border: 2px solid #4caf50;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .widget-header {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+            padding: 6px 10px;
+            font-weight: bold;
+            font-size: 11px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        }
+
+        .widget-content {
+            padding: 10px;
+        }
+
+        /* User List */
+        .user-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .user-item:last-child {
+            border-bottom: none;
+        }
+
+        .user-avatar {
+            width: 20px;
+            height: 20px;
+            background: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .username {
+            font-weight: bold;
+            color: #1976d2;
+            font-size: 10px;
+        }
+
+        .user-status {
+            font-size: 8px;
+            color: #666;
+        }
+
+        .online-indicator {
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            background: white;
+            border: 2px solid #4caf50;
+            border-radius: 6px;
+            padding: 15px;
+        }
+
+        .content-section {
+            margin-bottom: 25px;
+        }
+
+        .content-section h3 {
+            color: #2e7d32;
+            font-size: 14px;
+            margin-bottom: 12px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #4caf50;
+        }
+
+        /* Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .game-card {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .game-card:hover {
+            background: #e9ecef;
+            border-color: #4caf50;
+        }
+
+        .game-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .game-name {
+            font-size: 9px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* News List */
+        .news-item {
+            background: #f8f9fa;
+            border-left: 3px solid #4caf50;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .news-date {
+            font-size: 8px;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .news-title {
+            font-weight: bold;
+            color: #1976d2;
+            font-size: 10px;
+            margin-bottom: 3px;
+        }
+
+        .news-text {
+            font-size: 9px;
+            color: #555;
+            line-height: 1.3;
+        }
+
+        /* Groups */
+        .group-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .group-item:last-child {
+            border-bottom: none;
+        }
+
+        .group-name {
+            font-size: 10px;
+            color: #333;
+        }
+
+        .group-members {
+            font-size: 8px;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(to bottom, #e8f5e8 0%, #d0f28f 100%);
+            border-top: 2px solid #4caf50;
+            margin-top: 40px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 960px;
+            margin: 0 auto;
+            color: #2e7d32;
+            font-size: 10px;
+        }
+
+        .footer-links {
+            margin-top: 8px;
+        }
+
+        .footer-links a {
+            color: #1976d2;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+            }
+
+            .nav-menu li {
+                border-right: none;
+                border-bottom: 1px solid #2e7d32;
+            }
+
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Retro Effects */
+        .retro-glow {
+            text-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        .blink {
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+    </style>
 </head>
 <body>
-  <div class="wrapper">
-    <header>
-      <h1>POLchatka</h1>
-      <p>Czuj się jak u siebie.</p>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">PŁ</div>
+                <div class="site-title">
+                    <h1 class="retro-glow">POLchatka</h1>
+                    <span class="tagline">Czuj się jak u siebie.</span>
+                </div>
+            </div>
+
+            <div class="login-box">
+                <h3>🔐 Zaloguj się</h3>
+                <form class="login-form">
+                    <input type="text" placeholder="Nazwa użytkownika" required>
+                    <input type="password" placeholder="Hasło" required>
+                    <div class="login-buttons">
+                        <button type="submit" class="btn btn-login">Zaloguj</button>
+                        <a href="register" class="btn btn-register">Zarejestruj</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </header>
 
-    <nav>
-      <ul>
-        <li><a href="/">Start</a></li>
-        <li><a href="/blog">Blogi</a></li>
-        <li><a href="/forum">Forum</a></li>
-        <li><a href="/profil">Profil</a></li>
-      </ul>
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-content">
+            <ul class="nav-menu">
+                <li><a href="/">🏠 Start</a></li>
+                <li><a href="/content/ludzie">👥 Ludzie</a></li>
+                <li><a href="/gry">🎮 Gry Online</a></li>
+                <li><a href="/sciana">📝 Ściana</a></li>
+                <li><a href="/grupy">👨‍👩‍👧‍👦 Grupy</a></li>
+                <li><a href="/quizy">🧠 Quizy</a></li>
+                <li><a href="https://polchatka.forumpolish.com">💬 Forum</a></li>
+                <li><a href="/blog">📰 Blog</a></li>
+                <li><a href="/poczta">📧 Poczta</a></li>
+                <li><a href="/sklep">🛒 Sklep</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <main>
-      {% block content %}{% endblock content %}
-    </main>
+<main class="main-container">
+  <div class="main-content single-page-centered">
+    {{ page.content | safe }}
+  </div>
+</main>
+
 
     <footer>
       <p>&copy; POLchatka.pl | Projekt hobbystyczny | <a href="/kontakt">Kontakt</a></p>

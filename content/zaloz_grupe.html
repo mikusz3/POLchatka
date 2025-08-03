@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Załóż Grupę - POLchatka</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Verdana', 'Tahoma', sans-serif;
+            font-size: 11px;
+            background: #e4f1ce url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==') repeat-x;
+            color: #333;
+            line-height: 1.3;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(to bottom, #ffffff 0%, #e8f5e8 50%, #d0f28f 100%);
+            border-bottom: 3px solid #4caf50;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+            border: 3px solid #2e7d32;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold;
+        }
+
+        .site-title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .site-title h1 {
+            font-size: 28px;
+            color: #2e7d32;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+            margin-bottom: 2px;
+            font-weight: bold;
+        }
+
+        .site-title .tagline {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .user-info-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 10px 15px;
+        }
+
+        .user-avatar-small {
+            width: 32px;
+            height: 32px;
+            background: #4caf50;
+            border: 2px solid #2e7d32;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: white;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 12px;
+        }
+
+        .user-status {
+            font-size: 9px;
+            color: #666;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-btn {
+            padding: 4px 12px;
+            font-size: 10px;
+            font-weight: bold;
+            border: 1px solid #4caf50;
+            border-radius: 3px;
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            color: #2e7d32;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .header-btn:hover {
+            background: linear-gradient(to bottom, #e9ecef 0%, #dee2e6 100%);
+            border-color: #388e3c;
+        }
+
+        /* Navigation */
+        .navigation {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            border-bottom: 2px solid #2e7d32;
+            box-shadow: inset 0 1px 0 #66bb6a;
+        }
+
+        .nav-content {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu li {
+            border-right: 1px solid #2e7d32;
+        }
+
+        .nav-menu li:last-child {
+            border-right: none;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 8px 16px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 11px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            transition: background 0.2s;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(46, 125, 50, 0.5);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 0 15px;
+            background: white;
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .content-header {
+            background: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px 6px 0 0;
+            margin: -2px -2px 0 -2px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .content-header h2 {
+            font-size: 16px;
+            margin: 0;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .breadcrumb {
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            padding: 6px 20px;
+            font-size: 10px;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #2e7d32;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Form Content */
+        .form-content {
+            padding: 25px 20px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+        }
+
+        /* Form Sections */
+        .form-section {
+            background: white;
+            border: 2px solid #4caf50;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: linear-gradient(to bottom, #66bb6a 0%, #4caf50 100%);
+            color: white;
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 12px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        }
+
+        .section-content {
+            padding: 20px;
+        }
+
+        .form-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .form-table td {
+            padding: 8px;
+            vertical-align: top;
+        }
+
+        .form-table label {
+            font-weight: bold;
+            font-size: 11px;
+            color: #2e7d32;
+            white-space: nowrap;
+        }
+
+        .form-table input[type="text"],
+        .form-table textarea,
+        .form-table select {
+            width: 100%;
+            padding: 6px 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 4px;
+            background: white;
+            font-size: 11px;
+            font-family: 'Verdana', sans-serif;
+            transition: border-color 0.2s;
+        }
+
+        .form-table input:focus,
+        .form-table textarea:focus,
+        .form-table select:focus {
+            outline: none;
+            border-color: #4caf50;
+            background: #fffffe;
+        }
+
+        .form-table textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Tags Input */
+        .tags-container {
+            border: 2px solid #e9ecef;
+            border-radius: 4px;
+            padding: 6px;
+            min-height: 40px;
+            background: white;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            align-items: flex-start;
+        }
+
+        .tags-container:focus-within {
+            border-color: #4caf50;
+        }
+
+        .tag-item {
+            background: #4caf50;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 9px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .tag-remove {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .tag-input {
+            border: none;
+            outline: none;
+            flex: 1;
+            min-width: 80px;
+            font-size: 11px;
+            padding: 2px;
+        }
+
+        /* Group Avatar Selection */
+        .avatar-selection {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .avatar-option {
+            width: 48px;
+            height: 48px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.2s;
+        }
+
+        .avatar-option:hover {
+            background: #e8f5e8;
+            border-color: #4caf50;
+        }
+
+        .avatar-option.selected {
+            border-color: #4caf50;
+            background: #c8e6c8;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+        }
+
+        /* Theme Customization */
+        .theme-preview {
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .theme-preview-header {
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 10px;
+            color: white;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        }
+
+        .theme-preview-content {
+            padding: 12px;
+            font-size: 9px;
+        }
+
+        .theme-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .theme-option {
+            padding: 8px;
+            border: 2px solid #e9ecef;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 9px;
+            transition: all 0.2s;
+        }
+
+        .theme-option:hover,
+        .theme-option.active {
+            border-color: #4caf50;
+            background: #e8f5e8;
+        }
+
+        .custom-css-editor {
+            width: 100%;
+            height: 120px;
+            padding: 8px;
+            border: 2px solid #e9ecef;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 9px;
+            resize: vertical;
+        }
+
+        .custom-css-editor:focus {
+            border-color: #4caf50;
+            outline: none;
+        }
+
+        /* Privacy Settings */
+        .privacy-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .privacy-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+        }
+
+        .privacy-option input[type="radio"] {
+            margin: 0;
+        }
+
+        .privacy-option label {
+            font-size: 10px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .privacy-description {
+            font-size: 8px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        /* Category Selection */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .category-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            border: 2px solid #e9ecef;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .category-option:hover {
+            border-color: #4caf50;
+            background: #e8f5e8;
+        }
+
+        .category-option input[type="radio"] {
+            margin: 0;
+        }
+
+        .category-option.selected {
+            border-color: #4caf50;
+            background: #c8e6c8;
+        }
+
+        .category-icon {
+            font-size: 16px;
+        }
+
+        .category-label {
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* Buttons */
+        .form-actions {
+            text-align: center;
+            padding: 20px;
+            border-top: 2px solid #e9ecef;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            font-size: 12px;
+            font-weight: bold;
+            border: 2px solid;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary {
+            background: linear-gradient(to bottom, #ff9800 0%, #f57c00 100%);
+            color: white;
+            border-color: #e65100;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to bottom, #ffb74d 0%, #ff9800 100%);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            color: #2e7d32;
+            border-color: #4caf50;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(to bottom, #e9ecef 0%, #dee2e6 100%);
+        }
+
+        .btn-preview {
+            background: linear-gradient(to bottom, #2196f3 0%, #1976d2 100%);
+            color: white;
+            border-color: #1565c0;
+        }
+
+        .btn-preview:hover {
+            background: linear-gradient(to bottom, #42a5f5 0%, #2196f3 100%);
+        }
+
+        /* Sidebar Info */
+        .info-box {
+            background: white;
+            border: 2px solid #4caf50;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .info-header {
+            background: linear-gradient(to bottom, #ffc107 0%, #ff9800 100%);
+            color: white;
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 11px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        }
+
+        .info-content {
+            padding: 15px;
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
+        .info-list {
+            list-style: none;
+            margin: 10px 0;
+        }
+
+        .info-list li {
+            padding: 4px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-list strong {
+            color: #2e7d32;
+        }
+
+        /* Message Boxes */
+        .message-box {
+            margin-bottom: 15px;
+            padding: 12px;
+            border: 2px solid;
+            border-radius: 4px;
+            font-size: 10px;
+        }
+
+        .message-info {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            color: #1565c0;
+        }
+
+        .message-success {
+            background: #e8f5e8;
+            border-color: #4caf50;
+            color: #2e7d32;
+        }
+
+        .message-warning {
+            background: #fff3e0;
+            border-color: #ff9800;
+            color: #e65100;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(to bottom, #e8f5e8 0%, #d0f28f 100%);
+            border-top: 2px solid #4caf50;
+            margin-top: 40px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 960px;
+            margin: 0 auto;
+            color: #2e7d32;
+            font-size: 10px;
+        }
+
+        .footer-links {
+            margin-top: 8px;
+        }
+
+        .footer-links a {
+            color: #1976d2;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .main-container {
+                margin: 15px;
+                max-width: none;
+            }
+
+            .form-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+            }
+
+            .nav-menu li {
+                border-right: none;
+                border-bottom: 1px solid #2e7d32;
+            }
+
+            .nav-menu li:last-child {
+                border-bottom: none;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .avatar-selection {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Theme Previews */
+        .theme-anime .theme-preview-header {
+            background: linear-gradient(to bottom, #66b3ff, #4da6ff);
+        }
+        .theme-anime .theme-preview-content {
+            background: #f0f8ff;
+            color: #0066cc;
+        }
+
+        .theme-gry .theme-preview-header {
+            background: linear-gradient(to bottom, #9c27b0, #7b1fa2);
+        }
+        .theme-gry .theme-preview-content {
+            background: #f3e5f5;
+            color: #4a148c;
+        }
+
+        .theme-muzyka .theme-preview-header {
+            background: linear-gradient(to bottom, #e91e63, #c2185b);
+        }
+        .theme-muzyka .theme-preview-content {
+            background: #fce4ec;
+            color: #880e4f;
+        }
+
+        .theme-sport .theme-preview-header {
+            background: linear-gradient(to bottom, #ff5722, #d84315);
+        }
+        .theme-sport .theme-preview-content {
+            background: #fff3e0;
+            color: #bf360c;
+        }
+
+        .theme-nauka .theme-preview-header {
+            background: linear-gradient(to bottom, #607d8b, #455a64);
+        }
+        .theme-nauka .theme-preview-content {
+            background: #eceff1;
+            color: #263238;
+        }
+
+        .theme-hobby .theme-preview-header {
+            background: linear-gradient(to bottom, #795548, #5d4037);
+        }
+        .theme-hobby .theme-preview-content {
+            background: #efebe9;
+            color: #3e2723;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">PŁ</div>
+                <div class="site-title">
+                    <h1>POLchatka</h1>
+                    <span class="tagline">Czuj się jak u siebie.</span>
+                </div>
+            </div>
+
+            <div class="user-info-header">
+                <div class="user-avatar-small">🎭</div>
+                <div class="user-details">
+                    <div class="user-name">mikusz3</div>
+                    <div class="user-status">🟢 Online</div>
+                </div>
+                <div class="header-actions">
+                    <a href="profile.html" class="header-btn">Mój profil</a>
+                    <a href="index.html" class="header-btn">Strona główna</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-content">
+            <ul class="nav-menu">
+                <li><a href="index.html">🏠 Start</a></li>
+                <li><a href="profile.html">👤 Mój profil</a></li>
+                <li><a href="#">👥 Ludzie</a></li>
+                <li><a href="#">🎮 Gry Online</a></li>
+                <li><a href="#">📝 Ściana</a></li>
+                <li><a href="#" class="active">👨‍👩‍👧‍👦 Grupy</a></li>
+                <li><a href="#">🧠 Quizy</a></li>
+                <li><a href="#">💬 Forum</a></li>
+                <li><a href="#">📧 Poczta</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="content-header">
+            <h2>👨‍👩‍👧‍👦 Załóż nową grupę</h2>
+        </div>
+        
+        <div class="breadcrumb">
+            <a href="index.html">Strona główna</a> &raquo; 
+            <a href="#">Grupy</a> &raquo; 
+            Załóż grupę
+        </div>
+
+        <div class="form-content">
+            <!-- Main Form -->
+            <div class="form-main">
+                <div class="message-box message-info">
+                    <strong>ℹ️ Informacja:</strong> Tworzenie grupy jest bezpłatne. Pamiętaj, że jako założyciel będziesz administratorem grupy i będziesz odpowiedzialny za jej moderację.
+                </div>
+
+                <form id="createGroupForm">
+                    <!-- Podstawowe informacje -->
+                    <div class="form-section">
+                        <div class="section-header">📋 Podstawowe informacje</div>
+                        <div class="section-content">
+                            <table class="form-table">
+                                <tr>
+                                    <td width="120"><label for="groupName">Nazwa grupy: <span style="color: #f44336;">*</span></label></td>
+                                    <td><input type="text" id="groupName" name="groupName" required maxlength="100" placeholder="np. Fani Rycerzy Zodiaku"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="groupDesc">Opis grupy: <span style="color: #f44336;">*</span></label></td>
+                                    <td><textarea id="groupDesc" name="groupDesc" required maxlength="500" placeholder="Opisz czym zajmuje się Twoja grupa, jakie są jej cele..."></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="groupLoc">Lokalizacja:</label></td>
+                                    <td><input type="text" id="groupLoc" name="groupLoc" maxlength="100" placeholder="np. Cała Polska, Warszawa, Online"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Kategoria -->
+                    <div class="form-section">
+                        <div class="section-header">🏷️ Kategoria grupy</div>
+                        <div class="section-content">
+                            <div class="category-grid">
+                                <div class="category-option" onclick="selectCategory('anime')">
+                                    <input type="radio" name="category" value="anime" id="cat-anime">
+                                    <div class="category-icon">🎌</div>
+                                    <div class="category-label">Anime/Manga</div>
+                                </div>
+                                <div class="category-option" onclick="selectCategory('gry')">
+                                    <input type="radio" name="category" value="gry" id="cat-gry">
+                                    <div class="category-icon">🎮</div>
+                                    <div class="category-label">Gry</div>
+                                </div>
+                                <div class="category-option" onclick="selectCategory('muzyka')">
+                                    <input type="radio" name="category" value="muzyka" id="cat-muzyka">
+                                    <div class="category-icon">🎵</div>
+                                    <div class="category-label">Muzyka</div>
+                                </div>
+                                <div class="category-option" onclick="selectCategory('sport')">
+                                    <input type="radio" name="category" value="sport" id="cat-sport">
+                                    <div class="category-icon">⚽</div>
+                                    <div class="category-label">Sport</div>
+                                </div>
+                                <div class="category-option" onclick="selectCategory('nauka')">
+                                    <input type="radio" name="category" value="nauka" id="cat-nauka">
+                                    <div class="category-icon">📚</div>
+                                    <div class="category-label">Nauka</div>
+                                </div>
+                                <div class="category-option" onclick="selectCategory('hobby')">
+                                    <input type="radio" name="category" value="hobby" id="cat-hobby">
+                                    <div class="category-icon">🎨</div>
+                                    <div class="category-label">Hobby</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tagi -->
+                    <div class="form-section">
+                        <div class="section-header">🏷️ Tagi (słowa kluczowe)</div>
+                        <div class="section-content">
+                            <p style="font-size: 10px; color: #666; margin-bottom: 10px;">
+                                Dodaj tagi, które ułatwią znalezienie Twojej grupy. Naciśnij Enter po wpisaniu każdego tagu.
+                            </p>
+                            <div class="tags-container" onclick="document.getElementById('tagInput').focus()">
+                                <input type="text" id="tagInput" class="tag-input" placeholder="Wpisz tag i naciśnij Enter..." onkeypress="addTag(event)">
+                            </div>
+                            <input type="hidden" id="tagsHidden" name="tags">
+                        </div>
+                    </div>
+
+                    <!-- Avatar grupy -->
+                    <div class="form-section">
+                        <div class="section-header">🖼️ Avatar grupy</div>
+                        <div class="section-content">
+                            <p style="font-size: 10px; color: #666; margin-bottom: 10px;">
+                                Wybierz ikonę, która będzie reprezentować Twoją grupę:
+                            </p>
+                            <div class="avatar-selection">
+                                <div class="avatar-option selected" data-avatar="👥" onclick="selectAvatar(this)">👥</div>
+                                <div class="avatar-option" data-avatar="🎌" onclick="selectAvatar(this)">🎌</div>
+                                <div class="avatar-option" data-avatar="🎮" onclick="selectAvatar(this)">🎮</div>
+                                <div class="avatar-option" data-avatar="🎵" onclick="selectAvatar(this)">🎵</div>
+                                <div class="avatar-option" data-avatar="⚽" onclick="selectAvatar(this)">⚽</div>
+                                <div class="avatar-option" data-avatar="📚" onclick="selectAvatar(this)">📚</div>
+                                <div class="avatar-option" data-avatar="🎨" onclick="selectAvatar(this)">🎨</div>
+                                <div class="avatar-option" data-avatar="🎭" onclick="selectAvatar(this)">🎭</div>
+                                <div class="avatar-option" data-avatar="🎪" onclick="selectAvatar(this)">🎪</div>
+                                <div class="avatar-option" data-avatar="🎯" onclick="selectAvatar(this)">🎯</div>
+                                <div class="avatar-option" data-avatar="🌟" onclick="selectAvatar(this)">🌟</div>
+                                <div class="avatar-option" data-avatar="💫" onclick="selectAvatar(this)">💫</div>
+                                <div class="avatar-option" data-avatar="🔥" onclick="selectAvatar(this)">🔥</div>
+                                <div class="avatar-option" data-avatar="❤️" onclick="selectAvatar(this)">❤️</div>
+                                <div class="avatar-option" data-avatar="🚀" onclick="selectAvatar(this)">🚀</div>
+                                <div class="avatar-option" data-avatar="⭐" onclick="selectAvatar(this)">⭐</div>
+                                <div class="avatar-option" data-avatar="🎊" onclick="selectAvatar(this)">🎊</div>
+                                <div class="avatar-option" data-avatar="🎈" onclick="selectAvatar(this)">🎈</div>
+                            </div>
+                            <input type="hidden" id="selectedAvatar" name="avatar" value="👥">
+                        </div>
+                    </div>
+
+                    <!-- Ustawienia prywatności -->
+                    <div class="form-section">
+                        <div class="section-header">🔒 Ustawienia prywatności</div>
+                        <div class="section-content">
+                            <div class="privacy-options">
+                                <div class="privacy-option">
+                                    <input type="radio" name="privacy" value="public" id="privacy-public" checked>
+                                    <label for="privacy-public">
+                                        <strong>🌐 Grupa publiczna</strong>
+                                        <div class="privacy-description">Każdy może znaleźć grupę i dołączyć</div>
+                                    </label>
+                                </div>
+                                <div class="privacy-option">
+                                    <input type="radio" name="privacy" value="request" id="privacy-request">
+                                    <label for="privacy-request">
+                                        <strong>🔐 Na zaproszenie</strong>
+                                        <div class="privacy-description">Każdy może znaleźć grupę, ale musi prosić o dołączenie</div>
+                                    </label>
+                                </div>
+                                <div class="privacy-option">
+                                    <input type="radio" name="privacy" value="private" id="privacy-private">
+                                    <label for="privacy-private">
+                                        <strong>🔒 Grupa prywatna</strong>
+                                        <div class="privacy-description">Grupa niewidoczna w wyszukiwaniu, tylko na zaproszenia</div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Motyw grupy -->
+                    <div class="form-section">
+                        <div class="section-header">🎨 Personalizacja motywu</div>
+                        <div class="section-content">
+                            <p style="font-size: 10px; color: #666; margin-bottom: 15px;">
+                                Dostosuj wygląd strony swojej grupy:
+                            </p>
+                            
+                            <div class="theme-options">
+                                <div class="theme-option active" onclick="selectTheme('default')">
+                                    🌿 Domyślny
+                                </div>
+                                <div class="theme-option" onclick="selectTheme('anime')">
+                                    🎌 Anime
+                                </div>
+                                <div class="theme-option" onclick="selectTheme('gry')">
+                                    🎮 Gaming
+                                </div>
+                                <div class="theme-option" onclick="selectTheme('muzyka')">
+                                    🎵 Muzyczny
+                                </div>
+                                <div class="theme-option" onclick="selectTheme('sport')">
+                                    ⚽ Sportowy
+                                </div>
+                                <div class="theme-option" onclick="selectTheme('nauka')">
+                                    📚 Naukowy
+                                </div>
+                                <div class="theme-option" onclick="selectTheme('hobby')">
+                                    🎨 Hobby
+                                </div>
+                                <div class="theme-option" onclick="selectTheme('custom')">
+                                    ✨ Własny CSS
+                                </div>
+                            </div>
+
+                            <div class="theme-preview" id="themePreview">
+                                <div class="theme-preview-header">Przykład nagłówka grupy</div>
+                                <div class="theme-preview-content">
+                                    To jest przykład jak będzie wyglądać Twoja grupa z wybranym motywem.
+                                </div>
+                            </div>
+
+                            <div id="customCssContainer" style="display: none;">
+                                <label for="customCss" style="display: block; margin-bottom: 8px; font-weight: bold; color: #2e7d32;">
+                                    Własny CSS:
+                                </label>
+                                <textarea class="custom-css-editor" id="customCss" name="customCss" placeholder="/* Wpisz swój kod CSS */
+.group-header {
+    background: linear-gradient(45deg, #ff0000, #00ff00);
+    color: white;
+}
+
+.group-content {
+    background: #f0f0f0;
+    border: 2px solid #333;
+}"></textarea>
+                                <button type="button" onclick="previewCustomCss()" style="margin-top: 8px; padding: 4px 12px; font-size: 10px;">
+                                    👁️ Podgląd CSS
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Przyciski akcji -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-preview" onclick="previewGroup()">
+                            👁️ Podgląd grupy
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            ✅ Utwórz grupę
+                        </button>
+                        <button type="reset" class="btn btn-secondary" onclick="resetForm()">
+                            🔄 Wyczyść formularz
+                        </button>
+                        <a href="#" class="btn btn-secondary">
+                            ❌ Anuluj
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="form-sidebar">
+                <!-- Pomoc -->
+                <div class="info-box">
+                    <div class="info-header">💡 Wskazówki</div>
+                    <div class="info-content">
+                        <ul class="info-list">
+                            <li><strong>Nazwa:</strong> Wybierz krótką, ale opisową nazwę</li>
+                            <li><strong>Opis:</strong> Wyjaśnij czym zajmuje się grupa</li>
+                            <li><strong>Tagi:</strong> Pomogą użytkownikom znaleźć grupę</li>
+                            <li><strong>Kategoria:</strong> Ułatwi kategoryzację</li>
+                            <li><strong>Prywatność:</strong> Zdecyduj kto może dołączyć</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Przykłady grup -->
+                <div class="info-box">
+                    <div class="info-header">🌟 Popularne grupy</div>
+                    <div class="info-content">
+                        <ul class="info-list">
+                            <li><strong>🎵 Muzyka Polska</strong> (1,234 członków)</li>
+                            <li><strong>⚽ Piłka nożna</strong> (2,156 członków)</li>
+                            <li><strong>📚 Studenci</strong> (987 członków)</li>
+                            <li><strong>🎮 Retro Gaming</strong> (756 członków)</li>
+                            <li><strong>🎌 Anime PL</strong> (645 członków)</li>
+                        </ul>
+                        <p style="margin-top: 10px; font-size: 9px; color: #666;">
+                            Zobacz jakie grupy są już popularne i znajdź swoją niszę!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Regulamin grup -->
+                <div class="info-box">
+                    <div class="info-header">📋 Regulamin grup</div>
+                    <div class="info-content">
+                        <ul class="info-list">
+                            <li>Szanuj innych członków</li>
+                            <li>Nie publikuj nieodpowiednich treści</li>
+                            <li>Grupą zarządza założyciel</li>
+                            <li>Możliwość wyznaczenia moderatorów</li>
+                            <li>POLchatka może usunąć nieaktywne grupy</li>
+                        </ul>
+                        <p style="margin-top: 10px; font-size: 9px;">
+                            <a href="#" style="color: #2e7d32;">» Pełny regulamin grup</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Statystyki -->
+                <div class="info-box">
+                    <div class="info-header">📊 Statystyki</div>
+                    <div class="info-content">
+                        <ul class="info-list">
+                            <li><strong>Wszystkich grup:</strong> 1,247</li>
+                            <li><strong>Aktywnych dziś:</strong> 89</li>
+                            <li><strong>Nowych w tym miesiącu:</strong> 23</li>
+                            <li><strong>Średnia członków:</strong> 47</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                © 2025 POLchatka.pl | Projekt hobbystyczny
+            </div>
+            <div class="footer-links">
+                <a href="/regulamin">Regulamin</a> |
+                <a href="/prywatnosc">Prywatność</a> |
+                <a href="/kontakt">Kontakt</a> |
+                <a href="/blog">Blog</a>
+            </div>
+            <div style="margin-top: 5px; font-size: 8px; color: #666;">
+                Zainspirowane klasycznymi polskimi portalami z lat 2000
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let tags = [];
+        let selectedTheme = 'default';
+
+        // Tag management
+        function addTag(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const input = event.target;
+                const tag = input.value.trim();
+                
+                if (tag && !tags.includes(tag) && tags.length < 10) {
+                    tags.push(tag);
+                    input.value = '';
+                    updateTagsDisplay();
+                }
+            }
+        }
+
+        function removeTag(tag) {
+            tags = tags.filter(t => t !== tag);
+            updateTagsDisplay();
+        }
+
+        function updateTagsDisplay() {
+            const container = document.querySelector('.tags-container');
+            const input = document.getElementById('tagInput');
+            const hiddenInput = document.getElementById('tagsHidden');
+            
+            // Clear container except input
+            container.innerHTML = '';
+            
+            // Add tags
+            tags.forEach(tag => {
+                const tagElement = document.createElement('div');
+                tagElement.className = 'tag-item';
+                tagElement.innerHTML = `
+                    ${tag}
+                    <span class="tag-remove" onclick="removeTag('${tag}')">×</span>
+                `;
+                container.appendChild(tagElement);
+            });
+            
+            // Re-add input
+            container.appendChild(input);
+            
+            // Update hidden input
+            hiddenInput.value = tags.join(',');
+        }
+
+        // Avatar selection
+        function selectAvatar(element) {
+            document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            document.getElementById('selectedAvatar').value = element.dataset.avatar;
+        }
+
+        // Category selection
+        function selectCategory(category) {
+            document.querySelectorAll('.category-option').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            document.getElementById('cat-' + category).checked = true;
+        }
+
+        // Theme selection
+        function selectTheme(theme) {
+            document.querySelectorAll('.theme-option').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            selectedTheme = theme;
+            
+            const preview = document.getElementById('themePreview');
+            const customContainer = document.getElementById('customCssContainer');
+            
+            // Remove all theme classes
+            preview.className = 'theme-preview';
+            
+            if (theme === 'custom') {
+                customContainer.style.display = 'block';
+            } else {
+                customContainer.style.display = 'none';
+                if (theme !== 'default') {
+                    preview.classList.add('theme-' + theme);
+                }
+            }
+        }
+
+        // Custom CSS preview
+        function previewCustomCss() {
+            const css = document.getElementById('customCss').value;
+            const preview = document.getElementById('themePreview');
+            
+            // Remove existing custom styles
+            const existingStyle = document.getElementById('customPreviewStyle');
+            if (existingStyle) {
+                existingStyle.remove();
+            }
+            
+            // Add new custom styles
+            const style = document.createElement('style');
+            style.id = 'customPreviewStyle';
+            style.textContent = css.replace(/\.group-/g, '.theme-preview .');
+            document.head.appendChild(style);
+        }
+
+        // Group preview
+        function previewGroup() {
+            const formData = new FormData(document.getElementById('createGroupForm'));
+            const data = Object.fromEntries(formData);
+            
+            let preview = `Podgląd grupy:\n\n`;
+            preview += `Nazwa: ${data.groupName || 'Bez nazwy'}\n`;
+            preview += `Opis: ${data.groupDesc || 'Brak opisu'}\n`;
+            preview += `Kategoria: ${data.category || 'Nie wybrano'}\n`;
+            preview += `Lokalizacja: ${data.groupLoc || 'Nie podano'}\n`;
+            preview += `Prywatność: ${data.privacy || 'publiczna'}\n`;
+            preview += `Avatar: ${data.avatar}\n`;
+            preview += `Tagi: ${tags.join(', ') || 'Brak tagów'}\n`;
+            preview += `Motyw: ${selectedTheme}\n`;
+            
+            alert(preview);
+        }
+
+        // Form reset
+        function resetForm() {
+            if (confirm('Czy na pewno chcesz wyczyścić cały formularz?')) {
+                document.getElementById('createGroupForm').reset();
+                tags = [];
+                updateTagsDisplay();
+                selectedTheme = 'default';
+                
+                // Reset selections
+                document.querySelectorAll('.selected, .active').forEach(el => {
+                    el.classList.remove('selected', 'active');
+                });
+                
+                // Reset defaults
+                document.querySelector('.avatar-option').classList.add('selected');
+                document.querySelector('.theme-option').classList.add('active');
+                document.getElementById('selectedAvatar').value = '👥';
+                document.getElementById('customCssContainer').style.display = 'none';
+            }
+        }
+
+        // Form submission
+        document.getElementById('createGroupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Basic validation
+            if (!data.groupName || !data.groupDesc) {
+                alert('Wypełnij wszystkie wymagane pola!');
+                return;
+            }
+            
+            if (!data.category) {
+                alert('Wybierz kategorię grupy!');
+                return;
+            }
+            
+            // Show success message
+            const successMsg = document.createElement('div');
+            successMsg.className = 'message-box message-success';
+            successMsg.innerHTML = '<strong>✅ Sukces!</strong> Grupa została utworzona pomyślnie! Za chwilę zostaniesz przekierowany do strony grupy.';
+            
+            document.querySelector('.form-content').insertBefore(successMsg, document.querySelector('.form-main'));
+            
+            setTimeout(() => {
+                // Redirect to group page (simulate)
+                window.location.href = 'grupa-rycerze-zodiaku.html';
+            }, 2000);
+        });
+
+        // Initialize form
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('POLchatka - Załóż grupę loaded');
+            
+            // Set default category based on common selection
+            selectCategory('anime');
+        });
+
+        // Character counters
+        document.getElementById('groupName').addEventListener('input', function() {
+            updateCharCounter(this, 100);
+        });
+
+        document.getElementById('groupDesc').addEventListener('input', function() {
+            updateCharCounter(this, 500);
+        });
+
+        function updateCharCounter(element, maxLength) {
+            const current = element.value.length;
+            const remaining = maxLength - current;
+            
+            // You can add a character counter display here
+            if (remaining < 20) {
+                element.style.borderColor = remaining < 0 ? '#f44336' : '#ff9800';
+            } else {
+                element.style.borderColor = '#4caf50';
+            }
+        }
+    </script>
+</body>
+</html>

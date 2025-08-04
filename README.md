@@ -157,6 +157,9 @@ polchatka/
 ![polchatka_projekt_3](/polchatka_projekt_3.png)
 ![polchatka_projekt_4](/polchatka_projekt_4.png)
 ![polchatka_projekt_5](/polchatka_projekt_5.png)
+![poszkole profil all](/poszkole_profil_all.png)
+![polchatka_projekt_gamehelicopter](/polchatka_projekt_gamehelicopter.png)
+![polchatka_projekt_gameupload](/polchatka_projekt_gameupload.png)
 
 ## 🔗 Przydatne linki
 

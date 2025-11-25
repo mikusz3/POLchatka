@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/config.php';
+require_once __DIR__ . '/../templates/header.php';
 
 // Override JSON headers from config for HTML output
 header('Content-Type: text/html; charset=utf-8');
@@ -50,28 +51,9 @@ $stmt = $pdo->query('SELECT p.content, p.created_at, u.username FROM posts p JOI
 $posts = $stmt->fetchAll();
 $csrfToken = ensureCsrfToken();
 ?>
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Ściana postów</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 2rem; background: #f7f7f7; }
-        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-        form textarea { width: 100%; min-height: 120px; padding: 0.5rem; }
-        form button { margin-top: 0.5rem; padding: 0.5rem 1rem; }
-        .flash { padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1rem; }
-        .flash.error { background: #ffe1e1; color: #a10000; }
-        .flash.success { background: #e3ffe5; color: #046c28; }
-        .post { border-bottom: 1px solid #ddd; padding: 0.75rem 0; }
-        .post:last-child { border-bottom: none; }
-        .post .meta { color: #666; font-size: 0.9rem; margin-bottom: 0.25rem; }
-        .post .content { white-space: pre-wrap; }
-    </style>
-</head>
-<body>
-<div class="container">
-    <h1>Ściana postów</h1>
+<?php render_page_start('Ściana postów'); ?>
+<div class="content-card">
+    <h1 class="section-title">Ściana postów</h1>
 
     <?php if ($errors): ?>
         <div class="flash error">
@@ -84,10 +66,12 @@ $csrfToken = ensureCsrfToken();
     <?php endif; ?>
 
     <form method="post" action="wall.php">
-        <label for="content">Nowy post:</label>
-        <textarea id="content" name="content" required <?= $isLoggedIn ? '' : 'disabled' ?>></textarea>
+        <div class="form-field">
+            <label for="content">Nowy post:</label>
+            <textarea class="textarea" id="content" name="content" required <?= $isLoggedIn ? '' : 'disabled' ?>></textarea>
+        </div>
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>">
-        <button type="submit" <?= $isLoggedIn ? '' : 'disabled' ?>>Opublikuj</button>
+        <button class="button" type="submit" <?= $isLoggedIn ? '' : 'disabled' ?>>Opublikuj</button>
         <?php if (!$isLoggedIn): ?>
             <p>Aby dodać post, zaloguj się.</p>
         <?php endif; ?>
@@ -98,15 +82,14 @@ $csrfToken = ensureCsrfToken();
         <p>Brak postów.</p>
     <?php else: ?>
         <?php foreach ($posts as $post): ?>
-            <div class="post">
-                <div class="meta">
+            <div class="post-card">
+                <div class="post-meta">
                     <strong><?= htmlspecialchars($post['username'], ENT_QUOTES, 'UTF-8') ?></strong>
-                    <span>— <?= htmlspecialchars($post['created_at'], ENT_QUOTES, 'UTF-8') ?></span>
+                    <span> — <?= htmlspecialchars($post['created_at'], ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
-                <div class="content"><?= nl2br(htmlspecialchars($post['content'], ENT_QUOTES, 'UTF-8')) ?></div>
+                <div class="post-content"><?= nl2br(htmlspecialchars($post['content'], ENT_QUOTES, 'UTF-8')) ?></div>
             </div>
         <?php endforeach; ?>
     <?php endif; ?>
 </div>
-</body>
-</html>
+<?php render_page_end(); ?>

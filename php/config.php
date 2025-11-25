@@ -20,7 +20,7 @@ function json_input(){ $raw=file_get_contents('php://input'); if(!$raw)return []
 function is_json_request(): bool { return isset($_SERVER['CONTENT_TYPE']) && stripos($_SERVER['CONTENT_TYPE'], 'application/json') !== false; }
 function append_query(string $location, array $params): string { $query=http_build_query($params); if($query===''){return $location;} return $location.(str_contains($location,'?')?'&':'?').$query; }
 function flash_message(string $key, string $message): void { $_SESSION[$key]=$message; }
-function respond_error(string $message,int $status=400,string $redirect=null,array $extra=[]): void {
+function respond_error(string $message,int $status=400,?string $redirect=null,array $extra=[]): void {
     if ($redirect !== null && !is_json_request()) {
         flash_message('flash_error',$message);
         header('Location: '.append_query($redirect,['error'=>$message]));
@@ -30,7 +30,7 @@ function respond_error(string $message,int $status=400,string $redirect=null,arr
     echo json_encode(array_merge(['error'=>$message],$extra));
     exit;
 }
-function respond_success(array $payload=[],string $redirect=null): void {
+function respond_success(array $payload=[],?string $redirect=null): void {
     if ($redirect !== null && !is_json_request()) {
         flash_message('flash_success',$payload['message'] ?? 'OK');
         header('Location: '.append_query($redirect,['success'=>$payload['message'] ?? '1']));

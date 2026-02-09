@@ -1,0 +1,68 @@
+# POLchatka — Changelog
+
+## [0.9.0-beta] — 2025-02-09
+
+### ✅ Dodane
+- **System logowania/rejestracji** — dopracowany register.php i login.php z walidacją, sesjami PHP i przekierowaniami (PRG pattern)
+- **Strona profilu** (profile.php) — wyświetlanie danych użytkownika, liczba postów i znajomych, podgląd profili innych użytkowników
+- **Tabela `posts`** w bazie danych — pełna obsługa postów ze ściany
+- **Ściana postów** (wall.php) — formularz dodawania postów i ich chronologiczne wyświetlanie z awatarami i linkami do profili
+- **System znajomych** — tabela `friendships`, przycisk "Dodaj do znajomych", akceptacja/odrzucanie zaproszeń, lista znajomych
+- **System wiadomości** — tabela `messages`, strona messages.php z panelem konwersacji i czatem
+- **Strony PHP z formularzami** — login_page.php, register_page.php
+- **Retro zielonkawy motyw CSS** — inspirowany Poszkole.pl/NK.pl
+- **Konta testowe** — admin, janek, ania, kasia, bartek (haslo: password)
+- **Migracja SQL** — 20250209_messages_and_updates.sql
+- **CSRF Protection** — tokeny w formularzach
+- **Nawigacja dynamiczna** — rózne linki dla zalogowanych/niezalogowanych
+- **Wylogowanie** — bezpieczne niszczenie sesji
+
+### 🔧 Poprawione
+- config.php — ujednolicone helpery
+- header.php — nawigacja z linkami do znajomych i wiadomości
+- System motywów — zachowana kompatybilność z retro-green i retro-amber
+
+### 📁 Struktura plików (Beta)
+```
+php/
+├── config.php            # Konfiguracja + helpery
+├── register.php          # Backend rejestracji
+├── register_page.php     # Formularz rejestracji
+├── login.php             # Backend logowania
+├── login_page.php        # Formularz logowania
+├── logout.php            # Wylogowanie
+├── profile.php           # Profil użytkownika
+├── wall.php              # Ściana postów
+├── friends.php           # API znajomych (JSON)
+├── friends_page.php      # Strona znajomych (HTML)
+├── friends_action.php    # Akcje znajomych (POST)
+├── messages.php          # Wiadomości prywatne
+└── sql/
+    └── 20250209_messages_and_updates.sql
+templates/
+└── header.php            # Szablon nagłówka + nawigacja
+themes/
+├── default.css           # Retro zielonkawy motyw
+├── retro-green.css       # Ciemny zielony terminal
+└── retro-amber.css       # Ciemny bursztynowy
+```
+
+### 🧪 Scenariusze testowe
+1. Rejestracja nowego konta → przekierowanie na profil
+2. Logowanie istniejącym kontem → przekierowanie na ścianę
+3. Dodawanie postu na ścianie → PRG, post widoczny na liście
+4. Wysyłanie zaproszenia do znajomych → widoczne w zakładce "Znajomi"
+5. Akceptacja zaproszenia → zmiana statusu na "Znajomy"
+6. Wysyłanie wiadomości → widoczne w konwersacji
+7. Wylogowanie → przekierowanie na stronę logowania
+8. Podgląd profilu innego użytkownika → przycisk "Dodaj do znajomych"
+
+---
+
+## [0.1.0-alpha] — 2025-08-02
+- Inicjalna struktura projektu
+- Podstawowy frontend Zola
+- Schemat bazy danych (database.sql)
+- Strony statyczne: index, login, register, profil, regulamin
+- System motywów CSS
+- Integracja z Flash/Ruffle

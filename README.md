@@ -90,7 +90,6 @@ POLchatka powstaje z czystej nostalgi i miłości do dawnych czasów internetu:
 - [ ] **Pełne wsparcie Windows XP** - nostalgiczna autentyczność
 - [ ] Responsywność dla współczesnych urządzeń
 - [ ] Tryb "Antyśledzik" - bez reklam i śledzenia
-- [ ] Wersja mobilna w stylu WAP
 
 ### Długoterminowe plany (2026+):
 - API dla zewnętrznych aplikacji
